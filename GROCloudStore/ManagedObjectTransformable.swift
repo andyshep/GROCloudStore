@@ -8,6 +8,6 @@
 
 import CoreData
 
-@objc protocol ManagedObjectTransformable {
+@objc public protocol ManagedObjectTransformable {
     func transform(object _: NSManagedObject) -> Void
 }

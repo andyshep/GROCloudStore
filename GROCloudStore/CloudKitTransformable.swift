@@ -9,7 +9,7 @@
 import CloudKit
 import CoreData
 
-@objc protocol CloudKitTransformable {
+@objc public protocol CloudKitTransformable {
     
     var encodedSystemFields: NSData? { get set }
     
@@ -24,7 +24,7 @@ import CoreData
 
 extension CloudKitTransformable where Self: NSManagedObject {
     
-    var record: CKRecord {
+    public var record: CKRecord {
         get {
             guard let data = self.encodedSystemFields else {
                 let zoneId = CKRecordZoneID(zoneName: CloudContainer.ZoneNames.Custom, ownerName: CKOwnerDefaultName)

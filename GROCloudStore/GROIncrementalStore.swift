@@ -35,7 +35,7 @@ public class GROIncrementalStore: NSIncrementalStore {
     private let cloudDataSource = GROCloudDataSource()
     private let operationQueue = NSOperationQueue()
     
-    class var storeType: String {
+    public class var storeType: String {
         return String(GROIncrementalStore)
     }
     
@@ -222,20 +222,6 @@ public class GROIncrementalStore: NSIncrementalStore {
         self.registeredEntities[name] = entities
     }
     
-    public override func managedObjectContextDidUnregisterObjectsWithIDs(objectIDs: [NSManagedObjectID]) {
-        
-        for objectID in objectIDs {
-            let refObj = self.referenceObjectForObjectID(objectID)
-            let identifier = resourceIdentifier(refObj)
-            
-            guard let name = objectID.entity.name else { continue }
-            
-            var entities = self.registeredEntities[name] ?? [:]
-            entities.removeValueForKey(String(identifier))
-//            self.registeredEntities[name] = entities
-        }
-    }
-    
     // MARK: - Private
     
     private func executeFetchRequest(request: NSPersistentStoreRequest!, withContext context: NSManagedObjectContext!) throws -> [AnyObject] {
@@ -329,57 +315,57 @@ public class GROIncrementalStore: NSIncrementalStore {
     
     private func fetchRemoteObjects(request: NSFetchRequest, context: NSManagedObjectContext) {
         
-        let verifyZonesOp = VerifyRecordZoneOperation(context: backingContext)
-        let verifySubscriptionsOp = VerifySubscriptionOperation(context: backingContext)
+        let verifyRecordZone = VerifyRecordZoneOperation(context: backingContext)
+        let verifySubscriptions = VerifySubscriptionOperation(context: backingContext)
         
-        let fetchChangesOp = FetchChangesOperation(request: request, context: context, backingContext: backingContext)
-        let deleteOp = InjestDeletedRecordsOperation(operation: fetchChangesOp)
-        let modifiedOp = InjestModifiedRecordsOperation(operation: fetchChangesOp)
+        let fetchChanges = FetchChangesOperation(request: request, context: context, backingContext: backingContext)
+        let injestDeletedRecords = InjestDeletedRecordsOperation(operation: fetchChanges)
+        let injestModifiedRecords = InjestModifiedRecordsOperation(operation: fetchChanges)
         
-        fetchChangesOp.delegate = self
-        deleteOp.delegate = self
-        modifiedOp.delegate = self
+        fetchChanges.delegate = self
+        injestDeletedRecords.delegate = self
+        injestModifiedRecords.delegate = self
         
-        deleteOp.addDependency(fetchChangesOp)
-        modifiedOp.addDependency(deleteOp)
+        injestDeletedRecords.addDependency(fetchChanges)
+        injestModifiedRecords.addDependency(injestDeletedRecords)
         
-        verifySubscriptionsOp.addDependency(verifyZonesOp)
-        fetchChangesOp.addDependency(verifySubscriptionsOp)
+        verifySubscriptions.addDependency(verifyRecordZone)
+        fetchChanges.addDependency(verifySubscriptions)
         
-        [deleteOp, modifiedOp].onFinish { 
+        [injestDeletedRecords, injestModifiedRecords].onFinish {
             self.backingContext.performBlockAndWait({
                 self.backingContext.saveOrLogError()
             })
         }
         
-        operationQueue.addOperation(verifyZonesOp)
-        operationQueue.addOperation(verifySubscriptionsOp)
-        operationQueue.addOperation(fetchChangesOp)
-        operationQueue.addOperation(deleteOp)
-        operationQueue.addOperation(modifiedOp)
+        operationQueue.addOperation(verifyRecordZone)
+        operationQueue.addOperation(verifySubscriptions)
+        operationQueue.addOperation(fetchChanges)
+        operationQueue.addOperation(injestDeletedRecords)
+        operationQueue.addOperation(injestModifiedRecords)
     }
     
     private func saveRemoteObjects(request: NSSaveChangesRequest, context: NSManagedObjectContext) {
         
-        let pushChangesOp = PushChangesOperation(request: request, context: context, backingContext: backingContext)
-        let deleteOp = InjestDeletedRecordsOperation(operation: pushChangesOp)
-        let modifiedOp = InjestModifiedRecordsOperation(operation: pushChangesOp)
+        let pushChanges = PushChangesOperation(request: request, context: context, backingContext: backingContext)
+        let injestDeletedRecords = InjestDeletedRecordsOperation(operation: pushChanges)
+        let injestModifiedRecords = InjestModifiedRecordsOperation(operation: pushChanges)
         
-        deleteOp.delegate = self
-        modifiedOp.delegate = self
+        injestDeletedRecords.delegate = self
+        injestModifiedRecords.delegate = self
         
-        deleteOp.addDependency(pushChangesOp)
-        modifiedOp.addDependency(deleteOp)
+        injestDeletedRecords.addDependency(pushChanges)
+        injestModifiedRecords.addDependency(injestDeletedRecords)
         
-        [deleteOp, modifiedOp].onFinish {
+        [injestDeletedRecords, injestModifiedRecords].onFinish {
             self.backingContext.performBlockAndWait({
                 self.backingContext.saveOrLogError()
             })
         }
         
-        operationQueue.addOperation(pushChangesOp)
-        operationQueue.addOperation(deleteOp)
-        operationQueue.addOperation(modifiedOp)
+        operationQueue.addOperation(pushChanges)
+        operationQueue.addOperation(injestDeletedRecords)
+        operationQueue.addOperation(injestModifiedRecords)
     }
 }
 

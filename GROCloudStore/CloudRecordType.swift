@@ -1,5 +1,5 @@
 //
-//  CloudAndCoreDataTypes.swift
+//  CloudRecordType.swift
 //  GROCloudStore
 //
 //  Created by Andrew Shepard on 2/9/16.

@@ -8,12 +8,12 @@
 
 import Foundation
 
-class AsyncOperation: NSOperation {
+public class AsyncOperation: NSOperation {
     
     private var _executing = false
     private var _finished = false
     
-    override func start() {
+    public override func start() {
         if cancelled {
             finish()
             return
@@ -26,7 +26,7 @@ class AsyncOperation: NSOperation {
         main()
     }
     
-    func finish() {
+    public func finish() {
         willChangeValueForKey("isExecuting")
         willChangeValueForKey("isFinished")
         _executing = false
@@ -35,15 +35,15 @@ class AsyncOperation: NSOperation {
         didChangeValueForKey("isFinished")
     }
     
-    override var executing: Bool {
+    public override var executing: Bool {
         return _executing
     }
     
-    override var finished: Bool {
+    public override var finished: Bool {
         return _finished
     }
     
-    override func cancel() {
+    public override func cancel() {
         super.cancel()
         finish()
     }

@@ -18,7 +18,6 @@
 		F78D93141C934B09009EA958 /* ContextOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D92FC1C934B09009EA958 /* ContextOperation.swift */; };
 		F78D93151C934B09009EA958 /* FetchChangesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D92FD1C934B09009EA958 /* FetchChangesOperation.swift */; };
 		F78D93161C934B09009EA958 /* GROCloudDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D92FE1C934B09009EA958 /* GROCloudDataSource.swift */; };
-		F78D93171C934B09009EA958 /* GROConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D92FF1C934B09009EA958 /* GROConfiguration.swift */; };
 		F78D93181C934B09009EA958 /* GROIncrementalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D93001C934B09009EA958 /* GROIncrementalStore.swift */; };
 		F78D93191C934B09009EA958 /* GROIncrementalStore+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D93011C934B09009EA958 /* GROIncrementalStore+Helpers.swift */; };
 		F78D931A1C934B09009EA958 /* GROSavedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D93021C934B09009EA958 /* GROSavedData.swift */; };
@@ -34,6 +33,7 @@
 		F78D93241C934B09009EA958 /* RecordChangeOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D930C1C934B09009EA958 /* RecordChangeOperation.swift */; };
 		F78D93251C934B09009EA958 /* VerifyRecordZoneOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D930D1C934B09009EA958 /* VerifyRecordZoneOperation.swift */; };
 		F78D93261C934B09009EA958 /* VerifySubscriptionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D930E1C934B09009EA958 /* VerifySubscriptionOperation.swift */; };
+		F78D93361C934E1E009EA958 /* GROConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D92FF1C934B09009EA958 /* GROConfiguration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -290,8 +290,8 @@
 				F78D93191C934B09009EA958 /* GROIncrementalStore+Helpers.swift in Sources */,
 				F78D93221C934B09009EA958 /* NSURL+Directories.swift in Sources */,
 				F78D93121C934B09009EA958 /* CloudKitTransformable.swift in Sources */,
-				F78D93171C934B09009EA958 /* GROConfiguration.swift in Sources */,
 				F78D93151C934B09009EA958 /* FetchChangesOperation.swift in Sources */,
+				F78D93361C934E1E009EA958 /* GROConfiguration.swift in Sources */,
 				F78D930F1C934B09009EA958 /* Array+NSOperation.swift in Sources */,
 				F78D93201C934B09009EA958 /* NSManagedObjectContext+Helpers.swift in Sources */,
 				F78D93161C934B09009EA958 /* GROCloudDataSource.swift in Sources */,
@@ -332,6 +332,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -366,6 +367,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -381,6 +383,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -409,6 +412,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
@@ -430,6 +434,7 @@
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = GROCloudStore/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.andyshep.GROCloudStore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -450,6 +455,7 @@
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = GROCloudStore/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.andyshep.GROCloudStore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -498,6 +504,7 @@
 				F78D92F31C934AAD009EA958 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F78D92F41C934AAD009EA958 /* Build configuration list for PBXNativeTarget "GROCloudStoreTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +513,7 @@
 				F78D92F61C934AAD009EA958 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

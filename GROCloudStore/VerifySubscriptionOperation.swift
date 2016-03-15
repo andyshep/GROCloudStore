@@ -12,10 +12,11 @@ import CloudKit
 class VerifySubscriptionOperation: AsyncOperation {
     
     private let context: NSManagedObjectContext
-    private let cloudDataSource = GROCloudDataSource()
+    private let dataSource: GROCloudDataSource
     
-    init(context: NSManagedObjectContext) {
+    init(context: NSManagedObjectContext, dataSource: GROCloudDataSource) {
         self.context = context
+        self.dataSource = dataSource
         super.init()
     }
     
@@ -36,7 +37,7 @@ class VerifySubscriptionOperation: AsyncOperation {
         }
         
         if shouldCreateSubscription {
-            cloudDataSource.verifySubscriptions(didFetchSubscriptions)
+            dataSource.verifySubscriptions(didFetchSubscriptions)
         }
         else {
             print("subscription verified, skipping creation")
@@ -46,7 +47,7 @@ class VerifySubscriptionOperation: AsyncOperation {
     
     private func createSubscriptions() {
         let subscriptions = Subscriptions.Default
-        cloudDataSource.createSubscriptions(subscriptions, completion: didCreateSubscription)
+        dataSource.createSubscriptions(subscriptions, completion: didCreateSubscription)
     }
     
     private func didFetchSubscriptions(subscriptions: [CKSubscription]?, error: NSError?) {

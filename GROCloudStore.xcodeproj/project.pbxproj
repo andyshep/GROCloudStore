@@ -34,6 +34,9 @@
 		F78D93251C934B09009EA958 /* VerifyRecordZoneOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D930D1C934B09009EA958 /* VerifyRecordZoneOperation.swift */; };
 		F78D93261C934B09009EA958 /* VerifySubscriptionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D930E1C934B09009EA958 /* VerifySubscriptionOperation.swift */; };
 		F78D93361C934E1E009EA958 /* GROConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D92FF1C934B09009EA958 /* GROConfiguration.swift */; };
+		F7BE38731C98810A00D1CE87 /* GROTestDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BE38721C98810A00D1CE87 /* GROTestDataSource.swift */; };
+		F7BE38741C98812100D1CE87 /* GROCloudDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D92FE1C934B09009EA958 /* GROCloudDataSource.swift */; };
+		F7BE38761C9881D200D1CE87 /* GRODefaultDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BE38751C9881D200D1CE87 /* GRODefaultDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +80,8 @@
 		F78D930C1C934B09009EA958 /* RecordChangeOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordChangeOperation.swift; sourceTree = "<group>"; };
 		F78D930D1C934B09009EA958 /* VerifyRecordZoneOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyRecordZoneOperation.swift; sourceTree = "<group>"; };
 		F78D930E1C934B09009EA958 /* VerifySubscriptionOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifySubscriptionOperation.swift; sourceTree = "<group>"; };
+		F7BE38721C98810A00D1CE87 /* GROTestDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GROTestDataSource.swift; sourceTree = "<group>"; };
+		F7BE38751C9881D200D1CE87 /* GRODefaultDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GRODefaultDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +126,7 @@
 			children = (
 				F78D93001C934B09009EA958 /* GROIncrementalStore.swift */,
 				F78D93011C934B09009EA958 /* GROIncrementalStore+Helpers.swift */,
-				F78D92FE1C934B09009EA958 /* GROCloudDataSource.swift */,
+				F7BE38751C9881D200D1CE87 /* GRODefaultDataSource.swift */,
 				F78D92FF1C934B09009EA958 /* GROConfiguration.swift */,
 				F78D93021C934B09009EA958 /* GROSavedData.swift */,
 				F78D93281C934BA8009EA958 /* Operations */,
@@ -136,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				F78D92EC1C934AAD009EA958 /* GROCloudStoreTests.swift */,
+				F7BE38721C98810A00D1CE87 /* GROTestDataSource.swift */,
 				F78D92EE1C934AAD009EA958 /* Info.plist */,
 			);
 			path = GROCloudStoreTests;
@@ -144,6 +150,7 @@
 		F78D93271C934B8A009EA958 /* Protocols & Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F78D92FE1C934B09009EA958 /* GROCloudDataSource.swift */,
 				F78D930A1C934B09009EA958 /* NSURL+Directories.swift */,
 				F78D92FA1C934B09009EA958 /* CloudKitTransformable.swift */,
 				F78D92F71C934B09009EA958 /* Array+NSOperation.swift */,
@@ -163,11 +170,11 @@
 			children = (
 				F78D92F81C934B09009EA958 /* AsyncOperation.swift */,
 				F78D92FC1C934B09009EA958 /* ContextOperation.swift */,
+				F78D930C1C934B09009EA958 /* RecordChangeOperation.swift */,
 				F78D92FD1C934B09009EA958 /* FetchChangesOperation.swift */,
 				F78D93031C934B09009EA958 /* InjestDeletedRecordsOperation.swift */,
 				F78D93041C934B09009EA958 /* InjestModifiedRecordsOperation.swift */,
 				F78D930B1C934B09009EA958 /* PushChangesOperation.swift */,
-				F78D930C1C934B09009EA958 /* RecordChangeOperation.swift */,
 				F78D930D1C934B09009EA958 /* VerifyRecordZoneOperation.swift */,
 				F78D930E1C934B09009EA958 /* VerifySubscriptionOperation.swift */,
 			);
@@ -304,6 +311,7 @@
 				F78D931A1C934B09009EA958 /* GROSavedData.swift in Sources */,
 				F78D931E1C934B09009EA958 /* ManagedObjectTransformable.swift in Sources */,
 				F78D93261C934B09009EA958 /* VerifySubscriptionOperation.swift in Sources */,
+				F7BE38761C9881D200D1CE87 /* GRODefaultDataSource.swift in Sources */,
 				F78D93241C934B09009EA958 /* RecordChangeOperation.swift in Sources */,
 				F78D93141C934B09009EA958 /* ContextOperation.swift in Sources */,
 			);
@@ -314,6 +322,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F78D92ED1C934AAD009EA958 /* GROCloudStoreTests.swift in Sources */,
+				F7BE38731C98810A00D1CE87 /* GROTestDataSource.swift in Sources */,
+				F7BE38741C98812100D1CE87 /* GROCloudDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,7 +342,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -383,7 +392,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";

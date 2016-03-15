@@ -10,6 +10,7 @@ import CoreData
 import CloudKit
 
 public let GRODidCreateRecordNotification = "GRODidCreateRecordNotification"
+public let GRODataSourceKey = "GRODataSourceKey"
 
 public enum GROIncrementalStoreError: ErrorType {
     case UnsupportedRequest
@@ -32,7 +33,7 @@ public class GROIncrementalStore: NSIncrementalStore {
     private var registeredEntities: RegisteredEntitiesMap = [:]
     private var registeredBackingEntities: RegisteredEntitiesMap = [:]
     
-    private let cloudDataSource = GROCloudDataSource()
+    private let dataSource: GROCloudDataSource
     private let operationQueue = NSOperationQueue()
     
     public class var storeType: String {
@@ -44,6 +45,9 @@ public class GROIncrementalStore: NSIncrementalStore {
     }
     
     override init(persistentStoreCoordinator root: NSPersistentStoreCoordinator?, configurationName name: String?, URL url: NSURL, options: [NSObject : AnyObject]?) {
+        
+        self.dataSource = options?[GRODataSourceKey] as? GROCloudDataSource ?? GRODefaultDataSource()
+        
         super.init(persistentStoreCoordinator: root, configurationName: name, URL: url, options: options)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "contextDidChange:", name: NSManagedObjectContextDidSaveNotification, object: nil)
@@ -152,32 +156,32 @@ public class GROIncrementalStore: NSIncrementalStore {
             
             if backingObjID != nil {
                 let backingObj = try self.backingContext.existingObjectWithID(backingObjID!)
-                let backingRelationshipObj = backingObj.valueForKeyPath(relationship.name)
-                
-                if relationship.toMany {
-                    var objectIDs: [NSManagedObjectID] = []
-                    
-                    guard let relatedObjs = backingRelationshipObj else { fatalError("missing relationship") }
-                    guard let entity = relationship.destinationEntity else { fatalError("missing entity") }
-                    
-                    guard let identifierSet = relatedObjs.valueForKeyPath(Attribute.ResourceIdentifier) as? NSSet else { fatalError() }
-                    guard let identifiers = identifierSet.allObjects as? [String] else { fatalError() }
-                    
-                    for id in identifiers {
-                        let objectID = try self.objectIDForEntity(entity, identifier: id)
-                        objectIDs.append(objectID)
+                if let backingRelationshipObj = backingObj.valueForKeyPath(relationship.name) {
+                    if relationship.toMany {
+                        var objectIDs: [NSManagedObjectID] = []
+                        
+                        let relatedObjs = backingRelationshipObj
+                        guard let entity = relationship.destinationEntity else { fatalError("missing entity") }
+                        
+                        guard let identifierSet = relatedObjs.valueForKeyPath(Attribute.ResourceIdentifier) as? NSSet else { fatalError() }
+                        guard let identifiers = identifierSet.allObjects as? [String] else { fatalError() }
+                        
+                        for id in identifiers {
+                            let objectID = try self.objectIDForEntity(entity, identifier: id)
+                            objectIDs.append(objectID)
+                        }
+                        
+                        return objectIDs
                     }
-                    
-                    return objectIDs
-                }
-                else {
-                    guard let relatedObj = backingRelationshipObj as? NSManagedObject else { fatalError() }
-                    let identifier = relatedObj.GROResourceIdentifier
-                    
-                    guard let entity = relationship.destinationEntity else { fatalError("missing entity") }
-                    
-                    let objectID = try self.objectIDForEntity(entity, identifier: identifier)
-                    return objectID
+                    else {
+                        guard let relatedObj = backingRelationshipObj as? NSManagedObject else { fatalError() }
+                        let identifier = relatedObj.GROResourceIdentifier
+                        
+                        guard let entity = relationship.destinationEntity else { fatalError("missing entity") }
+                        
+                        let objectID = try self.objectIDForEntity(entity, identifier: identifier)
+                        return objectID
+                    }
                 }
             }
         }
@@ -230,7 +234,7 @@ public class GROIncrementalStore: NSIncrementalStore {
         
         if fetchRequest.resultType == .ManagedObjectResultType {
             
-            let container = self.cloudDataSource.container
+            let container = self.dataSource.container
             container.verifyPermission([], completion: { (error) -> Void in
                 if let error = error {
                     print("unhandled cloud kit error: \(error)")
@@ -315,10 +319,10 @@ public class GROIncrementalStore: NSIncrementalStore {
     
     private func fetchRemoteObjects(request: NSFetchRequest, context: NSManagedObjectContext) {
         
-        let verifyRecordZone = VerifyRecordZoneOperation(context: backingContext)
-        let verifySubscriptions = VerifySubscriptionOperation(context: backingContext)
+        let verifyRecordZone = VerifyRecordZoneOperation(context: backingContext, dataSource: dataSource)
+        let verifySubscriptions = VerifySubscriptionOperation(context: backingContext, dataSource: dataSource)
         
-        let fetchChanges = FetchChangesOperation(request: request, context: context, backingContext: backingContext)
+        let fetchChanges = FetchChangesOperation(request: request, context: context, backingContext: backingContext, dataSource: dataSource)
         let injestDeletedRecords = InjestDeletedRecordsOperation(operation: fetchChanges)
         let injestModifiedRecords = InjestModifiedRecordsOperation(operation: fetchChanges)
         
@@ -347,7 +351,7 @@ public class GROIncrementalStore: NSIncrementalStore {
     
     private func saveRemoteObjects(request: NSSaveChangesRequest, context: NSManagedObjectContext) {
         
-        let pushChanges = PushChangesOperation(request: request, context: context, backingContext: backingContext)
+        let pushChanges = PushChangesOperation(request: request, context: context, backingContext: backingContext, dataSource: dataSource)
         let injestDeletedRecords = InjestDeletedRecordsOperation(operation: pushChanges)
         let injestModifiedRecords = InjestModifiedRecordsOperation(operation: pushChanges)
         

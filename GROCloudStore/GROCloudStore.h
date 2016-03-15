@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import <CloudKit/CloudKit.h>
 
 //! Project version number for GROCloudStore.
 FOUNDATION_EXPORT double GROCloudStoreVersionNumber;

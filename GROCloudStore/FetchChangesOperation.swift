@@ -20,12 +20,13 @@ class FetchChangesOperation: AsyncOperation {
     
     weak var delegate: ManagedObjectIDProvider?
     
-    private let cloudDataSource = GROCloudDataSource()
+    private let dataSource: GROCloudDataSource
     
-    required init(request: NSFetchRequest, context: NSManagedObjectContext, backingContext: NSManagedObjectContext) {
+    required init(request: NSFetchRequest, context: NSManagedObjectContext, backingContext: NSManagedObjectContext, dataSource: GROCloudDataSource) {
         self.request = request
         self.context = context
         self.backingContext = backingContext
+        self.dataSource = dataSource
         
         super.init()
     }
@@ -41,7 +42,7 @@ class FetchChangesOperation: AsyncOperation {
             }
         }
         
-        cloudDataSource.changedRecordsOfType(recordType, token: token) { (changedRecords, deletedRecordIDs, token) in
+        dataSource.changedRecordsOfType(recordType, token: token) { (changedRecords, deletedRecordIDs, token) in
             
             for record in changedRecords {
                 self.recordDidChange(record)

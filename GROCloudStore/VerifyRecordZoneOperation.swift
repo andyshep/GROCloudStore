@@ -14,10 +14,11 @@ typealias Zones = [CKRecordZoneID: CKRecordZone]
 class VerifyRecordZoneOperation: AsyncOperation {
     
     private let context: NSManagedObjectContext
-    private let cloudDataSource = GROCloudDataSource()
+    private let dataSource: GROCloudDataSource
     
-    init(context: NSManagedObjectContext) {
+    init(context: NSManagedObjectContext, dataSource: GROCloudDataSource) {
         self.context = context
+        self.dataSource = dataSource
         super.init()
     }
     
@@ -38,7 +39,7 @@ class VerifyRecordZoneOperation: AsyncOperation {
         }
         
         if shouldCreateZone {
-            cloudDataSource.fetchRecordsZones(didFetchRecordZones)
+            dataSource.fetchRecordsZones(didFetchRecordZones)
         }
         else {
             print("zone verified, skipping creation")
@@ -65,7 +66,7 @@ class VerifyRecordZoneOperation: AsyncOperation {
             finish()
         }
         else {
-            self.cloudDataSource.createRecordZone(CloudContainer.ZoneNames.Custom, completion: didCreateRecordZone)
+            self.dataSource.createRecordZone(CloudContainer.ZoneNames.Custom, completion: didCreateRecordZone)
         }
     }
     

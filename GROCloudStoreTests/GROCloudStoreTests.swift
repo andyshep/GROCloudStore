@@ -21,16 +21,28 @@ class GROCloudStoreTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    var model: NSManagedObjectModel {
+        let contentAttribute = NSAttributeDescription()
+        contentAttribute.name = "content"
+        contentAttribute.attributeType = NSAttributeType.StringAttributeType
+        contentAttribute.optional = false
+        contentAttribute.indexed = true
+        
+        let testEntity = NSEntityDescription()
+        testEntity.name = "GROTest"
+        testEntity.properties = [contentAttribute]
+        
+        let model = NSManagedObjectModel()
+        model.entities = [testEntity]
+        
+        return model
     }
     
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
+    func test_canCreateContext() {
+        
+        let model = self.model
+        let context = createInMemoryContext(model)
+        
+        XCTAssert(context != nil, "context should not be nil")
     }
-    
 }

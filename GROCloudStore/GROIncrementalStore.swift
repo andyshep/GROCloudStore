@@ -10,7 +10,12 @@ import CoreData
 import CloudKit
 
 public let GRODidCreateRecordNotification = "GRODidCreateRecordNotification"
+
 public let GRODataSourceKey = "GRODataSourceKey"
+public let GROUseInMemoryStoreKey = "GROUseInMemoryStoreKey"
+public let GROObjectIDKey = "GROObjectIDKey"
+public let GRORecordNameKey = "GRORecordNameKey"
+public let GROConfigurationKey = "GROConfigurationKey"
 
 public enum GROIncrementalStoreError: ErrorType {
     case UnsupportedRequest
@@ -36,6 +41,8 @@ public class GROIncrementalStore: NSIncrementalStore {
     private let dataSource: GROCloudDataSource
     private let operationQueue = NSOperationQueue()
     
+    private var useInMemoryStores: Bool = false
+    
     public class var storeType: String {
         return String(GROIncrementalStore)
     }
@@ -46,7 +53,13 @@ public class GROIncrementalStore: NSIncrementalStore {
     
     override init(persistentStoreCoordinator root: NSPersistentStoreCoordinator?, configurationName name: String?, URL url: NSURL, options: [NSObject : AnyObject]?) {
         
-        self.dataSource = options?[GRODataSourceKey] as? GROCloudDataSource ?? GRODefaultDataSource()
+//        guard let config = options?[GROConfigurationKey] as? Configuration else {
+//            fatalError("missing configuration")
+//        }
+        
+        let configuraton = GRODefaultConfiguration()
+        self.dataSource = options?[GRODataSourceKey] as? GROCloudDataSource ?? GRODefaultDataSource(configuration: configuraton)
+        self.useInMemoryStores = options?[GROUseInMemoryStoreKey] as? Bool ?? false
         
         super.init(persistentStoreCoordinator: root, configurationName: name, URL: url, options: options)
         
@@ -61,7 +74,8 @@ public class GROIncrementalStore: NSIncrementalStore {
     
     lazy var backingPersistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.augmentedModel)
-        let storeType = NSSQLiteStoreType
+        
+        let storeType = self.useInMemoryStores ? NSInMemoryStoreType : NSSQLiteStoreType
         let path = GROIncrementalStore.storeType + ".sqlite"
         let url = NSURL.applicationDocumentsDirectory().URLByAppendingPathComponent(path)
         let options = [NSMigratePersistentStoresAutomaticallyOption: NSNumber(bool: true),
@@ -216,8 +230,8 @@ public class GROIncrementalStore: NSIncrementalStore {
     }
     
     func didCreateRecord(notification: NSNotification) {
-        guard let objectID = notification.userInfo?[Key.ObjectID] as? NSManagedObjectID else { return }
-        guard let identifier = notification.userInfo?[Key.RecordName] as? String else { return }
+        guard let objectID = notification.userInfo?[GROObjectIDKey] as? NSManagedObjectID else { return }
+        guard let identifier = notification.userInfo?[GRORecordNameKey] as? String else { return }
         
         guard let name = objectID.entity.name else { return }
         
@@ -234,16 +248,9 @@ public class GROIncrementalStore: NSIncrementalStore {
         
         if fetchRequest.resultType == .ManagedObjectResultType {
             
-            let container = self.dataSource.container
-            container.verifyPermission([], completion: { (error) -> Void in
-                if let error = error {
-                    print("unhandled cloud kit error: \(error)")
-                } else {
-                    context.performBlock {
-                        self.fetchRemoteObjects(fetchRequest, context: context)
-                    }
-                }
-            })
+            context.performBlock {
+                self.fetchRemoteObjects(fetchRequest, context: context)
+            }
             
             let managedObjects = self.cachedObjectsForRequest(fetchRequest, materializedInContext: context)
             return managedObjects

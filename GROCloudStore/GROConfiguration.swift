@@ -9,35 +9,63 @@
 import Foundation
 import CloudKit
 
-struct Attribute {
-    static let ResourceIdentifier = "__gro__resourceIdentifier"
-    static let LastModified = "__gro__lastModified"
-    static let NeedsDeletion = "__gro__needsDeletion"
+public protocol AttributeType {
+    static var ResourceIdentifier: String { get }
+    static var LastModified: String { get }
+    static var NeedsDeletion: String { get }
     
-    static let Prefix = "__gro__"
+    static var Prefix: String { get }
 }
 
-struct CloudContainer {
-    static let Identifier = "iCloud.org.andyshep.GrowJo"
-    
-    struct ZoneNames {
-        static let Custom = "zone1"
+public protocol CloudContainerType {
+    var Identifier: String { get }
+    var CustomZoneName: String { get }
+}
+
+public protocol SubscriptionType {
+    static var Default: [CKSubscription] { get }
+}
+
+public protocol Configuration {
+    var Attributes: AttributeType { get }
+    var CloudContainer: CloudContainerType { get }
+    var Subscriptions: SubscriptionType { get }
+}
+
+struct Attribute: AttributeType {
+    static var ResourceIdentifier: String {
+        return  "__gro__resourceIdentifier"
     }
     
-    struct Subscriptions {
-        static let PlantChanges = "org.andyshep.GrowJo.subscription.plant.changes"
+    static var LastModified: String {
+        return "__gro__lastModified"
+    }
+    
+    static var NeedsDeletion: String {
+        return "__gro__needsDeletion"
+    }
+    
+    static var Prefix: String {
+        return "__gro__"
     }
 }
 
-struct Key {
-    static let ObjectID = "ObjectID"
-    static let RecordName = "RecordName"
+struct DefaultContainer: CloudContainerType {
+    var Identifier: String {
+        return "iCloud.org.andyshep.GrowJo"
+    }
+    
+    var CustomZoneName: String {
+        return "zone1"
+    }
 }
 
-struct Subscriptions {
+struct Subscription: SubscriptionType {
+    static let PlantChanges = "org.andyshep.GrowJo.subscription.plant.changes"
+    
     static var Default: [CKSubscription] {
-        let subscriptionId = CloudContainer.Subscriptions.PlantChanges
-        let zoneId = CKRecordZoneID(zoneName: CloudContainer.ZoneNames.Custom, ownerName: CKOwnerDefaultName)
+        let subscriptionId = Subscription.PlantChanges
+        let zoneId = CKRecordZoneID(zoneName: DefaultContainer().CustomZoneName, ownerName: CKOwnerDefaultName)
         
         let options = CKSubscriptionOptions.FiresOnRecordCreation
         let subscription = CKSubscription(recordType: "GROPlant", predicate: NSPredicate(format: "TRUEPREDICATE"), subscriptionID: subscriptionId, options: options)
@@ -49,5 +77,19 @@ struct Subscriptions {
         subscription.notificationInfo = notificationInfo
         
         return [subscription]
+    }
+}
+
+class GRODefaultConfiguration: Configuration {
+    var Attributes: AttributeType {
+        return Attribute()
+    }
+    
+    var Subscriptions: SubscriptionType {
+        return Subscription()
+    }
+    
+    var CloudContainer: CloudContainerType {
+        return DefaultContainer()
     }
 }

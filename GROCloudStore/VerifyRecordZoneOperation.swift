@@ -52,7 +52,8 @@ class VerifyRecordZoneOperation: AsyncOperation {
         guard let zones = zones else { return finish() }
         
         var found = false
-        let defaultZoneID = CKRecordZoneID(zoneName: CloudContainer.ZoneNames.Custom, ownerName: CKOwnerDefaultName)
+        let configuration = self.dataSource.configuration
+        let defaultZoneID = CKRecordZoneID(zoneName: configuration.CloudContainer.CustomZoneName, ownerName: CKOwnerDefaultName)
         
         for (zoneId, _) in zones {
             if zoneId == defaultZoneID {
@@ -66,7 +67,7 @@ class VerifyRecordZoneOperation: AsyncOperation {
             finish()
         }
         else {
-            self.dataSource.createRecordZone(CloudContainer.ZoneNames.Custom, completion: didCreateRecordZone)
+            self.dataSource.createRecordZone(DefaultContainer().CustomZoneName, completion: didCreateRecordZone)
         }
     }
     

@@ -11,6 +11,14 @@ import CloudKit
 
 class GROTestDataSource: GROCloudDataSource {
     
+    var database: CKDatabase {
+        fatalError()
+    }
+    
+    var configuration: Configuration {
+        fatalError()
+    }
+    
     // MARK: - Records
     
     func saveRecord(record: CKRecord, completion: RecordCompletion) {

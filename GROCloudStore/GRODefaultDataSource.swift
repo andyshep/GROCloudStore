@@ -9,30 +9,36 @@
 import Foundation
 import CloudKit
 
-extension GROCloudDataSource {
-    public var container: CKContainer {
-        return CKContainer(identifier: CloudContainer.Identifier)
+public class GRODefaultDataSource: GROCloudDataSource {
+    
+    public var configuration: Configuration
+    
+    init(configuration: Configuration) {
+        self.configuration = configuration
     }
     
-    public var privateDatabase: CKDatabase {
+    public var database: CKDatabase {
         return self.container.privateCloudDatabase
     }
-}
+    
+    public var container: CKContainer {
+        return CKContainer(identifier: self.configuration.CloudContainer.Identifier)
+    }
 
-public class GRODefaultDataSource: GROCloudDataSource {
+    
     // MARK: - Records
     
     public func saveRecord(record:CKRecord, completion: RecordCompletion) {
-        privateDatabase.saveRecord(record, completionHandler: completion)
+        database.saveRecord(record, completionHandler: completion)
     }
     
     public func recordWithID(recordID:CKRecordID, completion: RecordCompletion) {
-        privateDatabase.fetchRecordWithID(recordID, completionHandler: completion)
+        database.fetchRecordWithID(recordID, completionHandler: completion)
     }
     
     public func recordsOfType(type: String, completion: RecordsCompletion) {
         let query = CKQuery(recordType: type, predicate: NSPredicate(value: true))
-        privateDatabase.performQuery(query, inZoneWithID: nil, completionHandler: completion)
+        database.performQuery(query, inZoneWithID: nil, completionHandler: completion)
     }
     
     public func recordsOfType(type: String, fetched: RecordFetched, completion: QueryCompletion?) {
@@ -49,12 +55,12 @@ public class GRODefaultDataSource: GROCloudDataSource {
             }
         }
         
-        privateDatabase.addOperation(operation)
+        database.addOperation(operation)
     }
     
     public func changedRecordsOfType(type: String, token: CKServerChangeToken?, completion: ChangedRecordHandler) {
         
-        let zoneId = CKRecordZoneID(zoneName: CloudContainer.ZoneNames.Custom, ownerName: CKOwnerDefaultName)
+        let zoneId = CKRecordZoneID(zoneName: DefaultContainer().CustomZoneName, ownerName: CKOwnerDefaultName)
         let operation = CKFetchRecordChangesOperation(recordZoneID: zoneId, previousServerChangeToken: token)
         
         var changedRecords: [CKRecord] = []
@@ -79,17 +85,17 @@ public class GRODefaultDataSource: GROCloudDataSource {
             completion(changed: changedRecords, deleted: deletedRecordIDs, token: token)
         }
         
-        privateDatabase.addOperation(operation)
+        database.addOperation(operation)
     }
     
     public func deleteRecordWithID(recordID: CKRecordID, completion: DeleteRecordCompletion) {
-        privateDatabase.deleteRecordWithID(recordID, completionHandler: completion)
+        database.deleteRecordWithID(recordID, completionHandler: completion)
     }
     
     // MARK: - Subscriptions
     
     public func verifySubscriptions(completion: FetchSubscriptionsCompletion) {
-        privateDatabase.fetchAllSubscriptionsWithCompletionHandler(completion)
+        database.fetchAllSubscriptionsWithCompletionHandler(completion)
     }
     
     public func createSubscriptions(subscriptions: [CKSubscription], completion: CreateSubscriptionsCompletion) {
@@ -99,7 +105,7 @@ public class GRODefaultDataSource: GROCloudDataSource {
             completion(subscription?.first, error)
         }
         
-        privateDatabase.addOperation(operation)
+        database.addOperation(operation)
     }
     
     public func validateSubscriptions(subscriptions: [CKSubscription]) -> Void {
@@ -111,7 +117,7 @@ public class GRODefaultDataSource: GROCloudDataSource {
     public func subscribeToPlantUpdates() -> Void {
         let subscription = CKSubscription(recordType: "Plant", predicate: NSPredicate(value: true), options: .FiresOnRecordCreation)
         
-        privateDatabase.saveSubscription(subscription) { (subscription, error) -> Void in
+        database.saveSubscription(subscription) { (subscription, error) -> Void in
             if let error = error {
                 print("error: \(error)")
             }
@@ -132,7 +138,7 @@ public class GRODefaultDataSource: GROCloudDataSource {
             completion(zones, error)
         }
         
-        privateDatabase.addOperation(operation)
+        database.addOperation(operation)
     }
     
     public func createRecordZone(name: String, completion: CreateRecordZoneCompletion) -> Void {
@@ -145,6 +151,6 @@ public class GRODefaultDataSource: GROCloudDataSource {
             completion(zones?.first, error)
         }
         
-        privateDatabase.addOperation(operation)
+        database.addOperation(operation)
     }
 }

@@ -46,7 +46,7 @@ class VerifySubscriptionOperation: AsyncOperation {
     }
     
     private func createSubscriptions() {
-        let subscriptions = Subscriptions.Default
+        let subscriptions = Subscription.Default
         dataSource.createSubscriptions(subscriptions, completion: didCreateSubscription)
     }
     
@@ -60,7 +60,7 @@ class VerifySubscriptionOperation: AsyncOperation {
             var foundSubscription: CKSubscription? = nil
             if let subscriptions = subscriptions {
                 for subscription in subscriptions {
-                    if subscription.subscriptionID == CloudContainer.Subscriptions.PlantChanges {
+                    if subscription.subscriptionID == Subscription.PlantChanges {
                         foundSubscription = subscription
                         break
                     }

@@ -26,6 +26,9 @@ public typealias ChangedRecordHandler = (changed: [CKRecord], deleted: [CKRecord
 
 public protocol GROCloudDataSource {
     
+    var configuration: Configuration { get }
+    var database: CKDatabase { get }
+    
     func saveRecord(record:CKRecord, completion: RecordCompletion)
     func recordWithID(recordID:CKRecordID, completion: RecordCompletion)
     

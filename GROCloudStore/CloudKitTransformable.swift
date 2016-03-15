@@ -27,7 +27,7 @@ extension CloudKitTransformable where Self: NSManagedObject {
     public var record: CKRecord {
         get {
             guard let data = self.encodedSystemFields else {
-                let zoneId = CKRecordZoneID(zoneName: CloudContainer.ZoneNames.Custom, ownerName: CKOwnerDefaultName)
+                let zoneId = CKRecordZoneID(zoneName: DefaultContainer().CustomZoneName, ownerName: CKOwnerDefaultName)
                 let recordName = NSUUID().UUIDString
                 
                 let recordId = CKRecordID(recordName: recordName, zoneID: zoneId)
@@ -37,7 +37,7 @@ extension CloudKitTransformable where Self: NSManagedObject {
                 
                 print("generated new record id: \(recordName)")
                 
-                let info = [Key.ObjectID: objectID, Key.RecordName: recordName]
+                let info = [GROObjectIDKey: objectID, GRORecordNameKey: recordName]
                 NSNotificationCenter.defaultCenter().postNotificationName(GRODidCreateRecordNotification, object: nil, userInfo: info)
                 
                 return rec

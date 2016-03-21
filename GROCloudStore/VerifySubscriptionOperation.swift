@@ -46,7 +46,8 @@ class VerifySubscriptionOperation: AsyncOperation {
     }
     
     private func createSubscriptions() {
-        let subscriptions = Subscription.Default
+        let configuration = dataSource.configuration
+        let subscriptions = configuration.Subscriptions.Default
         dataSource.createSubscriptions(subscriptions, completion: didCreateSubscription)
     }
     

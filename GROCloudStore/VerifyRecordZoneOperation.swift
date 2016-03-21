@@ -67,7 +67,8 @@ class VerifyRecordZoneOperation: AsyncOperation {
             finish()
         }
         else {
-            self.dataSource.createRecordZone(DefaultContainer().CustomZoneName, completion: didCreateRecordZone)
+            let configuration = dataSource.configuration
+            self.dataSource.createRecordZone(configuration.CloudContainer.CustomZoneName, completion: didCreateRecordZone)
         }
     }
     

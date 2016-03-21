@@ -9,45 +9,18 @@
 import Foundation
 import CloudKit
 
-public protocol AttributeType {
-    static var ResourceIdentifier: String { get }
-    static var LastModified: String { get }
-    static var NeedsDeletion: String { get }
-    
-    static var Prefix: String { get }
-}
-
 public protocol CloudContainerType {
     var Identifier: String { get }
     var CustomZoneName: String { get }
 }
 
 public protocol SubscriptionType {
-    static var Default: [CKSubscription] { get }
+    var Default: [CKSubscription] { get }
 }
 
 public protocol Configuration {
-    var Attributes: AttributeType { get }
     var CloudContainer: CloudContainerType { get }
     var Subscriptions: SubscriptionType { get }
-}
-
-struct Attribute: AttributeType {
-    static var ResourceIdentifier: String {
-        return  "__gro__resourceIdentifier"
-    }
-    
-    static var LastModified: String {
-        return "__gro__lastModified"
-    }
-    
-    static var NeedsDeletion: String {
-        return "__gro__needsDeletion"
-    }
-    
-    static var Prefix: String {
-        return "__gro__"
-    }
 }
 
 struct DefaultContainer: CloudContainerType {
@@ -63,7 +36,7 @@ struct DefaultContainer: CloudContainerType {
 struct Subscription: SubscriptionType {
     static let PlantChanges = "org.andyshep.GrowJo.subscription.plant.changes"
     
-    static var Default: [CKSubscription] {
+    var Default: [CKSubscription] {
         let subscriptionId = Subscription.PlantChanges
         let zoneId = CKRecordZoneID(zoneName: DefaultContainer().CustomZoneName, ownerName: CKOwnerDefaultName)
         
@@ -81,9 +54,6 @@ struct Subscription: SubscriptionType {
 }
 
 class GRODefaultConfiguration: Configuration {
-    var Attributes: AttributeType {
-        return Attribute()
-    }
     
     var Subscriptions: SubscriptionType {
         return Subscription()

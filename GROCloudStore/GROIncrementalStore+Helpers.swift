@@ -8,6 +8,25 @@
 
 import CoreData
 
+struct Attribute {
+    static var ResourceIdentifier: String {
+        return  "__gro__resourceIdentifier"
+    }
+    
+    static var LastModified: String {
+        return "__gro__lastModified"
+    }
+    
+    static var NeedsDeletion: String {
+        return "__gro__needsDeletion"
+    }
+    
+    static var Prefix: String {
+        return "__gro__"
+    }
+}
+
+
 protocol GROBackingStoreResourceType {
     var GROResourceIdentifier: String { get set }
     var GROLastModified: NSDate { get set }

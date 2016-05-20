@@ -36,7 +36,7 @@ extension NSPersistentStoreCoordinator {
         do {
             let coordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
             let dataSource = GROTestDataSource()
-            let configuration = GRODefaultConfiguration()
+            let configuration = GROTestConfiguration()
             
             let options: [NSObject: AnyObject] = [GRODataSourceKey: dataSource, GROUseInMemoryStoreKey: NSNumber(bool: true), GROConfigurationKey: configuration]
             let type = GROIncrementalStore.storeType

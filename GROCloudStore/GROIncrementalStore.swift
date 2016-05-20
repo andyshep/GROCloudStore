@@ -43,6 +43,8 @@ public class GROIncrementalStore: NSIncrementalStore {
     
     private var useInMemoryStores: Bool = false
     
+    private(set) var configuration: Configuration
+    
     public class var storeType: String {
         return String(GROIncrementalStore)
     }
@@ -53,19 +55,20 @@ public class GROIncrementalStore: NSIncrementalStore {
     
     override init(persistentStoreCoordinator root: NSPersistentStoreCoordinator?, configurationName name: String?, URL url: NSURL, options: [NSObject : AnyObject]?) {
         
-//        guard let config = options?[GROConfigurationKey] as? Configuration else {
-//            fatalError("missing configuration")
-//        }
+        guard let configuration = options?[GROConfigurationKey] as? Configuration else {
+            fatalError("missing configuration")
+        }
         
-        let configuraton = GRODefaultConfiguration()
-        self.dataSource = options?[GRODataSourceKey] as? GROCloudDataSource ?? GRODefaultDataSource(configuration: configuraton)
+        self.configuration = configuration
+        
+        self.dataSource = options?[GRODataSourceKey] as? GROCloudDataSource ?? GRODefaultDataSource(configuration: configuration)
         self.useInMemoryStores = options?[GROUseInMemoryStoreKey] as? Bool ?? false
         
         super.init(persistentStoreCoordinator: root, configurationName: name, URL: url, options: options)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "contextDidChange:", name: NSManagedObjectContextDidSaveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GROIncrementalStore.contextDidChange(_:)), name: NSManagedObjectContextDidSaveNotification, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "didCreateRecord:", name: GRODidCreateRecordNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GROIncrementalStore.didCreateRecord(_:)), name: GRODidCreateRecordNotification, object: nil)
     }
     
     deinit {
@@ -294,7 +297,7 @@ public class GROIncrementalStore: NSIncrementalStore {
                 cachedObjects = try backingContext.executeFetchRequest(cacheFetchRequest)
             }
             catch {
-                fatalError()
+                fatalError("error executing fetch request: \(error)")
             }
         }
         
@@ -327,7 +330,7 @@ public class GROIncrementalStore: NSIncrementalStore {
     private func fetchRemoteObjects(request: NSFetchRequest, context: NSManagedObjectContext) {
         
         let verifyRecordZone = VerifyRecordZoneOperation(context: backingContext, dataSource: dataSource)
-        let verifySubscriptions = VerifySubscriptionOperation(context: backingContext, dataSource: dataSource)
+        let verifySubscriptions = VerifySubscriptionOperation(context: backingContext, dataSource: dataSource, configuration: configuration)
         
         let fetchChanges = FetchChangesOperation(request: request, context: context, backingContext: backingContext, dataSource: dataSource)
         let injestDeletedRecords = InjestDeletedRecordsOperation(operation: fetchChanges)

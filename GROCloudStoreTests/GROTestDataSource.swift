@@ -47,10 +47,6 @@ class GROTestDataSource: GROCloudDataSource {
     
     // MARK: - Subscriptions
     
-    func validateSubscriptions(subscriptions: [CKSubscription]) {
-        //
-    }
-    
     func verifySubscriptions(completion: FetchSubscriptionsCompletion) {
         //
     }

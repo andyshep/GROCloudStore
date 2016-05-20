@@ -27,7 +27,12 @@ extension CloudKitTransformable where Self: NSManagedObject {
     public var record: CKRecord {
         get {
             guard let data = self.encodedSystemFields else {
-                let zoneId = CKRecordZoneID(zoneName: DefaultContainer().CustomZoneName, ownerName: CKOwnerDefaultName)
+                
+                let psc = self.managedObjectContext?.persistentStoreCoordinator
+                guard let configuration = configurationFromPersistentStore(psc) else { fatalError() }
+                
+                let zoneName = configuration.CloudContainer.CustomZoneName
+                let zoneId = CKRecordZoneID(zoneName: zoneName, ownerName: CKOwnerDefaultName)
                 let recordName = NSUUID().UUIDString
                 
                 let recordId = CKRecordID(recordName: recordName, zoneID: zoneId)
@@ -75,4 +80,16 @@ private func encodeSystemFieldsWithRecord(record: CKRecord) -> NSData {
     coder.finishEncoding()
     
     return NSData(data: data)
+}
+
+private func configurationFromPersistentStore(coordinator: NSPersistentStoreCoordinator?) -> Configuration? {
+    guard let _ = coordinator else { return nil }
+    
+    for store in coordinator!.persistentStores {
+        if let incremental = store as? GROIncrementalStore {
+            return incremental.configuration
+        }
+    }
+    
+    return nil
 }

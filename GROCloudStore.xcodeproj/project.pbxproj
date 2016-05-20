@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F7116A781CEF84EE005210FA /* GROTestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7116A771CEF84EE005210FA /* GROTestConfiguration.swift */; };
 		F78D92E11C934AAD009EA958 /* GROCloudStore.h in Headers */ = {isa = PBXBuildFile; fileRef = F78D92E01C934AAD009EA958 /* GROCloudStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F78D92E81C934AAD009EA958 /* GROCloudStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78D92DD1C934AAD009EA958 /* GROCloudStore.framework */; };
 		F78D92ED1C934AAD009EA958 /* GROCloudStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D92EC1C934AAD009EA958 /* GROCloudStoreTests.swift */; };
 		F78D930F1C934B09009EA958 /* Array+NSOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D92F71C934B09009EA958 /* Array+NSOperation.swift */; };
 		F78D93101C934B09009EA958 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D92F81C934B09009EA958 /* AsyncOperation.swift */; };
-		F78D93111C934B09009EA958 /* CKContainer+Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D92F91C934B09009EA958 /* CKContainer+Operations.swift */; };
 		F78D93121C934B09009EA958 /* CloudKitTransformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D92FA1C934B09009EA958 /* CloudKitTransformable.swift */; };
 		F78D93131C934B09009EA958 /* CloudRecordType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D92FB1C934B09009EA958 /* CloudRecordType.swift */; };
 		F78D93141C934B09009EA958 /* ContextOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D92FC1C934B09009EA958 /* ContextOperation.swift */; };
@@ -33,7 +33,7 @@
 		F78D93241C934B09009EA958 /* RecordChangeOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D930C1C934B09009EA958 /* RecordChangeOperation.swift */; };
 		F78D93251C934B09009EA958 /* VerifyRecordZoneOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D930D1C934B09009EA958 /* VerifyRecordZoneOperation.swift */; };
 		F78D93261C934B09009EA958 /* VerifySubscriptionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D930E1C934B09009EA958 /* VerifySubscriptionOperation.swift */; };
-		F78D93361C934E1E009EA958 /* GROConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D92FF1C934B09009EA958 /* GROConfiguration.swift */; };
+		F78D93361C934E1E009EA958 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D92FF1C934B09009EA958 /* Configuration.swift */; };
 		F7BE38731C98810A00D1CE87 /* GROTestDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BE38721C98810A00D1CE87 /* GROTestDataSource.swift */; };
 		F7BE38761C9881D200D1CE87 /* GRODefaultDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BE38751C9881D200D1CE87 /* GRODefaultDataSource.swift */; };
 		F7D099A21C98AF210023C220 /* CoreData+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D099A11C98AF210023C220 /* CoreData+Extensions.swift */; };
@@ -50,7 +50,6 @@
 		F7D099B71C98B3840023C220 /* GROCloudDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D92FE1C934B09009EA958 /* GROCloudDataSource.swift */; };
 		F7D099B81C98B3840023C220 /* NSURL+Directories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D930A1C934B09009EA958 /* NSURL+Directories.swift */; };
 		F7D099BA1C98B3840023C220 /* Array+NSOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D92F71C934B09009EA958 /* Array+NSOperation.swift */; };
-		F7D099BB1C98B3840023C220 /* CKContainer+Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D92F91C934B09009EA958 /* CKContainer+Operations.swift */; };
 		F7D099BC1C98B3840023C220 /* ManagedObjectTransformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D93061C934B09009EA958 /* ManagedObjectTransformable.swift */; };
 		F7D099BD1C98B3840023C220 /* NameableEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D93071C934B09009EA958 /* NameableEntity.swift */; };
 		F7D099BE1C98B3840023C220 /* ManagedObjectIDProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D93051C934B09009EA958 /* ManagedObjectIDProvider.swift */; };
@@ -61,7 +60,7 @@
 		F7D099C31C98B3970023C220 /* GROSavedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D93021C934B09009EA958 /* GROSavedData.swift */; };
 		F7D099C41C98B3B40023C220 /* CloudKitTransformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D92FA1C934B09009EA958 /* CloudKitTransformable.swift */; };
 		F7D099C51C98B3C00023C220 /* GROIncrementalStore+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D93011C934B09009EA958 /* GROIncrementalStore+Helpers.swift */; };
-		F7D099C61C98B3CC0023C220 /* GROConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D92FF1C934B09009EA958 /* GROConfiguration.swift */; };
+		F7D099C61C98B3CC0023C220 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D92FF1C934B09009EA958 /* Configuration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +74,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F7116A771CEF84EE005210FA /* GROTestConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GROTestConfiguration.swift; sourceTree = "<group>"; };
 		F78D92DD1C934AAD009EA958 /* GROCloudStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GROCloudStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F78D92E01C934AAD009EA958 /* GROCloudStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GROCloudStore.h; sourceTree = "<group>"; };
 		F78D92E21C934AAD009EA958 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -83,13 +83,12 @@
 		F78D92EE1C934AAD009EA958 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F78D92F71C934B09009EA958 /* Array+NSOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+NSOperation.swift"; sourceTree = "<group>"; };
 		F78D92F81C934B09009EA958 /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
-		F78D92F91C934B09009EA958 /* CKContainer+Operations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CKContainer+Operations.swift"; sourceTree = "<group>"; };
 		F78D92FA1C934B09009EA958 /* CloudKitTransformable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudKitTransformable.swift; sourceTree = "<group>"; };
 		F78D92FB1C934B09009EA958 /* CloudRecordType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudRecordType.swift; sourceTree = "<group>"; };
 		F78D92FC1C934B09009EA958 /* ContextOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextOperation.swift; sourceTree = "<group>"; };
 		F78D92FD1C934B09009EA958 /* FetchChangesOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchChangesOperation.swift; sourceTree = "<group>"; };
 		F78D92FE1C934B09009EA958 /* GROCloudDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GROCloudDataSource.swift; sourceTree = "<group>"; };
-		F78D92FF1C934B09009EA958 /* GROConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GROConfiguration.swift; sourceTree = "<group>"; };
+		F78D92FF1C934B09009EA958 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		F78D93001C934B09009EA958 /* GROIncrementalStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GROIncrementalStore.swift; sourceTree = "<group>"; };
 		F78D93011C934B09009EA958 /* GROIncrementalStore+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GROIncrementalStore+Helpers.swift"; sourceTree = "<group>"; };
 		F78D93021C934B09009EA958 /* GROSavedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GROSavedData.swift; sourceTree = "<group>"; };
@@ -129,6 +128,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F7116A761CEF82CB005210FA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F78D93011C934B09009EA958 /* GROIncrementalStore+Helpers.swift */,
+				F78D930A1C934B09009EA958 /* NSURL+Directories.swift */,
+				F78D92F71C934B09009EA958 /* Array+NSOperation.swift */,
+				F78D93081C934B09009EA958 /* NSManagedObjectContext+Helpers.swift */,
+				F78D93091C934B09009EA958 /* NSSaveChangesRequest+Records.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		F78D92D31C934AAC009EA958 = {
 			isa = PBXGroup;
 			children = (
@@ -151,12 +162,11 @@
 			isa = PBXGroup;
 			children = (
 				F78D93001C934B09009EA958 /* GROIncrementalStore.swift */,
-				F78D93011C934B09009EA958 /* GROIncrementalStore+Helpers.swift */,
 				F7BE38751C9881D200D1CE87 /* GRODefaultDataSource.swift */,
-				F78D92FF1C934B09009EA958 /* GROConfiguration.swift */,
 				F78D93021C934B09009EA958 /* GROSavedData.swift */,
 				F78D93281C934BA8009EA958 /* Operations */,
-				F78D93271C934B8A009EA958 /* Protocols & Extensions */,
+				F78D93271C934B8A009EA958 /* Protocols */,
+				F7116A761CEF82CB005210FA /* Extensions */,
 				F78D92E01C934AAD009EA958 /* GROCloudStore.h */,
 				F78D92E21C934AAD009EA958 /* Info.plist */,
 			);
@@ -169,27 +179,24 @@
 				F78D92EC1C934AAD009EA958 /* GROCloudStoreTests.swift */,
 				F7BE38721C98810A00D1CE87 /* GROTestDataSource.swift */,
 				F7D099A11C98AF210023C220 /* CoreData+Extensions.swift */,
+				F7116A771CEF84EE005210FA /* GROTestConfiguration.swift */,
 				F78D92EE1C934AAD009EA958 /* Info.plist */,
 			);
 			path = GROCloudStoreTests;
 			sourceTree = "<group>";
 		};
-		F78D93271C934B8A009EA958 /* Protocols & Extensions */ = {
+		F78D93271C934B8A009EA958 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				F78D92FF1C934B09009EA958 /* Configuration.swift */,
 				F78D92FE1C934B09009EA958 /* GROCloudDataSource.swift */,
-				F78D930A1C934B09009EA958 /* NSURL+Directories.swift */,
 				F78D92FA1C934B09009EA958 /* CloudKitTransformable.swift */,
-				F78D92F71C934B09009EA958 /* Array+NSOperation.swift */,
-				F78D92F91C934B09009EA958 /* CKContainer+Operations.swift */,
 				F78D93061C934B09009EA958 /* ManagedObjectTransformable.swift */,
 				F78D93071C934B09009EA958 /* NameableEntity.swift */,
 				F78D93051C934B09009EA958 /* ManagedObjectIDProvider.swift */,
-				F78D93081C934B09009EA958 /* NSManagedObjectContext+Helpers.swift */,
-				F78D93091C934B09009EA958 /* NSSaveChangesRequest+Records.swift */,
 				F78D92FB1C934B09009EA958 /* CloudRecordType.swift */,
 			);
-			name = "Protocols & Extensions";
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 		F78D93281C934BA8009EA958 /* Operations */ = {
@@ -325,7 +332,7 @@
 				F78D93221C934B09009EA958 /* NSURL+Directories.swift in Sources */,
 				F78D93121C934B09009EA958 /* CloudKitTransformable.swift in Sources */,
 				F78D93151C934B09009EA958 /* FetchChangesOperation.swift in Sources */,
-				F78D93361C934E1E009EA958 /* GROConfiguration.swift in Sources */,
+				F78D93361C934E1E009EA958 /* Configuration.swift in Sources */,
 				F78D930F1C934B09009EA958 /* Array+NSOperation.swift in Sources */,
 				F78D93201C934B09009EA958 /* NSManagedObjectContext+Helpers.swift in Sources */,
 				F78D93161C934B09009EA958 /* GROCloudDataSource.swift in Sources */,
@@ -334,7 +341,6 @@
 				F78D931C1C934B09009EA958 /* InjestModifiedRecordsOperation.swift in Sources */,
 				F78D93231C934B09009EA958 /* PushChangesOperation.swift in Sources */,
 				F78D931F1C934B09009EA958 /* NameableEntity.swift in Sources */,
-				F78D93111C934B09009EA958 /* CKContainer+Operations.swift in Sources */,
 				F78D931A1C934B09009EA958 /* GROSavedData.swift in Sources */,
 				F78D931E1C934B09009EA958 /* ManagedObjectTransformable.swift in Sources */,
 				F78D93261C934B09009EA958 /* VerifySubscriptionOperation.swift in Sources */,
@@ -357,6 +363,7 @@
 				F7BE38731C98810A00D1CE87 /* GROTestDataSource.swift in Sources */,
 				F7D099A31C98B2580023C220 /* GROIncrementalStore.swift in Sources */,
 				F7D099B81C98B3840023C220 /* NSURL+Directories.swift in Sources */,
+				F7116A781CEF84EE005210FA /* GROTestConfiguration.swift in Sources */,
 				F7D099BE1C98B3840023C220 /* ManagedObjectIDProvider.swift in Sources */,
 				F7D099B01C98B3800023C220 /* VerifySubscriptionOperation.swift in Sources */,
 				F7D099A21C98AF210023C220 /* CoreData+Extensions.swift in Sources */,
@@ -369,12 +376,11 @@
 				F7D099C01C98B3840023C220 /* NSSaveChangesRequest+Records.swift in Sources */,
 				F7D099AF1C98B3800023C220 /* VerifyRecordZoneOperation.swift in Sources */,
 				F7D099A81C98B3800023C220 /* AsyncOperation.swift in Sources */,
-				F7D099C61C98B3CC0023C220 /* GROConfiguration.swift in Sources */,
+				F7D099C61C98B3CC0023C220 /* Configuration.swift in Sources */,
 				F7D099C31C98B3970023C220 /* GROSavedData.swift in Sources */,
 				F7D099AD1C98B3800023C220 /* InjestModifiedRecordsOperation.swift in Sources */,
 				F7D099AE1C98B3800023C220 /* PushChangesOperation.swift in Sources */,
 				F7D099C21C98B3970023C220 /* GRODefaultDataSource.swift in Sources */,
-				F7D099BB1C98B3840023C220 /* CKContainer+Operations.swift in Sources */,
 				F7D099BC1C98B3840023C220 /* ManagedObjectTransformable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

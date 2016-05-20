@@ -60,7 +60,8 @@ public class GRODefaultDataSource: GROCloudDataSource {
     
     public func changedRecordsOfType(type: String, token: CKServerChangeToken?, completion: ChangedRecordHandler) {
         
-        let zoneId = CKRecordZoneID(zoneName: DefaultContainer().CustomZoneName, ownerName: CKOwnerDefaultName)
+        let name = self.configuration.CloudContainer.CustomZoneName
+        let zoneId = CKRecordZoneID(zoneName: name, ownerName: CKOwnerDefaultName)
         let operation = CKFetchRecordChangesOperation(recordZoneID: zoneId, previousServerChangeToken: token)
         
         var changedRecords: [CKRecord] = []
@@ -106,25 +107,6 @@ public class GRODefaultDataSource: GROCloudDataSource {
         }
         
         database.addOperation(operation)
-    }
-    
-    public func validateSubscriptions(subscriptions: [CKSubscription]) -> Void {
-        for sub in subscriptions {
-            print("sub id: \(sub.subscriptionID)")
-        }
-    }
-    
-    public func subscribeToPlantUpdates() -> Void {
-        let subscription = CKSubscription(recordType: "Plant", predicate: NSPredicate(value: true), options: .FiresOnRecordCreation)
-        
-        database.saveSubscription(subscription) { (subscription, error) -> Void in
-            if let error = error {
-                print("error: \(error)")
-            }
-            else {
-                print("new subscription: \(subscription)")
-            }
-        }
     }
     
     // MARK: - Record Zones

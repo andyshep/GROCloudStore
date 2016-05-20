@@ -37,10 +37,9 @@ public protocol GROCloudDataSource {
     
     func changedRecordsOfType(type: String, token: CKServerChangeToken?, completion: ChangedRecordHandler)
     func deleteRecordWithID(recordID: CKRecordID, completion: DeleteRecordCompletion)
-    func verifySubscriptions(completion: FetchSubscriptionsCompletion)
     
+    func verifySubscriptions(completion: FetchSubscriptionsCompletion)
     func createSubscriptions(subscriptions: [CKSubscription], completion: CreateSubscriptionsCompletion)
-    func validateSubscriptions(subscriptions: [CKSubscription]) -> Void
     
     func fetchRecordsZones(completion: FetchRecordZonesCompletion) -> Void
     func createRecordZone(name: String, completion: CreateRecordZoneCompletion) -> Void

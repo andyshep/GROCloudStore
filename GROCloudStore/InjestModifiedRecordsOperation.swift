@@ -15,7 +15,6 @@ class InjestModifiedRecordsOperation: NSOperation {
     
     required init(operation: RecordChangeOperation) {
         self.operation = operation
-        
         super.init()
     }
     

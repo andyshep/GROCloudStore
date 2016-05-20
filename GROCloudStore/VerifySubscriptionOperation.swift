@@ -13,10 +13,12 @@ class VerifySubscriptionOperation: AsyncOperation {
     
     private let context: NSManagedObjectContext
     private let dataSource: GROCloudDataSource
+    private let configuration: Configuration
     
-    init(context: NSManagedObjectContext, dataSource: GROCloudDataSource) {
+    init(context: NSManagedObjectContext, dataSource: GROCloudDataSource, configuration: Configuration) {
         self.context = context
         self.dataSource = dataSource
+        self.configuration = configuration
         super.init()
     }
     
@@ -58,22 +60,29 @@ class VerifySubscriptionOperation: AsyncOperation {
         }
         else {
             
-            var foundSubscription: CKSubscription? = nil
+            var foundSubscriptions: [CKSubscription: Bool] = [:]
+            for subscription in self.configuration.Subscriptions.Default {
+                foundSubscriptions[subscription] = false
+            }
+            
             if let subscriptions = subscriptions {
                 for subscription in subscriptions {
-                    if subscription.subscriptionID == Subscription.PlantChanges {
-                        foundSubscription = subscription
-                        break
+                    if let _ = foundSubscriptions[subscription] {
+                        foundSubscriptions[subscription] = true
                     }
                 }
             }
             
-            if let _ = foundSubscription {
-                self.saveSubscription(foundSubscription!, context: self.context)
-                finish()
-            }
-            else {
-                createSubscriptions()
+            for obj in foundSubscriptions {
+                let subscription = obj.0
+                let found = obj.1
+                
+                if found {
+                    self.saveSubscription(subscription, context: self.context)
+                }
+                else {
+                    createSubscriptions()
+                }
             }
         }
     }

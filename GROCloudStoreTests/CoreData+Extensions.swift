@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+@testable import GROCloudStore
 
 public func createInMemoryContext(model: NSManagedObjectModel) -> NSManagedObjectContext? {
     

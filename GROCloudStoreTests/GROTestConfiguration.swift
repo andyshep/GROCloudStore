@@ -8,6 +8,7 @@
 
 import Foundation
 import CloudKit
+@testable import GROCloudStore
 
 struct DefaultTestContainer: CloudContainerType {
     var Identifier: String {
@@ -27,7 +28,7 @@ struct TestSubscription: SubscriptionType {
         let zoneId = CKRecordZoneID(zoneName: DefaultTestContainer().CustomZoneName, ownerName: CKOwnerDefaultName)
         
         let options = CKSubscriptionOptions.FiresOnRecordCreation
-        let subscription = CKSubscription(recordType: "GROPlant", predicate: NSPredicate(format: "TRUEPREDICATE"), subscriptionID: subscriptionId, options: options)
+        let subscription = CKSubscription(recordType: "GROTestEntity", predicate: NSPredicate(format: "TRUEPREDICATE"), subscriptionID: subscriptionId, options: options)
         subscription.zoneID = zoneId
         
         let notificationInfo = CKNotificationInfo()
@@ -40,7 +41,7 @@ struct TestSubscription: SubscriptionType {
 }
 
 class GROTestConfiguration: NSObject {
-    
+
 }
 
 extension GROTestConfiguration: Configuration {

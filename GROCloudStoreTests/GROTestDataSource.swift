@@ -8,6 +8,7 @@
 
 import Foundation
 import CloudKit
+@testable import GROCloudStore
 
 class GROTestDataSource: GROCloudDataSource {
     

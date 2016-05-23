@@ -29,7 +29,7 @@ class GROCloudStoreTests: XCTestCase {
         contentAttribute.indexed = true
         
         let testEntity = NSEntityDescription()
-        testEntity.name = "GROTest"
+        testEntity.name = "GROTestEntity"
         testEntity.properties = [contentAttribute]
         
         let model = NSManagedObjectModel()

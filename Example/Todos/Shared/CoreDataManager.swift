@@ -65,7 +65,7 @@ class CoreDataManager: NSObject {
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         let url = NSURL.applicationDocumentsDirectory().URLByAppendingPathComponent("Todos.sqlite")
         
-        let options = [NSMigratePersistentStoresAutomaticallyOption: NSNumber(bool: true), NSInferMappingModelAutomaticallyOption: NSNumber(bool: true)];
+        let options = [GROConfigurationKey: TodoCloudConfiguration()];
         
         do {
            try coordinator.addPersistentStoreWithType(storeType, configuration: nil, URL: url, options: options)

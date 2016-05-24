@@ -7,14 +7,29 @@
 //
 
 import UIKit
+import CoreData
 
-class ViewController: UITableViewController {
+class ViewController: UIViewController {
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    lazy var fetchedResultsController: NSFetchedResultsController = {
+        let descriptors = [NSSortDescriptor(key: "created", ascending: true)]
+        let controller = CoreDataManager.sharedManager.fetchedResultsControllerForEntityName("Todo", sortDescriptors: descriptors)
+        
+        controller.delegate = self
+        
+        return controller
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        self.navigationItem.title = "Test"
+        self.title = "Test"
+        
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        self.tableView.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -23,4 +38,20 @@ class ViewController: UITableViewController {
     }
 }
 
+extension ViewController: UITableViewDataSource {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.fetchedResultsController.fetchedObjects?.count ?? 0
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        
+        cell.textLabel?.text = "test"
+        
+        return cell
+    }
+}
 
+extension ViewController: NSFetchedResultsControllerDelegate {
+    
+}

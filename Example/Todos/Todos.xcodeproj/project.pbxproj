@@ -30,6 +30,7 @@
 		F7417CB51CF39A1800FFDA3F /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7417CB31CF39A1800FFDA3F /* CoreDataManager.swift */; };
 		F7417CB71CF39A4800FFDA3F /* NSURL+Directories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7417CB61CF39A4800FFDA3F /* NSURL+Directories.swift */; };
 		F7417CB81CF39A4800FFDA3F /* NSURL+Directories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7417CB61CF39A4800FFDA3F /* NSURL+Directories.swift */; };
+		F75E87671CF4C56100CBE3EA /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75E87661CF4C56100CBE3EA /* AddViewController.swift */; };
 		F7E685331CF40A3E00EEFD86 /* Todos+Transformables.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E685321CF40A3E00EEFD86 /* Todos+Transformables.swift */; };
 		F7E685341CF40A3E00EEFD86 /* Todos+Transformables.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E685321CF40A3E00EEFD86 /* Todos+Transformables.swift */; };
 /* End PBXBuildFile section */
@@ -88,6 +89,7 @@
 		F7417CAB1CF377EB00FFDA3F /* Todo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		F7417CB31CF39A1800FFDA3F /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		F7417CB61CF39A4800FFDA3F /* NSURL+Directories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+Directories.swift"; sourceTree = "<group>"; };
+		F75E87661CF4C56100CBE3EA /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddViewController.swift; path = Shared/AddViewController.swift; sourceTree = SOURCE_ROOT; };
 		F7E685321CF40A3E00EEFD86 /* Todos+Transformables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Todos+Transformables.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,8 +118,8 @@
 			children = (
 				F7417C881CF3756300FFDA3F /* GROCloudStore.xcodeproj */,
 				F7417C4D1CF3748800FFDA3F /* Todos-iOS */,
-				F7417CA51CF377A300FFDA3F /* Shared */,
 				F7417C7A1CF3754100FFDA3F /* Todos-OSX */,
+				F7417CA51CF377A300FFDA3F /* Shared */,
 				F7417C4C1CF3748800FFDA3F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -136,6 +138,7 @@
 			children = (
 				F7417C631CF374C000FFDA3F /* AppDelegate.swift */,
 				F7417C6D1CF374C000FFDA3F /* ViewController.swift */,
+				F75E87661CF4C56100CBE3EA /* AddViewController.swift */,
 				F7417C641CF374C000FFDA3F /* Assets.xcassets */,
 				F7417C6A1CF374C000FFDA3F /* Info.plist */,
 				F7417C971CF375A000FFDA3F /* LaunchScreen.storyboard */,
@@ -320,6 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F75E87671CF4C56100CBE3EA /* AddViewController.swift in Sources */,
 				F7417CB41CF39A1800FFDA3F /* CoreDataManager.swift in Sources */,
 				F7417C741CF374C000FFDA3F /* ViewController.swift in Sources */,
 				F7417CAC1CF377EB00FFDA3F /* Todo+CoreDataProperties.swift in Sources */,

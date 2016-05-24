@@ -24,17 +24,20 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
-        self.title = "Test"
+        self.title = "Todos"
         
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         self.tableView.dataSource = self
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "AddTodoItem" {
+            guard let navController = segue.destinationViewController as? UINavigationController else { return }
+            guard let addViewController = navController.viewControllers.first as? AddViewController else { return }
+            
+            addViewController.context = self.fetchedResultsController.managedObjectContext
+        }
     }
 }
 
@@ -45,13 +48,16 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        guard let todo = fetchedResultsController.fetchedObjects?[indexPath.row] as? Todo else { fatalError() }
         
-        cell.textLabel?.text = "test"
+        cell.textLabel?.text = todo.item
         
         return cell
     }
 }
 
 extension ViewController: NSFetchedResultsControllerDelegate {
-    
+    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+        self.tableView?.reloadData()
+    }
 }

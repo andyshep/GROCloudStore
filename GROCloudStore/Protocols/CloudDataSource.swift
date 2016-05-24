@@ -1,5 +1,5 @@
 //
-//  GROCloudDataSource.swift
+//  CloudDataSource.swift
 //  GROCloudStore
 //
 //  Created by Andrew Shepard on 7/11/15.
@@ -24,7 +24,7 @@ public typealias CreateRecordZoneCompletion = (CKRecordZone?, NSError?) -> Void
 
 public typealias ChangedRecordHandler = (changed: [CKRecord], deleted: [CKRecordID], token: CKServerChangeToken?) -> Void
 
-public protocol GROCloudDataSource {
+public protocol CloudDataSource {
     
     var configuration: Configuration { get }
     var database: CKDatabase { get }

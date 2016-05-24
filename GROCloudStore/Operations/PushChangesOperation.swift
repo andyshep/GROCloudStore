@@ -18,9 +18,9 @@ class PushChangesOperation: AsyncOperation {
     var updatedRecords: [CKRecord]
     var deletedRecordIDs: [CKRecordID]
     
-    private let dataSource: GROCloudDataSource
+    private let dataSource: CloudDataSource
     
-    init(request: NSSaveChangesRequest, context: NSManagedObjectContext, backingContext: NSManagedObjectContext, dataSource: GROCloudDataSource) {
+    init(request: NSSaveChangesRequest, context: NSManagedObjectContext, backingContext: NSManagedObjectContext, dataSource: CloudDataSource) {
         self.request = request
         self.context = context
         self.backingContext = backingContext

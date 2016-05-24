@@ -16,7 +16,7 @@
 		F73B5E5C1CF4B31400B92E55 /* CloudKitTransformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E551CF4B31400B92E55 /* CloudKitTransformable.swift */; };
 		F73B5E5D1CF4B31400B92E55 /* CloudRecordType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E561CF4B31400B92E55 /* CloudRecordType.swift */; };
 		F73B5E5E1CF4B31400B92E55 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E571CF4B31400B92E55 /* Configuration.swift */; };
-		F73B5E5F1CF4B31400B92E55 /* GROCloudDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E581CF4B31400B92E55 /* GROCloudDataSource.swift */; };
+		F73B5E5F1CF4B31400B92E55 /* CloudDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E581CF4B31400B92E55 /* CloudDataSource.swift */; };
 		F73B5E601CF4B31400B92E55 /* ManagedObjectIDProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E591CF4B31400B92E55 /* ManagedObjectIDProvider.swift */; };
 		F73B5E611CF4B31400B92E55 /* ManagedObjectTransformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E5A1CF4B31400B92E55 /* ManagedObjectTransformable.swift */; };
 		F73B5E621CF4B31400B92E55 /* NameableEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E5B1CF4B31400B92E55 /* NameableEntity.swift */; };
@@ -29,6 +29,27 @@
 		F73B5E721CF4B33800B92E55 /* RecordChangeOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E691CF4B33800B92E55 /* RecordChangeOperation.swift */; };
 		F73B5E731CF4B33800B92E55 /* VerifyRecordZoneOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E6A1CF4B33800B92E55 /* VerifyRecordZoneOperation.swift */; };
 		F73B5E741CF4B33800B92E55 /* VerifySubscriptionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E6B1CF4B33800B92E55 /* VerifySubscriptionOperation.swift */; };
+		F73B5E7D1CF4B49600B92E55 /* CloudKitTransformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E551CF4B31400B92E55 /* CloudKitTransformable.swift */; };
+		F73B5E7E1CF4B49600B92E55 /* CloudRecordType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E561CF4B31400B92E55 /* CloudRecordType.swift */; };
+		F73B5E7F1CF4B49600B92E55 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E571CF4B31400B92E55 /* Configuration.swift */; };
+		F73B5E801CF4B49600B92E55 /* CloudDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E581CF4B31400B92E55 /* CloudDataSource.swift */; };
+		F73B5E811CF4B49600B92E55 /* ManagedObjectIDProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E591CF4B31400B92E55 /* ManagedObjectIDProvider.swift */; };
+		F73B5E821CF4B49600B92E55 /* ManagedObjectTransformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E5A1CF4B31400B92E55 /* ManagedObjectTransformable.swift */; };
+		F73B5E831CF4B49600B92E55 /* NameableEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E5B1CF4B31400B92E55 /* NameableEntity.swift */; };
+		F73B5E841CF4B49A00B92E55 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E631CF4B33800B92E55 /* AsyncOperation.swift */; };
+		F73B5E851CF4B49A00B92E55 /* ContextOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E641CF4B33800B92E55 /* ContextOperation.swift */; };
+		F73B5E861CF4B49A00B92E55 /* FetchChangesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E651CF4B33800B92E55 /* FetchChangesOperation.swift */; };
+		F73B5E871CF4B49A00B92E55 /* InjestDeletedRecordsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E661CF4B33800B92E55 /* InjestDeletedRecordsOperation.swift */; };
+		F73B5E881CF4B49A00B92E55 /* InjestModifiedRecordsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E671CF4B33800B92E55 /* InjestModifiedRecordsOperation.swift */; };
+		F73B5E891CF4B49A00B92E55 /* PushChangesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E681CF4B33800B92E55 /* PushChangesOperation.swift */; };
+		F73B5E8A1CF4B49A00B92E55 /* RecordChangeOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E691CF4B33800B92E55 /* RecordChangeOperation.swift */; };
+		F73B5E8B1CF4B49A00B92E55 /* VerifyRecordZoneOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E6A1CF4B33800B92E55 /* VerifyRecordZoneOperation.swift */; };
+		F73B5E8C1CF4B49A00B92E55 /* VerifySubscriptionOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E6B1CF4B33800B92E55 /* VerifySubscriptionOperation.swift */; };
+		F73B5E8D1CF4B4A300B92E55 /* Array+NSOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E4B1CF4B2BC00B92E55 /* Array+NSOperation.swift */; };
+		F73B5E8E1CF4B4A300B92E55 /* GROIncrementalStore+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E4C1CF4B2BC00B92E55 /* GROIncrementalStore+Helpers.swift */; };
+		F73B5E8F1CF4B4A300B92E55 /* NSManagedObjectContext+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E4D1CF4B2BC00B92E55 /* NSManagedObjectContext+Helpers.swift */; };
+		F73B5E901CF4B4A300B92E55 /* NSSaveChangesRequest+Records.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E4E1CF4B2BC00B92E55 /* NSSaveChangesRequest+Records.swift */; };
+		F73B5E911CF4B4A300B92E55 /* NSURL+Directories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E4F1CF4B2BC00B92E55 /* NSURL+Directories.swift */; };
 		F78D92E11C934AAD009EA958 /* GROCloudStore.h in Headers */ = {isa = PBXBuildFile; fileRef = F78D92E01C934AAD009EA958 /* GROCloudStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F78D92E81C934AAD009EA958 /* GROCloudStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78D92DD1C934AAD009EA958 /* GROCloudStore.framework */; };
 		F78D92ED1C934AAD009EA958 /* GROCloudStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F78D92EC1C934AAD009EA958 /* GROCloudStoreTests.swift */; };
@@ -62,7 +83,7 @@
 		F73B5E551CF4B31400B92E55 /* CloudKitTransformable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudKitTransformable.swift; path = Protocols/CloudKitTransformable.swift; sourceTree = "<group>"; };
 		F73B5E561CF4B31400B92E55 /* CloudRecordType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudRecordType.swift; path = Protocols/CloudRecordType.swift; sourceTree = "<group>"; };
 		F73B5E571CF4B31400B92E55 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Configuration.swift; path = Protocols/Configuration.swift; sourceTree = "<group>"; };
-		F73B5E581CF4B31400B92E55 /* GROCloudDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GROCloudDataSource.swift; path = Protocols/GROCloudDataSource.swift; sourceTree = "<group>"; };
+		F73B5E581CF4B31400B92E55 /* CloudDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudDataSource.swift; path = Protocols/CloudDataSource.swift; sourceTree = "<group>"; };
 		F73B5E591CF4B31400B92E55 /* ManagedObjectIDProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManagedObjectIDProvider.swift; path = Protocols/ManagedObjectIDProvider.swift; sourceTree = "<group>"; };
 		F73B5E5A1CF4B31400B92E55 /* ManagedObjectTransformable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManagedObjectTransformable.swift; path = Protocols/ManagedObjectTransformable.swift; sourceTree = "<group>"; };
 		F73B5E5B1CF4B31400B92E55 /* NameableEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NameableEntity.swift; path = Protocols/NameableEntity.swift; sourceTree = "<group>"; };
@@ -170,7 +191,7 @@
 				F73B5E551CF4B31400B92E55 /* CloudKitTransformable.swift */,
 				F73B5E561CF4B31400B92E55 /* CloudRecordType.swift */,
 				F73B5E571CF4B31400B92E55 /* Configuration.swift */,
-				F73B5E581CF4B31400B92E55 /* GROCloudDataSource.swift */,
+				F73B5E581CF4B31400B92E55 /* CloudDataSource.swift */,
 				F73B5E591CF4B31400B92E55 /* ManagedObjectIDProvider.swift */,
 				F73B5E5A1CF4B31400B92E55 /* ManagedObjectTransformable.swift */,
 				F73B5E5B1CF4B31400B92E55 /* NameableEntity.swift */,
@@ -304,7 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F73B5E611CF4B31400B92E55 /* ManagedObjectTransformable.swift in Sources */,
-				F73B5E5F1CF4B31400B92E55 /* GROCloudDataSource.swift in Sources */,
+				F73B5E5F1CF4B31400B92E55 /* CloudDataSource.swift in Sources */,
 				F73B5E541CF4B2BC00B92E55 /* NSURL+Directories.swift in Sources */,
 				F73B5E511CF4B2BC00B92E55 /* GROIncrementalStore+Helpers.swift in Sources */,
 				F78D93181C934B09009EA958 /* GROIncrementalStore.swift in Sources */,
@@ -334,13 +355,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F73B5E811CF4B49600B92E55 /* ManagedObjectIDProvider.swift in Sources */,
+				F73B5E8E1CF4B4A300B92E55 /* GROIncrementalStore+Helpers.swift in Sources */,
 				F78D92ED1C934AAD009EA958 /* GROCloudStoreTests.swift in Sources */,
 				F7BE38731C98810A00D1CE87 /* GROTestDataSource.swift in Sources */,
+				F73B5E881CF4B49A00B92E55 /* InjestModifiedRecordsOperation.swift in Sources */,
+				F73B5E801CF4B49600B92E55 /* CloudDataSource.swift in Sources */,
+				F73B5E861CF4B49A00B92E55 /* FetchChangesOperation.swift in Sources */,
+				F73B5E871CF4B49A00B92E55 /* InjestDeletedRecordsOperation.swift in Sources */,
+				F73B5E891CF4B49A00B92E55 /* PushChangesOperation.swift in Sources */,
 				F7D099A31C98B2580023C220 /* GROIncrementalStore.swift in Sources */,
+				F73B5E831CF4B49600B92E55 /* NameableEntity.swift in Sources */,
+				F73B5E7E1CF4B49600B92E55 /* CloudRecordType.swift in Sources */,
+				F73B5E8A1CF4B49A00B92E55 /* RecordChangeOperation.swift in Sources */,
+				F73B5E851CF4B49A00B92E55 /* ContextOperation.swift in Sources */,
 				F7116A781CEF84EE005210FA /* GROTestConfiguration.swift in Sources */,
+				F73B5E8D1CF4B4A300B92E55 /* Array+NSOperation.swift in Sources */,
 				F7D099A21C98AF210023C220 /* CoreData+Extensions.swift in Sources */,
+				F73B5E7F1CF4B49600B92E55 /* Configuration.swift in Sources */,
+				F73B5E911CF4B4A300B92E55 /* NSURL+Directories.swift in Sources */,
+				F73B5E7D1CF4B49600B92E55 /* CloudKitTransformable.swift in Sources */,
+				F73B5E8C1CF4B49A00B92E55 /* VerifySubscriptionOperation.swift in Sources */,
+				F73B5E8B1CF4B49A00B92E55 /* VerifyRecordZoneOperation.swift in Sources */,
+				F73B5E8F1CF4B4A300B92E55 /* NSManagedObjectContext+Helpers.swift in Sources */,
 				F7D099C31C98B3970023C220 /* GROSavedData.swift in Sources */,
 				F7D099C21C98B3970023C220 /* GRODefaultDataSource.swift in Sources */,
+				F73B5E841CF4B49A00B92E55 /* AsyncOperation.swift in Sources */,
+				F73B5E821CF4B49600B92E55 /* ManagedObjectTransformable.swift in Sources */,
+				F73B5E901CF4B4A300B92E55 /* NSSaveChangesRequest+Records.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

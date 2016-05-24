@@ -12,10 +12,10 @@ import CloudKit
 class VerifySubscriptionOperation: AsyncOperation {
     
     private let context: NSManagedObjectContext
-    private let dataSource: GROCloudDataSource
+    private let dataSource: CloudDataSource
     private let configuration: Configuration
     
-    init(context: NSManagedObjectContext, dataSource: GROCloudDataSource, configuration: Configuration) {
+    init(context: NSManagedObjectContext, dataSource: CloudDataSource, configuration: Configuration) {
         self.context = context
         self.dataSource = dataSource
         self.configuration = configuration

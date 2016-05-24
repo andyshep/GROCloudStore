@@ -14,9 +14,9 @@ typealias Zones = [CKRecordZoneID: CKRecordZone]
 class VerifyRecordZoneOperation: AsyncOperation {
     
     private let context: NSManagedObjectContext
-    private let dataSource: GROCloudDataSource
+    private let dataSource: CloudDataSource
     
-    init(context: NSManagedObjectContext, dataSource: GROCloudDataSource) {
+    init(context: NSManagedObjectContext, dataSource: CloudDataSource) {
         self.context = context
         self.dataSource = dataSource
         super.init()

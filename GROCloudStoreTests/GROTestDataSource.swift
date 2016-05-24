@@ -10,7 +10,7 @@ import Foundation
 import CloudKit
 @testable import GROCloudStore
 
-class GROTestDataSource: GROCloudDataSource {
+class GROTestDataSource: CloudDataSource {
     
     var database: CKDatabase {
         fatalError()

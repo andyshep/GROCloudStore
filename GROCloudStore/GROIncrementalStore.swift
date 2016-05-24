@@ -38,7 +38,7 @@ public class GROIncrementalStore: NSIncrementalStore {
     private var registeredEntities: RegisteredEntitiesMap = [:]
     private var registeredBackingEntities: RegisteredEntitiesMap = [:]
     
-    private let dataSource: GROCloudDataSource
+    private let dataSource: CloudDataSource
     private let operationQueue = NSOperationQueue()
     
     private var useInMemoryStores: Bool = false
@@ -61,7 +61,7 @@ public class GROIncrementalStore: NSIncrementalStore {
         
         self.configuration = configuration
         
-        self.dataSource = options?[GRODataSourceKey] as? GROCloudDataSource ?? GRODefaultDataSource(configuration: configuration)
+        self.dataSource = options?[GRODataSourceKey] as? CloudDataSource ?? GRODefaultDataSource(configuration: configuration)
         self.useInMemoryStores = options?[GROUseInMemoryStoreKey] as? Bool ?? false
         
         super.init(persistentStoreCoordinator: root, configurationName: name, URL: url, options: options)

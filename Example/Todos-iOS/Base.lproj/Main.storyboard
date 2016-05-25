@@ -79,7 +79,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="N1w-la-50l">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="dmw-Wm-xY2"/>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="save" id="gtK-PZ-la5">
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="gtK-PZ-la5">
                             <connections>
                                 <action selector="handleDoneButton:" destination="Jbu-q3-wJo" id="pbj-1d-Vpx"/>
                             </connections>

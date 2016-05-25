@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F73B3E301CF60E9300393F1A /* GROCloudStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F73B3E2D1CF60E8000393F1A /* GROCloudStore.framework */; };
 		F7415D9F1CF408AC002A6275 /* TodoCloudConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7415D9E1CF408AC002A6275 /* TodoCloudConfiguration.swift */; };
 		F7415DA01CF408AC002A6275 /* TodoCloudConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7415D9E1CF408AC002A6275 /* TodoCloudConfiguration.swift */; };
 		F7417C6E1CF374C000FFDA3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7417C631CF374C000FFDA3F /* AppDelegate.swift */; };
@@ -16,8 +17,6 @@
 		F7417C7E1CF3754100FFDA3F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7417C7D1CF3754100FFDA3F /* ViewController.swift */; };
 		F7417C801CF3754100FFDA3F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7417C7F1CF3754100FFDA3F /* Assets.xcassets */; };
 		F7417C831CF3754100FFDA3F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7417C811CF3754100FFDA3F /* Main.storyboard */; };
-		F7417C931CF3757C00FFDA3F /* GROCloudStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7417C8E1CF3756300FFDA3F /* GROCloudStore.framework */; };
-		F7417C961CF3758500FFDA3F /* GROCloudStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7417C8E1CF3756300FFDA3F /* GROCloudStore.framework */; };
 		F7417C9B1CF375A100FFDA3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7417C971CF375A000FFDA3F /* LaunchScreen.storyboard */; };
 		F7417C9C1CF375A100FFDA3F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7417C991CF375A000FFDA3F /* Main.storyboard */; };
 		F7417CA81CF377CA00FFDA3F /* Todos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F7417CA61CF377CA00FFDA3F /* Todos.xcdatamodeld */; };
@@ -36,37 +35,24 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		F7417C8D1CF3756300FFDA3F /* PBXContainerItemProxy */ = {
+		F73B3E2C1CF60E8000393F1A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = F7417C881CF3756300FFDA3F /* GROCloudStore.xcodeproj */;
+			containerPortal = F73B3E271CF60E8000393F1A /* GROCloudStore.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = F78D92DD1C934AAD009EA958;
 			remoteInfo = GROCloudStore;
 		};
-		F7417C8F1CF3756300FFDA3F /* PBXContainerItemProxy */ = {
+		F73B3E2E1CF60E8000393F1A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = F7417C881CF3756300FFDA3F /* GROCloudStore.xcodeproj */;
+			containerPortal = F73B3E271CF60E8000393F1A /* GROCloudStore.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = F78D92E71C934AAD009EA958;
 			remoteInfo = GROCloudStoreTests;
 		};
-		F7417C911CF3757600FFDA3F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F7417C881CF3756300FFDA3F /* GROCloudStore.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F78D92DC1C934AAD009EA958;
-			remoteInfo = GROCloudStore;
-		};
-		F7417C941CF3758100FFDA3F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F7417C881CF3756300FFDA3F /* GROCloudStore.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F78D92DC1C934AAD009EA958;
-			remoteInfo = GROCloudStore;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F73B3E271CF60E8000393F1A /* GROCloudStore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GROCloudStore.xcodeproj; path = ../GROCloudStore.xcodeproj; sourceTree = "<group>"; };
 		F7415D9E1CF408AC002A6275 /* TodoCloudConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoCloudConfiguration.swift; sourceTree = "<group>"; };
 		F7417C4B1CF3748800FFDA3F /* Todos-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Todos-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7417C631CF374C000FFDA3F /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "Todos-iOS/AppDelegate.swift"; sourceTree = SOURCE_ROOT; };
@@ -79,7 +65,6 @@
 		F7417C7F1CF3754100FFDA3F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F7417C821CF3754100FFDA3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F7417C841CF3754100FFDA3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F7417C881CF3756300FFDA3F /* GROCloudStore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GROCloudStore.xcodeproj; path = ../../GROCloudStore.xcodeproj; sourceTree = "<group>"; };
 		F7417C981CF375A000FFDA3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Todos-iOS/Base.lproj/LaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
 		F7417C9A1CF375A000FFDA3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Todos-iOS/Base.lproj/Main.storyboard"; sourceTree = SOURCE_ROOT; };
 		F7417C9D1CF376CB00FFDA3F /* Todos-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "Todos-iOS.entitlements"; path = "Todos-iOS/Todos-iOS.entitlements"; sourceTree = SOURCE_ROOT; };
@@ -98,7 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7417C931CF3757C00FFDA3F /* GROCloudStore.framework in Frameworks */,
+				F73B3E301CF60E9300393F1A /* GROCloudStore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,17 +91,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7417C961CF3758500FFDA3F /* GROCloudStore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F73B3E281CF60E8000393F1A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F73B3E2D1CF60E8000393F1A /* GROCloudStore.framework */,
+				F73B3E2F1CF60E8000393F1A /* GROCloudStoreTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		F7417C421CF3748800FFDA3F = {
 			isa = PBXGroup;
 			children = (
-				F7417C881CF3756300FFDA3F /* GROCloudStore.xcodeproj */,
+				F73B3E271CF60E8000393F1A /* GROCloudStore.xcodeproj */,
 				F7417C4D1CF3748800FFDA3F /* Todos-iOS */,
 				F7417C7A1CF3754100FFDA3F /* Todos-OSX */,
 				F7417CA51CF377A300FFDA3F /* Shared */,
@@ -162,15 +155,6 @@
 			path = "Todos-OSX";
 			sourceTree = "<group>";
 		};
-		F7417C891CF3756300FFDA3F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				F7417C8E1CF3756300FFDA3F /* GROCloudStore.framework */,
-				F7417C901CF3756300FFDA3F /* GROCloudStoreTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		F7417CA51CF377A300FFDA3F /* Shared */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,7 +183,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				F7417C921CF3757600FFDA3F /* PBXTargetDependency */,
 			);
 			name = "Todos-iOS";
 			productName = Todos;
@@ -217,7 +200,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				F7417C951CF3758100FFDA3F /* PBXTargetDependency */,
 			);
 			name = "Todos-OSX";
 			productName = "Todos-OSX";
@@ -267,8 +249,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = F7417C891CF3756300FFDA3F /* Products */;
-					ProjectRef = F7417C881CF3756300FFDA3F /* GROCloudStore.xcodeproj */;
+					ProductGroup = F73B3E281CF60E8000393F1A /* Products */;
+					ProjectRef = F73B3E271CF60E8000393F1A /* GROCloudStore.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -280,18 +262,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		F7417C8E1CF3756300FFDA3F /* GROCloudStore.framework */ = {
+		F73B3E2D1CF60E8000393F1A /* GROCloudStore.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = GROCloudStore.framework;
-			remoteRef = F7417C8D1CF3756300FFDA3F /* PBXContainerItemProxy */;
+			remoteRef = F73B3E2C1CF60E8000393F1A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F7417C901CF3756300FFDA3F /* GROCloudStoreTests.xctest */ = {
+		F73B3E2F1CF60E8000393F1A /* GROCloudStoreTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = GROCloudStoreTests.xctest;
-			remoteRef = F7417C8F1CF3756300FFDA3F /* PBXContainerItemProxy */;
+			remoteRef = F73B3E2E1CF60E8000393F1A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -353,19 +335,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		F7417C921CF3757600FFDA3F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = GROCloudStore;
-			targetProxy = F7417C911CF3757600FFDA3F /* PBXContainerItemProxy */;
-		};
-		F7417C951CF3758100FFDA3F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = GROCloudStore;
-			targetProxy = F7417C941CF3758100FFDA3F /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		F7417C811CF3754100FFDA3F /* Main.storyboard */ = {

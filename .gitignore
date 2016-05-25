@@ -6,4 +6,6 @@
 *.xcworkspace/xcuserdata/*
 *.xcworkspace
 
+Example/Todos/*.xcodeproj/xcuserdata/*
+
 build/*

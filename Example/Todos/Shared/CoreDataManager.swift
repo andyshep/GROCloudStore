@@ -34,7 +34,8 @@ class CoreDataManager: NSObject {
     }()
     
     // MARK: - Public
-    
+  
+    #if os(iOS)
     func fetchedResultsControllerForEntityName(name:String, sortDescriptors:Array<NSSortDescriptor>, predicate:NSPredicate! = nil) -> NSFetchedResultsController {
         let managedObjectContext = self.managedObjectContext
         let fetchRequest = NSFetchRequest()
@@ -56,6 +57,7 @@ class CoreDataManager: NSObject {
         
         return fetchedResultsController;
     }
+    #endif
     
     // MARK: - Private
     

@@ -14,6 +14,8 @@ class ViewController: NSViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        self.view.window?.titleVisibility = .Hidden
     }
 
     override var representedObject: AnyObject? {

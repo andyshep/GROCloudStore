@@ -1,6 +1,38 @@
 # GROCloudStore
 
-GROCloudStore provides an `NSIncrementalStore` subclass that is backed by CloudKit, allowing data to be loaded from the cloud into your Core Data model.
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+
+GROCloudStore provides an `NSIncrementalStore` subclass that is backed by CloudKit, allowing data to be loaded from the cloud into your Core Data model. GROCloudStore works by augmenting your existing Core Data model.
+
+## Requirements
+
+ * iOS 9.0+ / Mac OS X 10.11+
+ * Xcode 7.3+
+
+## Installation
+
+### Carthage
+
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks.
+
+You can install Carthage with [Homebrew](http://brew.sh/) using the following command:
+
+	$ brew update
+	$ brew install carthage
+
+To integrate GROCloudStore into your Xcode project using Carthage, specify it in your `Cartfile`:
+
+	github "andyshep/GROCloudStore"
+
+Run `carthage update` to build the framework and drag the built `Alamofire.framework` into your Xcode project.
+
+### Cocoapods
+
+TODO
+
+### Manually
+
+TODO
 
 ## Configuration
 
@@ -63,4 +95,8 @@ Below these configuration points are discussed in more detail.
 
 ## Example
 
-There is an example Todos app that shows how to integrate with `GROCloudStore`. The app displays a task list of items to do, using a single Core Data entity. Before the example can be used, you'll need to have CloudKit enabled on your developer account. Change the app change id to something unique.
+There is an example Todos app that shows how to integrate with GROCloudStore. The app displays a task list of items to do, using a single Core Data entity. Before the example can be used, you'll need to have CloudKit enabled on your developer account. Change the app change id to something unique.
+
+## License
+
+GROCloudStore is released under the MIT license. See LICENSE for details.

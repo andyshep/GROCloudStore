@@ -20,8 +20,21 @@ struct DefaultContainer: CloudContainerType {
 }
 
 struct Subscription: SubscriptionType {
+    static let Todo = "iCloud.org.andyshep.example.Todos.subscription.Todo"
+    
     var Default: [CKSubscription] {
-        return []
+        let subscriptionId = Subscription.Todo
+        let zoneId = CKRecordZoneID(zoneName: DefaultContainer().CustomZoneName, ownerName: CKOwnerDefaultName)
+        
+        let options = CKSubscriptionOptions.FiresOnRecordCreation
+        let subscription = CKSubscription(recordType: "Todo", predicate: NSPredicate(format: "TRUEPREDICATE"), subscriptionID: subscriptionId, options: options)
+        subscription.zoneID = zoneId
+        
+        let notificationInfo = CKNotificationInfo()
+        notificationInfo.shouldSendContentAvailable = true
+        subscription.notificationInfo = notificationInfo
+        
+        return [subscription]
     }
 }
 

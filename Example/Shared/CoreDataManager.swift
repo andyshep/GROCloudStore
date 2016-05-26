@@ -9,6 +9,10 @@
 import CoreData
 import GROCloudStore
 
+#if os(OSX)
+import AppKit
+#endif
+
 class CoreDataManager: NSObject {
     
     // MARK: - Lifecycle
@@ -36,7 +40,7 @@ class CoreDataManager: NSObject {
     // MARK: - Public
   
     #if os(iOS)
-    func fetchedResultsControllerForEntityName(name:String, sortDescriptors:Array<NSSortDescriptor>, predicate:NSPredicate! = nil) -> NSFetchedResultsController {
+    func fetchedResultsControllerForEntityName(name: String, sortDescriptors: [NSSortDescriptor], predicate:NSPredicate! = nil) -> NSFetchedResultsController {
         let managedObjectContext = self.managedObjectContext
         let fetchRequest = NSFetchRequest()
         let entity = NSEntityDescription.entityForName(name, inManagedObjectContext: managedObjectContext!)
@@ -57,6 +61,18 @@ class CoreDataManager: NSObject {
         
         return fetchedResultsController;
     }
+    
+    #elseif os(OSX)
+    func arrayControllerForEntityName(name: String, sortDescriptors: [NSSortDescriptor] = []) -> NSArrayController {
+        let controller = NSArrayController()
+        
+        controller.entityName = name
+        controller.sortDescriptors = sortDescriptors
+        controller.automaticallyPreparesContent = false
+        
+        return controller
+    }
+    
     #endif
     
     // MARK: - Private

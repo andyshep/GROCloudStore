@@ -9,21 +9,24 @@
 import Cocoa
 
 class ViewController: NSViewController {
+    
+    @IBOutlet weak var tableView: NSTableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         
         self.view.window?.titleVisibility = .Hidden
     }
 
     override var representedObject: AnyObject? {
         didSet {
-        // Update the view, if already loaded.
+            guard let controller = representedObject as? NSArrayController else { return }
+            
+            self.tableView.bind(NSContentBinding, toObject: controller, withKeyPath: "arrangedObjects", options: nil)
+            self.tableView.bind(NSSelectionIndexesBinding, toObject: controller, withKeyPath: "selectionIndexes", options: nil)
+            
+            controller.fetch(nil)
         }
     }
-
-
 }
 

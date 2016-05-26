@@ -13,15 +13,9 @@ import GROCloudStore
 import AppKit
 #endif
 
-class CoreDataManager: NSObject {
-    
-    // MARK: - Lifecycle
+class CoreDataManager {
     
     static let sharedManager = CoreDataManager()
-    
-    override init() {
-        super.init()
-    }
     
     // MARK: - Core Data stack
     

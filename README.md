@@ -1,6 +1,9 @@
 # GROCloudStore
 
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Version Status](https://img.shields.io/cocoapods/v/GROCloudStore.svg)]()
+[![license MIT](https://img.shields.io/cocoapods/l/GROCloudStore.svg)](http://opensource.org/licenses/MIT)
+![Platform](https://img.shields.io/cocoapods/p/GROCloudStore.svg)
 
 GROCloudStore provides an `NSIncrementalStore` subclass that is backed by CloudKit, allowing data to be loaded from the cloud into your Core Data model. GROCloudStore works by augmenting your existing Core Data model.
 
@@ -24,7 +27,7 @@ To integrate GROCloudStore into your Xcode project using Carthage, specify it in
 
 	github "andyshep/GROCloudStore"
 
-Run `carthage update` to build the framework and drag the built `Alamofire.framework` into your Xcode project.
+Run `carthage update` to build the framework and drag the built `GROCloudStore.framework` into your Xcode project.
 
 ### Cocoapods
 

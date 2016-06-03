@@ -16,12 +16,12 @@ Pod::Spec.new do |s|
                        DESC
 
   s.homepage         = 'https://github.com/andyshep/GROCloudStore'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Andrew Shepard' => 'shep.andy@gmail.com' }
   s.source           = { :git => 'https://github.com/andyshep/GROCloudStore.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '9.0'
+  s.osx.deployment_target = '10.11'
 
   s.source_files = 'GROCloudStore/**/*'
 end

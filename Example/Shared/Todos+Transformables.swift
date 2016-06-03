@@ -12,14 +12,14 @@ import GROCloudStore
 
 extension Todo: ManagedObjectTransformable {
     
-    func transform(object object: NSManagedObject) {
-        guard let item = object.valueForKeyPath("item") as? String else { return }
+    func transform(object: NSManagedObject) {
+        guard let item = object.value(forKeyPath: "item") as? String else { return }
         self.item = item
         
-        guard let created = object.valueForKeyPath("created") as? NSDate else { return }
+        guard let created = object.value(forKeyPath: "created") as? NSDate else { return }
         self.created = created
         
-        guard let data = object.valueForKeyPath("encodedSystemFields") as? NSData else { fatalError() }
+        guard let data = object.value(forKeyPath: "encodedSystemFields") as? NSData else { fatalError() }
         self.encodedSystemFields = data
     }
     
@@ -30,7 +30,7 @@ extension Todo: ManagedObjectTransformable {
 
 extension Todo: CloudKitTransformable {
     
-    func transform(record record: CKRecord) {
+    func transform(record: CKRecord) {
         guard let item = record["item"] as? String else { return }
         self.item = item
         

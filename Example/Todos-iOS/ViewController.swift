@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     
     lazy var fetchedResultsController: NSFetchedResultsController = {
         let descriptors = [NSSortDescriptor(key: "created", ascending: true)]
-        let controller = CoreDataManager.sharedManager.fetchedResultsControllerForEntityName("Todo", sortDescriptors: descriptors)
+        let controller = CoreDataManager.sharedManager.fetchedResultsController(forEntityName: "Todo", sortedBy: descriptors)
         
         controller.delegate = self
         
@@ -27,11 +27,11 @@ class ViewController: UIViewController {
         
         self.title = "Todos"
         
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         self.tableView.dataSource = self
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "AddTodoItem" {
             guard let navController = segue.destinationViewController as? UINavigationController else { return }
             guard let addViewController = navController.viewControllers.first as? AddViewController else { return }
@@ -42,12 +42,12 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UITableViewDataSource {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.fetchedResultsController.fetchedObjects?.count ?? 0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         guard let todo = fetchedResultsController.fetchedObjects?[indexPath.row] as? Todo else { fatalError() }
         
         cell.textLabel?.text = todo.item
@@ -57,7 +57,7 @@ extension ViewController: UITableViewDataSource {
 }
 
 extension ViewController: NSFetchedResultsControllerDelegate {
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController) {
         self.tableView?.reloadData()
     }
 }

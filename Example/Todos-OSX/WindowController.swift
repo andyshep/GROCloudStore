@@ -12,7 +12,7 @@ class WindowController: NSWindowController {
     
     lazy var arrayController: NSArrayController = {
         let descriptors = [NSSortDescriptor(key: "created", ascending: true)]
-        let controller = CoreDataManager.sharedManager.arrayControllerForEntityName("Todo", sortDescriptors: descriptors)
+        let controller = CoreDataManager.sharedManager.arrayControllerForEntityName(name: "Todo", sortDescriptors: descriptors)
         
         let context = CoreDataManager.sharedManager.managedObjectContext
         controller.managedObjectContext = context

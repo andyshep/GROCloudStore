@@ -25,7 +25,7 @@ class CoreDataManager {
             return nil
         }
         
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
         managedObjectContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return managedObjectContext
@@ -34,10 +34,10 @@ class CoreDataManager {
     // MARK: - Public
   
     #if os(iOS)
-    func fetchedResultsControllerForEntityName(name: String, sortDescriptors: [NSSortDescriptor], predicate:NSPredicate! = nil) -> NSFetchedResultsController {
+    func fetchedResultsController(forEntityName name: String, sortedBy sortDescriptors: [NSSortDescriptor], predicate:NSPredicate! = nil) -> NSFetchedResultsController {
         let managedObjectContext = self.managedObjectContext
         let fetchRequest = NSFetchRequest()
-        let entity = NSEntityDescription.entityForName(name, inManagedObjectContext: managedObjectContext!)
+        let entity = NSEntityDescription.entity(forEntityName: name, in: managedObjectContext!)
         
         fetchRequest.entity = entity
         fetchRequest.fetchBatchSize = 20
@@ -75,12 +75,12 @@ class CoreDataManager {
         let storeType = GROIncrementalStore.storeType
         
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = NSURL.applicationDocumentsDirectory().URLByAppendingPathComponent("Todos.sqlite")
+        let url = NSURL.applicationDocumentsDirectory().appendingPathComponent("Todos.sqlite")
         
         let options = [GROConfigurationKey: TodoCloudConfiguration()];
         
         do {
-           try coordinator.addPersistentStoreWithType(storeType, configuration: nil, URL: url, options: options)
+           try coordinator.addPersistentStore(ofType: storeType, configurationName: nil, at: url, options: options)
         }
         catch {
             fatalError("Error creating persistent store: \(error)")
@@ -90,7 +90,7 @@ class CoreDataManager {
     }()
     
     private lazy var managedObjectModel: NSManagedObjectModel = {
-        let modelURL = NSBundle.mainBundle().URLForResource("Todos", withExtension: "momd")!
-        return NSManagedObjectModel(contentsOfURL: modelURL)!
+        let modelURL = NSBundle.main().urlForResource("Todos", withExtension: "momd")!
+        return NSManagedObjectModel(contentsOf: modelURL)!
     }()
 }

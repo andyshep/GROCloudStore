@@ -16,14 +16,14 @@ class AddViewController: UIViewController {
     var context: NSManagedObjectContext?
     
     @IBAction func handleDoneButton(sender: AnyObject) {
-        defer { dismissViewControllerAnimated(true, completion: nil) }
+        defer { dismiss(animated: true, completion: nil) }
         
         guard let context = context else { return }
         
         let item = self.textField.text ?? ""
         if item.characters.count > 0 {
             
-            guard let todo = NSEntityDescription.insertNewObjectForEntityForName("Todo", inManagedObjectContext: context) as? Todo else { return }
+            guard let todo = NSEntityDescription.insertNewObject(forEntityName: "Todo", into: context) as? Todo else { return }
             
             todo.item = item
             todo.created = NSDate()

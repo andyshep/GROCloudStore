@@ -25,10 +25,10 @@ class VerifyRecordZoneOperation: AsyncOperation {
     override func main() {
         var shouldCreateZone = true
         
-        self.context.performBlockAndWait { 
+        self.context.performAndWait { 
             do {
                 let request = NSFetchRequest(entityName: GRORecordZone.entityName)
-                let results = try self.context.executeFetchRequest(request)
+                let results = try self.context.fetch(request)
                 if let _ = results.first as? GRORecordZone {
                     shouldCreateZone = false
                 }
@@ -39,7 +39,7 @@ class VerifyRecordZoneOperation: AsyncOperation {
         }
         
         if shouldCreateZone {
-            dataSource.fetchRecordsZones(didFetchRecordZones)
+            dataSource.fetchRecordsZones(completion: didFetchRecordZones)
         }
         else {
             print("zone verified, skipping creation")
@@ -63,12 +63,12 @@ class VerifyRecordZoneOperation: AsyncOperation {
         }
         
         if found {
-            saveRecordZoneID(defaultZoneID, context: self.context)
+            saveRecordZoneID(recordZoneID: defaultZoneID, context: self.context)
             finish()
         }
         else {
             let configuration = dataSource.configuration
-            self.dataSource.createRecordZone(configuration.CloudContainer.CustomZoneName, completion: didCreateRecordZone)
+            self.dataSource.createRecordZone(name: configuration.CloudContainer.CustomZoneName, completion: didCreateRecordZone)
         }
     }
     
@@ -77,10 +77,10 @@ class VerifyRecordZoneOperation: AsyncOperation {
     }
     
     private func saveRecordZoneID(recordZoneID: CKRecordZoneID, context: NSManagedObjectContext) {
-        context.performBlock { 
-            guard let savedZone = GRORecordZone.newObjectInContext(context) as? GRORecordZone else { return }
+        context.perform { 
+            guard let savedZone = GRORecordZone.newObject(in: context) as? GRORecordZone else { return }
             
-            savedZone.content = NSKeyedArchiver.archivedDataWithRootObject(recordZoneID)
+            savedZone.content = NSKeyedArchiver.archivedData(withRootObject: recordZoneID)
             context.saveOrLogError()
         }
     }

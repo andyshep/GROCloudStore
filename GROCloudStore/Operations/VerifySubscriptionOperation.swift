@@ -25,10 +25,10 @@ class VerifySubscriptionOperation: AsyncOperation {
     override func main() {
         var shouldCreateSubscription = true
         
-        self.context.performBlockAndWait {
+        self.context.performAndWait {
             do {
                 let request = NSFetchRequest(entityName: GROSubscription.entityName)
-                let results = try self.context.executeFetchRequest(request)
+                let results = try self.context.fetch(request)
                 if let _ = results.first as? GROSubscription {
                     shouldCreateSubscription = false
                 }
@@ -39,7 +39,7 @@ class VerifySubscriptionOperation: AsyncOperation {
         }
         
         if shouldCreateSubscription {
-            dataSource.verifySubscriptions(didFetchSubscriptions)
+            dataSource.verifySubscriptions(completion: didFetchSubscriptions)
         }
         else {
             print("subscription verified, skipping creation")
@@ -50,7 +50,7 @@ class VerifySubscriptionOperation: AsyncOperation {
     private func createSubscriptions() {
         let configuration = dataSource.configuration
         let subscriptions = configuration.Subscriptions.Default
-        dataSource.createSubscriptions(subscriptions, completion: didCreateSubscription)
+        dataSource.createSubscriptions(subscriptions: subscriptions, completion: didCreateSubscription)
     }
     
     private func didFetchSubscriptions(subscriptions: [CKSubscription]?, error: NSError?) {
@@ -78,7 +78,7 @@ class VerifySubscriptionOperation: AsyncOperation {
                 let found = obj.1
                 
                 if found {
-                    self.saveSubscription(subscription, context: self.context)
+                    self.saveSubscription(subscription: subscription, context: self.context)
                 }
                 else {
                     createSubscriptions()
@@ -100,10 +100,10 @@ class VerifySubscriptionOperation: AsyncOperation {
     }
     
     private func saveSubscription(subscription: CKSubscription, context: NSManagedObjectContext) {
-        context.performBlock {
-            guard let savedSubscription = GROSubscription.newObjectInContext(context) as? GROSubscription else { return }
+        context.perform {
+            guard let savedSubscription = GROSubscription.newObject(in: context) as? GROSubscription else { return }
             
-            savedSubscription.content = NSKeyedArchiver.archivedDataWithRootObject(subscription)
+            savedSubscription.content = NSKeyedArchiver.archivedData(withRootObject: subscription)
             context.saveOrLogError()
         }
     }

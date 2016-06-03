@@ -12,10 +12,10 @@ extension NSManagedObjectContext {
     public func existingOrNewObjectForId(objectID: NSManagedObjectID?, entityName: String) throws -> NSManagedObject {
         do {
             if let objectID = objectID {
-                return try self.existingObjectWithID(objectID)
+                return try self.existingObject(with: objectID)
             } else {
-                let object = NSEntityDescription.insertNewObjectForEntityForName(entityName, inManagedObjectContext: self)
-                try object.managedObjectContext?.obtainPermanentIDsForObjects([object])
+                let object = NSEntityDescription.insertNewObject(forEntityName: entityName, into: self)
+                try object.managedObjectContext?.obtainPermanentIDs(for: [object])
                 return object
             }
         } catch { throw error }

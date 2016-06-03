@@ -35,7 +35,7 @@ protocol GROBackingStoreResourceType {
 extension NSManagedObject: GROBackingStoreResourceType {
     var GROResourceIdentifier: String {
         get {
-            return self.valueForKey(Attribute.ResourceIdentifier) as? String ?? ""
+            return self.value(forKey: Attribute.ResourceIdentifier) as? String ?? ""
         }
         set {
             self.setValue(newValue, forKey: Attribute.ResourceIdentifier)
@@ -44,7 +44,7 @@ extension NSManagedObject: GROBackingStoreResourceType {
     
     var GROLastModified: NSDate {
         get {
-            return self.valueForKey(Attribute.LastModified) as? NSDate ?? NSDate()
+            return self.value(forKey: Attribute.LastModified) as? NSDate ?? NSDate()
         }
         set {
             self.setValue(newValue, forKey: Attribute.LastModified)
@@ -56,9 +56,9 @@ extension NSAttributeDescription {
     class var contentAttribute: NSAttributeDescription {
         let contentAttribute = NSAttributeDescription()
         contentAttribute.name = "content"
-        contentAttribute.attributeType = NSAttributeType.BinaryDataAttributeType
-        contentAttribute.optional = false
-        contentAttribute.indexed = false
+        contentAttribute.attributeType = NSAttributeType.binaryDataAttributeType
+        contentAttribute.isOptional = false
+        contentAttribute.isIndexed = false
         
         return contentAttribute
     }
@@ -75,18 +75,18 @@ extension NSManagedObjectModel {
             
             let resourceIdProperty = NSAttributeDescription()
             resourceIdProperty.name = Attribute.ResourceIdentifier
-            resourceIdProperty.attributeType = .StringAttributeType
-            resourceIdProperty.indexed = true
+            resourceIdProperty.attributeType = .stringAttributeType
+            resourceIdProperty.isIndexed = true
             
             let lastModifiedProperty = NSAttributeDescription()
             lastModifiedProperty.name = Attribute.LastModified
-            lastModifiedProperty.attributeType = .DateAttributeType
-            lastModifiedProperty.indexed = false
+            lastModifiedProperty.attributeType = .dateAttributeType
+            lastModifiedProperty.isIndexed = false
             
             let needsDeletion = NSAttributeDescription()
             needsDeletion.name = Attribute.NeedsDeletion
-            needsDeletion.attributeType = .BooleanAttributeType
-            needsDeletion.indexed = false
+            needsDeletion.attributeType = .booleanAttributeType
+            needsDeletion.isIndexed = false
             needsDeletion.defaultValue = false
             
             var properties = entity.properties

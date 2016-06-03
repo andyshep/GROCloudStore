@@ -29,16 +29,16 @@ public class GRODefaultDataSource: CloudDataSource {
     // MARK: - Records
     
     public func saveRecord(record:CKRecord, completion: RecordCompletion) {
-        database.saveRecord(record, completionHandler: completion)
+        database.save(record, completionHandler: completion)
     }
     
     public func recordWithID(recordID:CKRecordID, completion: RecordCompletion) {
-        database.fetchRecordWithID(recordID, completionHandler: completion)
+        database.fetchRecord(with: recordID, completionHandler: completion)
     }
     
     public func recordsOfType(type: String, completion: RecordsCompletion) {
         let query = CKQuery(recordType: type, predicate: NSPredicate(value: true))
-        database.performQuery(query, inZoneWithID: nil, completionHandler: completion)
+        database.perform(query, inZoneWith: nil, completionHandler: completion)
     }
     
     public func recordsOfType(type: String, fetched: RecordFetched, completion: QueryCompletion?) {
@@ -55,7 +55,7 @@ public class GRODefaultDataSource: CloudDataSource {
             }
         }
         
-        database.addOperation(operation)
+        database.add(operation)
     }
     
     public func changedRecordsOfType(type: String, token: CKServerChangeToken?, completion: ChangedRecordHandler) {
@@ -86,17 +86,17 @@ public class GRODefaultDataSource: CloudDataSource {
             completion(changed: changedRecords, deleted: deletedRecordIDs, token: token)
         }
         
-        database.addOperation(operation)
+        database.add(operation)
     }
     
     public func deleteRecordWithID(recordID: CKRecordID, completion: DeleteRecordCompletion) {
-        database.deleteRecordWithID(recordID, completionHandler: completion)
+        database.deleteRecord(with: recordID, completionHandler: completion)
     }
     
     // MARK: - Subscriptions
     
     public func verifySubscriptions(completion: FetchSubscriptionsCompletion) {
-        database.fetchAllSubscriptionsWithCompletionHandler(completion)
+        database.fetchAllSubscriptions(completionHandler: completion)
     }
     
     public func createSubscriptions(subscriptions: [CKSubscription], completion: CreateSubscriptionsCompletion) {
@@ -106,13 +106,13 @@ public class GRODefaultDataSource: CloudDataSource {
             completion(subscription?.first, error)
         }
         
-        database.addOperation(operation)
+        database.add(operation)
     }
     
     // MARK: - Record Zones
     
     public func fetchRecordsZones(completion: FetchRecordZonesCompletion) -> Void {
-        let operation = CKFetchRecordZonesOperation.fetchAllRecordZonesOperation()
+        let operation = CKFetchRecordZonesOperation.fetchAll()
         
         //        operation.qualityOfService = NSQualityOfService.UserInitiated
         
@@ -120,7 +120,7 @@ public class GRODefaultDataSource: CloudDataSource {
             completion(zones, error)
         }
         
-        database.addOperation(operation)
+        database.add(operation)
     }
     
     public func createRecordZone(name: String, completion: CreateRecordZoneCompletion) -> Void {
@@ -133,6 +133,6 @@ public class GRODefaultDataSource: CloudDataSource {
             completion(zones?.first, error)
         }
         
-        database.addOperation(operation)
+        database.add(operation)
     }
 }

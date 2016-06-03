@@ -41,7 +41,7 @@ class PushChangesOperation: AsyncOperation {
             self.finish()
         }
         
-        self.dataSource.database.addOperation(operation)
+        self.dataSource.database.add(operation)
     }
 }
 

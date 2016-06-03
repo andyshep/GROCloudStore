@@ -14,32 +14,32 @@ public class AsyncOperation: NSOperation {
     private var _finished = false
     
     public override func start() {
-        if cancelled {
+        if isCancelled {
             finish()
             return
         }
         
-        willChangeValueForKey("isExecuting")
+        willChangeValue(forKey: "isExecuting")
         _executing = true
-        didChangeValueForKey("isExecuting")
+        didChangeValue(forKey: "isExecuting")
         
         main()
     }
     
     public func finish() {
-        willChangeValueForKey("isExecuting")
-        willChangeValueForKey("isFinished")
+        willChangeValue(forKey: "isExecuting")
+        willChangeValue(forKey: "isFinished")
         _executing = false
         _finished = true
-        didChangeValueForKey("isExecuting")
-        didChangeValueForKey("isFinished")
+        didChangeValue(forKey: "isExecuting")
+        didChangeValue(forKey: "isFinished")
     }
     
-    public override var executing: Bool {
+    public override var isExecuting: Bool {
         return _executing
     }
     
-    public override var finished: Bool {
+    public override var isFinished: Bool {
         return _finished
     }
     

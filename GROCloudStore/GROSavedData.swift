@@ -16,9 +16,9 @@ class GROSavedData: NSManagedObject {
         return String(self)
     }
     
-    class func newObjectInContext(context: NSManagedObjectContext) -> NSManagedObject {
+    class func newObject(in context: NSManagedObjectContext) -> NSManagedObject {
         let name = self.entityName
-        let object = NSEntityDescription.insertNewObjectForEntityForName(name, inManagedObjectContext: context)
+        let object = NSEntityDescription.insertNewObject(forEntityName: name, into: context)
         return object
     }
 }

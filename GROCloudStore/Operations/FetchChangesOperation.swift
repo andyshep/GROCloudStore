@@ -36,23 +36,23 @@ class FetchChangesOperation: AsyncOperation {
         let recordType = request.recordType
         
         var token: CKServerChangeToken? = nil
-        if let tokenObj = existingChangeTokenInContext(backingContext) {
-            if let lastToken = NSKeyedUnarchiver.unarchiveObjectWithData(tokenObj.content) as? CKServerChangeToken {
+        if let tokenObj = existingChangeToken(in: backingContext) {
+            if let lastToken = NSKeyedUnarchiver.unarchiveObject(with: tokenObj.content) as? CKServerChangeToken {
                 token = lastToken
             }
         }
         
-        dataSource.changedRecordsOfType(recordType, token: token) { (changedRecords, deletedRecordIDs, token) in
+        dataSource.changedRecordsOfType(type: recordType, token: token) { (changedRecords, deletedRecordIDs, token) in
             
             for record in changedRecords {
-                self.recordDidChange(record)
+                self.recordDidChange(record: record)
             }
             
             for recordID in deletedRecordIDs {
-                self.recordIDWasDeleted(recordID)
+                self.recordIDWasDeleted(recordID: recordID)
             }
             
-            self.saveToken(token)
+            self.saveToken(token: token)
             
             self.finish()
         }
@@ -68,18 +68,18 @@ class FetchChangesOperation: AsyncOperation {
         self.deletedRecordIDs.append(recordID)
     }
     
-    private func changeTokenInContext(context: NSManagedObjectContext) -> GROChangeToken {
-        if let token = self.existingChangeTokenInContext(context) {
+    private func changeToken(in context: NSManagedObjectContext) -> GROChangeToken {
+        if let token = self.existingChangeToken(in: context) {
             return token
         }
         
-        return self.newChangeTokenInContext(context)
+        return self.newChangeToken(in: context)
     }
     
-    private func existingChangeTokenInContext(context: NSManagedObjectContext) -> GROChangeToken? {
+    private func existingChangeToken(in context: NSManagedObjectContext) -> GROChangeToken? {
         let request = NSFetchRequest(entityName: GROChangeToken.entityName)
         do {
-            let result = try context.executeFetchRequest(request)
+            let result = try context.fetch(request)
             if let token = result.first as? GROChangeToken {
                 return token
             }
@@ -91,8 +91,8 @@ class FetchChangesOperation: AsyncOperation {
         return nil
     }
     
-    private func newChangeTokenInContext(context: NSManagedObjectContext) -> GROChangeToken {
-        let object = GROChangeToken.newObjectInContext(context)
+    private func newChangeToken(in context: NSManagedObjectContext) -> GROChangeToken {
+        let object = GROChangeToken.newObject(in: context)
         guard let token = object as? GROChangeToken else {
             fatalError()
         }
@@ -102,9 +102,9 @@ class FetchChangesOperation: AsyncOperation {
     
     private func saveToken(token: CKServerChangeToken?) {
         if let token = token {
-            self.backingContext.performBlockAndWait {
-                let savedChangeToken = self.changeTokenInContext(self.backingContext)
-                savedChangeToken.content = NSKeyedArchiver.archivedDataWithRootObject(token)
+            self.backingContext.performAndWait {
+                let savedChangeToken = self.changeToken(in: self.backingContext)
+                savedChangeToken.content = NSKeyedArchiver.archivedData(withRootObject: token)
                 self.backingContext.saveOrLogError()
             }
         }

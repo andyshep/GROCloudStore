@@ -17,14 +17,14 @@ public let GROObjectIDKey = "GROObjectIDKey"
 public let GRORecordNameKey = "GRORecordNameKey"
 public let GROConfigurationKey = "GROConfigurationKey"
 
-public enum GROIncrementalStoreError: ErrorType {
+public enum GROIncrementalStoreError: ErrorProtocol {
     case UnsupportedRequest
     case WrongRequestType
     case ObjectNotFound
     case ObjectIdNotFound
     case NoRemoteIdentifier
     case NoEntityName
-    case FetchError(ErrorType)
+    case FetchError(ErrorProtocol)
 }
 
 @objc(GROIncrementalStore)
@@ -34,7 +34,7 @@ public class GROIncrementalStore: NSIncrementalStore {
     private typealias RegisteredEntitiesMap = [String: RegisteredObjectsMap]
     
     private let cache = NSMutableDictionary()
-    private let backingObjectIDCache = NSCache()
+    private let backingObjectIDCache = NSCache<NSString, NSManagedObjectID>()
     private var registeredEntities: RegisteredEntitiesMap = [:]
     private var registeredBackingEntities: RegisteredEntitiesMap = [:]
     
@@ -53,7 +53,7 @@ public class GROIncrementalStore: NSIncrementalStore {
         NSPersistentStoreCoordinator.registerStoreClass(self, forStoreType: storeType)
     }
     
-    override init(persistentStoreCoordinator root: NSPersistentStoreCoordinator?, configurationName name: String?, URL url: NSURL, options: [NSObject : AnyObject]?) {
+    override init(persistentStoreCoordinator root: NSPersistentStoreCoordinator?, configurationName name: String?, at url: NSURL, options: [NSObject : AnyObject]?) {
         
         guard let configuration = options?[GROConfigurationKey] as? Configuration else {
             fatalError("missing configuration")
@@ -64,15 +64,15 @@ public class GROIncrementalStore: NSIncrementalStore {
         self.dataSource = options?[GRODataSourceKey] as? CloudDataSource ?? GRODefaultDataSource(configuration: configuration)
         self.useInMemoryStores = options?[GROUseInMemoryStoreKey] as? Bool ?? false
         
-        super.init(persistentStoreCoordinator: root, configurationName: name, URL: url, options: options)
+        super.init(persistentStoreCoordinator: root, configurationName: name, at: url, options: options)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GROIncrementalStore.contextDidChange(_:)), name: NSManagedObjectContextDidSaveNotification, object: nil)
+        NSNotificationCenter.default().addObserver(self, selector: #selector(GROIncrementalStore.contextDidChange(_:)), name: NSManagedObjectContextDidSaveNotification, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GROIncrementalStore.didCreateRecord(_:)), name: GRODidCreateRecordNotification, object: nil)
+        NSNotificationCenter.default().addObserver(self, selector: #selector(GROIncrementalStore.didCreateRecord(_:)), name: GRODidCreateRecordNotification, object: nil)
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NSNotificationCenter.default().removeObserver(self)
     }
     
     lazy var backingPersistentStoreCoordinator: NSPersistentStoreCoordinator = {
@@ -80,12 +80,12 @@ public class GROIncrementalStore: NSIncrementalStore {
         
         let storeType = self.useInMemoryStores ? NSInMemoryStoreType : NSSQLiteStoreType
         let path = GROIncrementalStore.storeType + ".sqlite"
-        let url = NSURL.applicationDocumentsDirectory().URLByAppendingPathComponent(path)
-        let options = [NSMigratePersistentStoresAutomaticallyOption: NSNumber(bool: true),
-            NSInferMappingModelAutomaticallyOption: NSNumber(bool: true)];
+        let url = NSURL.applicationDocumentsDirectory().appendingPathComponent(path)
+        let options = [NSMigratePersistentStoresAutomaticallyOption: NSNumber(value: true),
+            NSInferMappingModelAutomaticallyOption: NSNumber(value: true)];
         
         do {
-            try coordinator.addPersistentStoreWithType(storeType, configuration: nil, URL: url, options: options)
+            try coordinator.addPersistentStore(ofType: storeType, configurationName: nil, at: url, options: options)
         } catch {
             fatalError("could not create psc: \(error)")
         }
@@ -94,7 +94,7 @@ public class GROIncrementalStore: NSIncrementalStore {
     }()
     
     lazy var backingContext: NSManagedObjectContext = {
-        let context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         context.persistentStoreCoordinator = self.backingPersistentStoreCoordinator
         context.retainsRegisteredObjects = true
         return context
@@ -113,11 +113,11 @@ public class GROIncrementalStore: NSIncrementalStore {
     // MARK: - NSIncrementalStore
     
     public override func loadMetadata() throws {
-        let uuid = NSUUID().UUIDString
+        let uuid = NSUUID().uuidString
         self.metadata = [NSStoreTypeKey: GROIncrementalStore.storeType, NSStoreUUIDKey: uuid]
     }
     
-    public override func executeRequest(request: NSPersistentStoreRequest, withContext context: NSManagedObjectContext?) throws -> AnyObject {
+    public override func execute(_ request: NSPersistentStoreRequest, with context: NSManagedObjectContext?) throws -> AnyObject {
         
         assert(context != self.backingContext, "wrong context")
         
@@ -125,34 +125,34 @@ public class GROIncrementalStore: NSIncrementalStore {
             self.mainContext = context
         }
         
-        if request.requestType == .FetchRequestType {
-            return try self.executeFetchRequest(request, withContext: context)
+        if request.requestType == .fetchRequestType {
+            return try self.executeFetchRequest(request, with: context)
         }
-        else if request.requestType == .SaveRequestType {
-            return try self.executeSaveChangesRequest(request, withContext: context)
+        else if request.requestType == .saveRequestType {
+            return try self.executeSaveChangesRequest(request, with: context)
         }
         
         throw GROIncrementalStoreError.UnsupportedRequest
     }
     
-    public override func newValuesForObjectWithID(objectID: NSManagedObjectID, withContext context: NSManagedObjectContext) throws -> NSIncrementalStoreNode {
+    public override func newValuesForObject(with objectID: NSManagedObjectID, with context: NSManagedObjectContext) throws -> NSIncrementalStoreNode {
         guard let name = objectID.entity.name else { fatalError("missing entity name") }
         let fetchRequest = NSFetchRequest(entityName: name)
-        fetchRequest.resultType = .DictionaryResultType
+        fetchRequest.resultType = .dictionaryResultType
         fetchRequest.fetchLimit = 1
         fetchRequest.includesSubentities = false
         
-        let referenceObj = self.referenceObjectForObjectID(objectID)
-        let identifier = resourceIdentifier(referenceObj)
+        let referenceObj = self.referenceObject(for: objectID)
+        let identifier = resourceIdentifier(referenceObject: referenceObj)
         
         let predicate = NSPredicate(format: "%K = %@", Attribute.ResourceIdentifier, identifier)
         fetchRequest.predicate = predicate
         
         var results: [AnyObject]? = nil
         let privateContext = self.backingContext
-        privateContext.performBlockAndWait {
+        privateContext.performAndWait {
             do {
-                results = try privateContext.executeFetchRequest(fetchRequest)
+                results = try privateContext.fetch(fetchRequest)
             } catch {
                 fatalError("could not obtain new values: \(error)")
             }
@@ -163,28 +163,29 @@ public class GROIncrementalStore: NSIncrementalStore {
         return node
     }
     
-    public override func newValueForRelationship(relationship: NSRelationshipDescription, forObjectWithID objectID: NSManagedObjectID, withContext context: NSManagedObjectContext?) throws -> AnyObject {
+    public override func newValue(forRelationship relationship: NSRelationshipDescription, forObjectWith objectID: NSManagedObjectID, with context: NSManagedObjectContext?) throws -> AnyObject {
         
-        let referenceObj = self.referenceObjectForObjectID(objectID)
-        let identifier = resourceIdentifier(referenceObj)
+        let referenceObj = self.referenceObject(for: objectID)
+        let identifier = resourceIdentifier(referenceObject: referenceObj)
         
         do {
-            let backingObjID = try self.backingObjectIDForEntity(objectID.entity, identifier: String(identifier))
+            let backingObjID = try self.backingObjectID(for: objectID.entity, identifier: String(identifier))
             
             if backingObjID != nil {
-                let backingObj = try self.backingContext.existingObjectWithID(backingObjID!)
-                if let backingRelationshipObj = backingObj.valueForKeyPath(relationship.name) {
-                    if relationship.toMany {
+                let backingObj = try self.backingContext.existingObject(with: backingObjID!)
+                if let backingRelationshipObj = backingObj.value(forKeyPath: relationship.name) {
+                    if relationship.isToMany {
                         var objectIDs: [NSManagedObjectID] = []
                         
                         let relatedObjs = backingRelationshipObj
                         guard let entity = relationship.destinationEntity else { fatalError("missing entity") }
                         
-                        guard let identifierSet = relatedObjs.valueForKeyPath(Attribute.ResourceIdentifier) as? NSSet else { fatalError() }
+                        guard let identifierSet = relatedObjs.value(forKeyPath: Attribute.ResourceIdentifier) as? NSSet else { fatalError() }
+                        
                         guard let identifiers = identifierSet.allObjects as? [String] else { fatalError() }
                         
                         for id in identifiers {
-                            let objectID = try self.objectIDForEntity(entity, identifier: id)
+                            let objectID = try self.objectID(for: entity, identifier: id)
                             objectIDs.append(objectID)
                         }
                         
@@ -196,7 +197,7 @@ public class GROIncrementalStore: NSIncrementalStore {
                         
                         guard let entity = relationship.destinationEntity else { fatalError("missing entity") }
                         
-                        let objectID = try self.objectIDForEntity(entity, identifier: identifier)
+                        let objectID = try self.objectID(for: entity, identifier: identifier)
                         return objectID
                     }
                 }
@@ -204,7 +205,7 @@ public class GROIncrementalStore: NSIncrementalStore {
         }
         catch { }
         
-        if relationship.toMany {
+        if relationship.isToMany {
             return []
         }
         else {
@@ -214,25 +215,25 @@ public class GROIncrementalStore: NSIncrementalStore {
     
     // MARK: - Notifications
     
-    func contextDidChange(notification: NSNotification) {
+    func contextDidChange(_ notification: NSNotification) {
         guard let context = notification.object as? NSManagedObjectContext else { return }
         let contextSaveInfo = notification.userInfo ?? [:]
         
         if context == self.backingContext {
             guard let mergeContext = self.mainContext else { return }
-            NSManagedObjectContext.mergeChangesFromRemoteContextSave(contextSaveInfo, intoContexts: [mergeContext])
+            NSManagedObjectContext.mergeChanges(fromRemoteContextSave: contextSaveInfo, into: [mergeContext])
         }
         else if context == self.mainContext {
             let mergeContext = self.backingContext
-            NSManagedObjectContext.mergeChangesFromRemoteContextSave(contextSaveInfo, intoContexts: [mergeContext])
+            NSManagedObjectContext.mergeChanges(fromRemoteContextSave: contextSaveInfo, into: [mergeContext])
             
-            self.backingContext.performBlock({
+            self.backingContext.perform({
                 self.backingContext.saveOrLogError()
             })
         }
     }
     
-    func didCreateRecord(notification: NSNotification) {
+    func didCreateRecord(_ notification: NSNotification) {
         guard let objectID = notification.userInfo?[GROObjectIDKey] as? NSManagedObjectID else { return }
         guard let identifier = notification.userInfo?[GRORecordNameKey] as? String else { return }
         
@@ -245,24 +246,24 @@ public class GROIncrementalStore: NSIncrementalStore {
     
     // MARK: - Private
     
-    private func executeFetchRequest(request: NSPersistentStoreRequest!, withContext context: NSManagedObjectContext!) throws -> [AnyObject] {
+    private func executeFetchRequest(_ request: NSPersistentStoreRequest!, with context: NSManagedObjectContext!) throws -> [AnyObject] {
         guard let fetchRequest = request as? NSFetchRequest else { fatalError() }
         let backingContext = self.backingContext
         
-        if fetchRequest.resultType == .ManagedObjectResultType {
+        if fetchRequest.resultType == [] {
             
-            context.performBlock {
-                self.fetchRemoteObjects(fetchRequest, context: context)
+            context.perform {
+                self.fetchRemoteObjects(request: fetchRequest, context: context)
             }
             
-            let managedObjects = self.cachedObjectsForRequest(fetchRequest, materializedInContext: context)
+            let managedObjects = self.cachedObjects(for: fetchRequest, materializedIn: context)
             return managedObjects
         }
-        else if fetchRequest.resultType == .CountResultType ||
-                fetchRequest.resultType == .DictionaryResultType ||
-                fetchRequest.resultType == .ManagedObjectIDResultType {
+        else if fetchRequest.resultType == .countResultType ||
+                fetchRequest.resultType == .dictionaryResultType ||
+                fetchRequest.resultType == .managedObjectIDResultType {
             do {
-                return try backingContext.executeFetchRequest(fetchRequest)
+                return try backingContext.fetch(fetchRequest)
             }
             catch { throw error }
         }
@@ -270,31 +271,31 @@ public class GROIncrementalStore: NSIncrementalStore {
         return []
     }
     
-    private func executeSaveChangesRequest(request: NSPersistentStoreRequest!, withContext context: NSManagedObjectContext!) throws -> [AnyObject] {
+    private func executeSaveChangesRequest(_ request: NSPersistentStoreRequest!, with context: NSManagedObjectContext!) throws -> [AnyObject] {
         
         guard let saveRequest = request as? NSSaveChangesRequest else {
             throw GROIncrementalStoreError.WrongRequestType
         }
         
-        self.saveRemoteObjects(saveRequest, context: context)
+        self.saveRemoteObjects(request: saveRequest, context: context)
         
         return []
     }
     
-    private func cachedObjectsForRequest(request: NSFetchRequest, materializedInContext context: NSManagedObjectContext) -> [NSManagedObject] {
+    private func cachedObjects(for request: NSFetchRequest, materializedIn context: NSManagedObjectContext) -> [NSManagedObject] {
         guard let cacheFetchRequest = request.copy() as? NSFetchRequest else { fatalError() }
         guard let entityName = request.entityName else { fatalError() }
         guard let entity = request.entity else { fatalError("missing entity") }
         
         let backingContext = self.backingContext
-        cacheFetchRequest.entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: backingContext)
-        cacheFetchRequest.resultType = .ManagedObjectResultType
+        cacheFetchRequest.entity = NSEntityDescription.entity(forEntityName: entityName, in: backingContext)
+        cacheFetchRequest.resultType = []
         cacheFetchRequest.propertiesToFetch = [Attribute.ResourceIdentifier]
         
         var cachedObjects: [AnyObject] = []
-        backingContext.performBlockAndWait {
+        backingContext.performAndWait {
             do {
-                cachedObjects = try backingContext.executeFetchRequest(cacheFetchRequest)
+                cachedObjects = try backingContext.fetch(cacheFetchRequest)
             }
             catch {
                 fatalError("error executing fetch request: \(error)")
@@ -304,17 +305,17 @@ public class GROIncrementalStore: NSIncrementalStore {
         print("found \(cachedObjects.count) objects in backing store")
         
         let results = cachedObjects as NSArray
-        let resourceIds = results.valueForKeyPath(Attribute.ResourceIdentifier) as? [NSString] ?? []
+        let resourceIds = results.value(forKeyPath: Attribute.ResourceIdentifier) as? [NSString] ?? []
         
         var mainObjects: [NSManagedObject] = []
-        context.performBlockAndWait { 
+        context.performAndWait {
             mainObjects = resourceIds.map({ (resourceId: NSString) -> NSManagedObject in
-                let objectId = try! self.objectIDForEntity(entity, identifier: resourceId)
-                let managedObject = context.objectWithID(objectId)
+                let objectId = try! self.objectID(for: entity, identifier: resourceId)
+                let managedObject = context.object(with: objectId)
                 guard let transformableObj = managedObject as? ManagedObjectTransformable else { fatalError() }
                 
                 let predicate = NSPredicate(format: "%K = %@", Attribute.ResourceIdentifier, resourceId)
-                guard let backingObj = results.filteredArrayUsingPredicate(predicate).first as? NSManagedObject else { fatalError() }
+                guard let backingObj = results.filtered(using: predicate).first as? NSManagedObject else { fatalError() }
                 
                 transformableObj.transform(object: backingObj)
                 
@@ -347,7 +348,7 @@ public class GROIncrementalStore: NSIncrementalStore {
         fetchChanges.addDependency(verifySubscriptions)
         
         [injestDeletedRecords, injestModifiedRecords].onFinish {
-            self.backingContext.performBlockAndWait({
+            self.backingContext.performAndWait({
                 self.backingContext.saveOrLogError()
             })
         }
@@ -372,7 +373,7 @@ public class GROIncrementalStore: NSIncrementalStore {
         injestModifiedRecords.addDependency(injestDeletedRecords)
         
         [injestDeletedRecords, injestModifiedRecords].onFinish {
-            self.backingContext.performBlockAndWait({
+            self.backingContext.performAndWait({
                 self.backingContext.saveOrLogError()
             })
         }
@@ -385,7 +386,9 @@ public class GROIncrementalStore: NSIncrementalStore {
 
 extension GROIncrementalStore: ManagedObjectIDProvider {
     
-    func objectIDForEntity(entity: NSEntityDescription, identifier: NSString?) throws -> NSManagedObjectID {
+    
+    
+    func objectID(for entity: NSEntityDescription, identifier: NSString?) throws -> NSManagedObjectID {
         guard let identifier = identifier else { throw GROIncrementalStoreError.NoRemoteIdentifier }
         guard let name = entity.name else { throw GROIncrementalStoreError.NoEntityName }
         
@@ -401,10 +404,10 @@ extension GROIncrementalStore: ManagedObjectIDProvider {
         if managedObjectId == nil {
             guard let context = self.mainContext else { fatalError() }
             
-            context.performBlockAndWait {
+            context.performAndWait {
                 for object in context.registeredObjects {
-                    let refObj = self.referenceObjectForObjectID(object.objectID)
-                    if identifier == resourceIdentifier(refObj) {
+                    let refObj = self.referenceObject(for: object.objectID)
+                    if identifier == resourceIdentifier(referenceObject: refObj) {
                         managedObjectId = object.objectID
                         break
                     }
@@ -413,7 +416,7 @@ extension GROIncrementalStore: ManagedObjectIDProvider {
         }
         
         if managedObjectId == nil {
-            managedObjectId = newObjectIDForEntity(entity, referenceObject: cachedObjectIdentifier)
+            managedObjectId = newObjectID(for: entity, referenceObject: cachedObjectIdentifier)
         }
         
         guard let _ = managedObjectId else { throw GROIncrementalStoreError.ObjectIdNotFound }
@@ -425,12 +428,12 @@ extension GROIncrementalStore: ManagedObjectIDProvider {
         return managedObjectId!
     }
     
-    func backingObjectIDForEntity(entity: NSEntityDescription, identifier: NSString?) throws -> NSManagedObjectID? {
+    func backingObjectID(for entity: NSEntityDescription, identifier: NSString?) throws -> NSManagedObjectID? {
         guard let identifier = identifier else { throw GROIncrementalStoreError.NoRemoteIdentifier }
         guard let name = entity.name else { throw GROIncrementalStoreError.NoEntityName }
         
         let fetchRequest = NSFetchRequest(entityName: name)
-        fetchRequest.resultType = NSFetchRequestResultType.ManagedObjectIDResultType
+        fetchRequest.resultType = .managedObjectIDResultType
         fetchRequest.fetchLimit = 1
         
         let predicate = NSPredicate(format: "%K = %@", Attribute.ResourceIdentifier, identifier)
@@ -444,11 +447,11 @@ extension GROIncrementalStore: ManagedObjectIDProvider {
         }
         
         if backingObjectId == nil {
-            var fetchError: ErrorType?
+            var fetchError: ErrorProtocol?
             
-            self.backingContext.performBlockAndWait {
+            self.backingContext.performAndWait {
                 do {
-                    let results = try self.backingContext.executeFetchRequest(fetchRequest)
+                    let results = try self.backingContext.fetch(fetchRequest)
                     backingObjectId = results.last as? NSManagedObjectID
                 } catch (let error) {
                     fetchError = error
@@ -467,11 +470,11 @@ extension GROIncrementalStore: ManagedObjectIDProvider {
         return backingObjectId
     }
     
-    func entityForIdentifier(identifier: String, context: NSManagedObjectContext) -> NSEntityDescription? {
+    func entity(for identifier: String, context: NSManagedObjectContext) -> NSEntityDescription? {
         for (name, identifiers) in self.registeredEntities {
             for (id, _) in identifiers {
                 if id == identifier {
-                    let entity = NSEntityDescription.entityForName(name, inManagedObjectContext: context)
+                    let entity = NSEntityDescription.entity(forEntityName: name, in: context)
                     return entity
                 }
             }
@@ -480,7 +483,7 @@ extension GROIncrementalStore: ManagedObjectIDProvider {
         for (name, identifiers) in self.registeredBackingEntities {
             for (id, _) in identifiers {
                 if id == identifier {
-                    let entity = NSEntityDescription.entityForName(name, inManagedObjectContext: context)
+                    let entity = NSEntityDescription.entity(forEntityName: name, in: context)
                     return entity
                 }
             }
@@ -489,7 +492,7 @@ extension GROIncrementalStore: ManagedObjectIDProvider {
         fatalError("missing entity")
     }
     
-    func registerObjectID(objectID: NSManagedObjectID, forIdentifier identifier: String, context: NSManagedObjectContext) {
+    func register(_ objectID: NSManagedObjectID, for identifier: String, context: NSManagedObjectContext) {
         guard let name = objectID.entity.name else { return }
         
         if context == self.backingContext {
@@ -510,8 +513,8 @@ private func resourceIdentifier(referenceObject: AnyObject) -> String {
     let prefix = Attribute.Prefix
     
     if refObj.hasPrefix(prefix) {
-        let index = refObj.startIndex.advancedBy(prefix.characters.count)
-        let identifier = refObj.substringFromIndex(index)
+        let index = refObj.index(refObj.startIndex, offsetBy: prefix.characters.count)
+        let identifier = refObj.substring(from: index)
         return identifier
     }
     

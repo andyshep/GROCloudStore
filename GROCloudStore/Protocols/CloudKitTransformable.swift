@@ -29,26 +29,26 @@ extension CloudKitTransformable where Self: NSManagedObject {
             guard let data = self.encodedSystemFields else {
                 
                 let psc = self.managedObjectContext?.persistentStoreCoordinator
-                guard let configuration = configurationFromPersistentStore(psc) else { fatalError() }
+                guard let configuration = configurationFromPersistentStore(coordinator: psc) else { fatalError() }
                 
                 let zoneName = configuration.CloudContainer.CustomZoneName
                 let zoneId = CKRecordZoneID(zoneName: zoneName, ownerName: CKOwnerDefaultName)
-                let recordName = NSUUID().UUIDString
+                let recordName = NSUUID().uuidString
                 
                 let recordId = CKRecordID(recordName: recordName, zoneID: zoneId)
                 let rec = CKRecord(recordType: self.recordType, recordID: recordId)
                 
-                self.encodedSystemFields = encodeSystemFieldsWithRecord(rec)
+                self.encodedSystemFields = encodeSystemFieldsWithRecord(record: rec)
                 
                 print("generated new record id: \(recordName)")
                 
                 let info = [GROObjectIDKey: objectID, GRORecordNameKey: recordName]
-                NSNotificationCenter.defaultCenter().postNotificationName(GRODidCreateRecordNotification, object: nil, userInfo: info)
+                NSNotificationCenter.default().post(name: GRODidCreateRecordNotification, object: nil, userInfo: info)
                 
                 return rec
             }
             
-            let coder = NSKeyedUnarchiver(forReadingWithData: data)
+            let coder = NSKeyedUnarchiver(forReadingWith: data)
             coder.requiresSecureCoding = true
             
             if let record = CKRecord(coder: coder) {
@@ -60,10 +60,10 @@ extension CloudKitTransformable where Self: NSManagedObject {
         }
         set {
             let data = NSMutableData()
-            let coder = NSKeyedArchiver(forWritingWithMutableData: data)
+            let coder = NSKeyedArchiver(forWritingWith: data)
             coder.requiresSecureCoding = true
             
-            newValue.encodeSystemFieldsWithCoder(coder)
+            newValue.encodeSystemFields(with: coder)
             coder.finishEncoding()
             
             self.encodedSystemFields = NSData(data: data)
@@ -73,10 +73,10 @@ extension CloudKitTransformable where Self: NSManagedObject {
 
 private func encodeSystemFieldsWithRecord(record: CKRecord) -> NSData {
     let data = NSMutableData()
-    let coder = NSKeyedArchiver(forWritingWithMutableData: data)
+    let coder = NSKeyedArchiver(forWritingWith: data)
     coder.requiresSecureCoding = true
     
-    record.encodeSystemFieldsWithCoder(coder)
+    record.encodeSystemFields(with: coder)
     coder.finishEncoding()
     
     return NSData(data: data)

@@ -35,18 +35,18 @@ class InjestDeletedRecordsOperation: NSOperation {
         
         let deletedRecordIDs = self.operation.deletedRecordIDs
         
-        backingContext.performBlockAndWait {
+        backingContext.performAndWait {
             
             for record in deletedRecordIDs {
                 let identifier = record.recordName
-                guard let entity = self.delegate?.entityForIdentifier(identifier, context: self.context) else {
+                guard let entity = self.delegate?.entity(for: identifier, context: self.context) else {
                     fatalError("entity not found")
                 }
                 
                 do {
-                    guard let objectId = try self.delegate?.backingObjectIDForEntity(entity, identifier: identifier) else { return }
-                    let obj = self.backingContext.objectWithID(objectId)
-                    self.backingContext.deleteObject(obj)
+                    guard let objectId = try self.delegate?.backingObjectID(for: entity, identifier: identifier) else { return }
+                    let obj = self.backingContext.object(with: objectId)
+                    self.backingContext.delete(obj)
                 }
                 catch {
                     print("could not find backing object for identifier: \(error)")
@@ -54,17 +54,17 @@ class InjestDeletedRecordsOperation: NSOperation {
             }
         }
         
-        context.performBlockAndWait { 
+        context.performAndWait { 
             for record in deletedRecordIDs {
                 let identifier = record.recordName
-                guard let entity = self.delegate?.entityForIdentifier(identifier, context: self.context) else {
+                guard let entity = self.delegate?.entity(for: identifier, context: self.context) else {
                     fatalError("entity not found")
                 }
                 
                 do {
-                    guard let objectId = try self.delegate?.objectIDForEntity(entity, identifier: identifier) else { return }
-                    let obj = self.context.objectWithID(objectId)
-                    self.context.deleteObject(obj)
+                    guard let objectId = try self.delegate?.objectID(for: entity, identifier: identifier) else { return }
+                    let obj = self.context.object(with: objectId)
+                    self.context.delete(obj)
                 }
                 catch {
                     print("could not find object for identifier: \(error)")

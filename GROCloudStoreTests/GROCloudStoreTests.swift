@@ -24,9 +24,9 @@ class GROCloudStoreTests: XCTestCase {
     var model: NSManagedObjectModel {
         let contentAttribute = NSAttributeDescription()
         contentAttribute.name = "content"
-        contentAttribute.attributeType = NSAttributeType.StringAttributeType
-        contentAttribute.optional = false
-        contentAttribute.indexed = true
+        contentAttribute.attributeType = NSAttributeType.stringAttributeType
+        contentAttribute.isOptional = false
+        contentAttribute.isIndexed = true
         
         let testEntity = NSEntityDescription()
         testEntity.name = "GROTestEntity"
@@ -41,7 +41,7 @@ class GROCloudStoreTests: XCTestCase {
     func test_canCreateContext() {
         
         let model = self.model
-        let context = createInMemoryContext(model)
+        let context = createInMemoryContext(model: model)
         
         XCTAssert(context != nil, "context should not be nil")
     }

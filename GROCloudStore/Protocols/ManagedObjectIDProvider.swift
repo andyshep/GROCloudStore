@@ -9,9 +9,9 @@
 import CoreData
 
 protocol ManagedObjectIDProvider: class {
-    func objectIDForEntity(entity: NSEntityDescription, identifier: NSString?) throws -> NSManagedObjectID
-    func backingObjectIDForEntity(entity: NSEntityDescription, identifier: NSString?) throws -> NSManagedObjectID?
+    func objectID(for entity: NSEntityDescription, identifier: NSString?) throws -> NSManagedObjectID
+    func backingObjectID(for entity: NSEntityDescription, identifier: NSString?) throws -> NSManagedObjectID?
     
-    func entityForIdentifier(identifier: String, context: NSManagedObjectContext) -> NSEntityDescription?
-    func registerObjectID(objectID: NSManagedObjectID, forIdentifier identifier: String, context: NSManagedObjectContext)
+    func entity(for identifier: String, context: NSManagedObjectContext) -> NSEntityDescription?
+    func register(_ objectID: NSManagedObjectID, for identifier: String, context: NSManagedObjectContext)
 }

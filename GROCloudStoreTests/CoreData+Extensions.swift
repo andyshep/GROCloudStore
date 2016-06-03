@@ -12,8 +12,8 @@ import CoreData
 
 public func createInMemoryContext(model: NSManagedObjectModel) -> NSManagedObjectContext? {
     
-    if let coordinator = NSPersistentStoreCoordinator.coordinatorWithInMemoryStoreUsingModel(model) {
-        let context = NSManagedObjectContext.mainContextForCoordinator(coordinator)
+    if let coordinator = NSPersistentStoreCoordinator.coordinatorWithInMemoryStore(using: model) {
+        let context = NSManagedObjectContext.mainContext(for: coordinator)
         return context
     }
     else {
@@ -33,16 +33,16 @@ public func saveContext(context: NSManagedObjectContext) {
 }
 
 extension NSPersistentStoreCoordinator {
-    public static func coordinatorWithInMemoryStoreUsingModel(model: NSManagedObjectModel) -> NSPersistentStoreCoordinator? {
+    public static func coordinatorWithInMemoryStore(using model: NSManagedObjectModel) -> NSPersistentStoreCoordinator? {
         do {
             let coordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
             let dataSource = GROTestDataSource()
             let configuration = GROTestConfiguration()
             
-            let options: [NSObject: AnyObject] = [GRODataSourceKey: dataSource, GROUseInMemoryStoreKey: NSNumber(bool: true), GROConfigurationKey: configuration]
+            let options: [NSObject: AnyObject] = [GRODataSourceKey: dataSource, GROUseInMemoryStoreKey: NSNumber(value: true), GROConfigurationKey: configuration]
             let type = GROIncrementalStore.storeType
             
-            try coordinator.addPersistentStoreWithType(type, configuration: nil, URL: nil, options: options)
+            try coordinator.addPersistentStore(ofType: type, configurationName: nil, at: nil, options: options)
             return coordinator
         }
         catch {
@@ -52,8 +52,8 @@ extension NSPersistentStoreCoordinator {
 }
 
 extension NSManagedObjectContext {
-    public static func mainContextForCoordinator(coordinator: NSPersistentStoreCoordinator) -> NSManagedObjectContext {
-        let context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+    public static func mainContext(for coordinator: NSPersistentStoreCoordinator) -> NSManagedObjectContext {
+        let context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         context.persistentStoreCoordinator = coordinator
         return context
     }

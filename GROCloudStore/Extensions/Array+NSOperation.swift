@@ -10,10 +10,10 @@
 
 import Foundation
 
-extension Array where Element: NSOperation {
-    func onFinish(block: () -> Void) {
-        let completion = NSBlockOperation(block: block)
+extension Array where Element: Operation {
+    func onFinish(_ block: () -> Void) {
+        let completion = BlockOperation(block: block)
         self.forEach { [unowned completion] in completion.addDependency($0) }
-        NSOperationQueue().addOperation(completion)
+        OperationQueue().addOperation(completion)
     }
 }

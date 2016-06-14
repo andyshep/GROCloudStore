@@ -27,9 +27,9 @@ class VerifyRecordZoneOperation: AsyncOperation {
         
         self.context.performAndWait { 
             do {
-                let request = NSFetchRequest(entityName: GRORecordZone.entityName)
+                let request = NSFetchRequest<GRORecordZone>(entityName: GRORecordZone.entityName)
                 let results = try self.context.fetch(request)
-                if let _ = results.first as? GRORecordZone {
+                if let _ = results.first {
                     shouldCreateZone = false
                 }
             }
@@ -47,7 +47,7 @@ class VerifyRecordZoneOperation: AsyncOperation {
         }
     }
     
-    private func didFetchRecordZones(zones: Zones?, error: NSError?) {
+    private func didFetchRecordZones(_ zones: Zones?, error: NSError?) {
         guard error == nil else { fatalError() }
         guard let zones = zones else { return finish() }
         
@@ -63,7 +63,7 @@ class VerifyRecordZoneOperation: AsyncOperation {
         }
         
         if found {
-            saveRecordZoneID(recordZoneID: defaultZoneID, context: self.context)
+            saveRecordZoneID(defaultZoneID, context: self.context)
             finish()
         }
         else {
@@ -72,11 +72,11 @@ class VerifyRecordZoneOperation: AsyncOperation {
         }
     }
     
-    private func didCreateRecordZone(recordZone: CKRecordZone?, error: NSError?) {
+    private func didCreateRecordZone(_ recordZone: CKRecordZone?, error: NSError?) {
         finish()
     }
     
-    private func saveRecordZoneID(recordZoneID: CKRecordZoneID, context: NSManagedObjectContext) {
+    private func saveRecordZoneID(_ recordZoneID: CKRecordZoneID, context: NSManagedObjectContext) {
         context.perform { 
             guard let savedZone = GRORecordZone.newObject(in: context) as? GRORecordZone else { return }
             

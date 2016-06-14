@@ -22,47 +22,47 @@ class GROTestDataSource: CloudDataSource {
     
     // MARK: - Records
     
-    func saveRecord(record: CKRecord, completion: RecordCompletion) {
+    func saveRecord(_ record: CKRecord, completion: RecordCompletion) {
         //
     }
     
-    func recordWithID(recordID: CKRecordID, completion: RecordCompletion) {
+    func recordWithID(_ recordID: CKRecordID, completion: RecordCompletion) {
         //
     }
     
-    func recordsOfType(type: String, completion: RecordsCompletion) {
+    func recordsOfType(_ type: String, completion: RecordsCompletion) {
         //
     }
     
-    func recordsOfType(type: String, fetched: RecordFetched, completion: QueryCompletion?) {
+    func recordsOfType(_ type: String, fetched: RecordFetched, completion: QueryCompletion?) {
         //
     }
     
-    func changedRecordsOfType(type: String, token: CKServerChangeToken?, completion: ChangedRecordHandler) {
+    func changedRecordsOfType(_ type: String, token: CKServerChangeToken?, completion: ChangedRecordHandler) {
         //
     }
     
-    func deleteRecordWithID(recordID: CKRecordID, completion: DeleteRecordCompletion) {
+    func deleteRecordWithID(_ recordID: CKRecordID, completion: DeleteRecordCompletion) {
         //
     }
     
     // MARK: - Subscriptions
     
-    func verifySubscriptions(completion: FetchSubscriptionsCompletion) {
+    func verifySubscriptions(_ completion: FetchSubscriptionsCompletion) {
         //
     }
     
-    func createSubscriptions(subscriptions: [CKSubscription], completion: CreateSubscriptionsCompletion) {
+    func createSubscriptions(_ subscriptions: [CKSubscription], completion: CreateSubscriptionsCompletion) {
         //
     }
     
     // MARK: - Record Zones
     
-    func fetchRecordsZones(completion: FetchRecordZonesCompletion) -> Void {
+    func fetchRecordsZones(_ completion: FetchRecordZonesCompletion) -> Void {
         //
     }
     
-    func createRecordZone(name: String, completion: CreateRecordZoneCompletion) -> Void {
+    func createRecordZone(_ name: String, completion: CreateRecordZoneCompletion) -> Void {
         //
     }
 }

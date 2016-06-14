@@ -16,10 +16,10 @@ extension Todo: ManagedObjectTransformable {
         guard let item = object.value(forKeyPath: "item") as? String else { return }
         self.item = item
         
-        guard let created = object.value(forKeyPath: "created") as? NSDate else { return }
+        guard let created = object.value(forKeyPath: "created") as? Date else { return }
         self.created = created
         
-        guard let data = object.value(forKeyPath: "encodedSystemFields") as? NSData else { fatalError() }
+        guard let data = object.value(forKeyPath: "encodedSystemFields") as? Data else { fatalError() }
         self.encodedSystemFields = data
     }
     
@@ -34,7 +34,7 @@ extension Todo: CloudKitTransformable {
         guard let item = record["item"] as? String else { return }
         self.item = item
         
-        guard let created = record["created"] as? NSDate else { return }
+        guard let created = record["created"] as? Date else { return }
         self.created = created
         
         self.record = record
@@ -48,7 +48,7 @@ extension Todo: CloudKitTransformable {
         return record
     }
     
-    func references(record: CKRecord) -> [CKReference: String] {
+    func references(_ record: CKRecord) -> [CKReference: String] {
         return [:]
     }
     

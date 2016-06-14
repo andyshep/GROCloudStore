@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class AsyncOperation: NSOperation {
+public class AsyncOperation: Operation {
     
     private var _executing = false
     private var _finished = false

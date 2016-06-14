@@ -28,7 +28,7 @@ struct TestSubscription: SubscriptionType {
         let zoneId = CKRecordZoneID(zoneName: DefaultTestContainer().CustomZoneName, ownerName: CKOwnerDefaultName)
         
         let options = CKSubscriptionOptions.firesOnRecordCreation
-        let subscription = CKSubscription(recordType: "GROTestEntity", predicate: NSPredicate(format: "TRUEPREDICATE"), subscriptionID: subscriptionId, options: options)
+        let subscription = CKSubscription(recordType: "GROTestEntity", predicate: Predicate(format: "TRUEPREDICATE"), subscriptionID: subscriptionId, options: options)
         subscription.zoneID = zoneId
         
         let notificationInfo = CKNotificationInfo()

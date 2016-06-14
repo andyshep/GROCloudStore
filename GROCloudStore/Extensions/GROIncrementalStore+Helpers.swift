@@ -29,7 +29,7 @@ struct Attribute {
 
 protocol GROBackingStoreResourceType {
     var GROResourceIdentifier: String { get set }
-    var GROLastModified: NSDate { get set }
+    var GROLastModified: Date { get set }
 }
 
 extension NSManagedObject: GROBackingStoreResourceType {
@@ -42,9 +42,9 @@ extension NSManagedObject: GROBackingStoreResourceType {
         }
     }
     
-    var GROLastModified: NSDate {
+    var GROLastModified: Date {
         get {
-            return self.value(forKey: Attribute.LastModified) as? NSDate ?? NSDate()
+            return self.value(forKey: Attribute.LastModified) as? Date ?? Date()
         }
         set {
             self.setValue(newValue, forKey: Attribute.LastModified)

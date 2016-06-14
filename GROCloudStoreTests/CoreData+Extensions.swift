@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 @testable import GROCloudStore
 
-public func createInMemoryContext(model: NSManagedObjectModel) -> NSManagedObjectContext? {
+public func createInMemoryContext(_ model: NSManagedObjectModel) -> NSManagedObjectContext? {
     
     if let coordinator = NSPersistentStoreCoordinator.coordinatorWithInMemoryStore(using: model) {
         let context = NSManagedObjectContext.mainContext(for: coordinator)
@@ -21,7 +21,7 @@ public func createInMemoryContext(model: NSManagedObjectModel) -> NSManagedObjec
     }
 }
 
-public func saveContext(context: NSManagedObjectContext) {
+public func saveContext(_ context: NSManagedObjectContext) {
     if context.hasChanges {
         do {
             try context.save()

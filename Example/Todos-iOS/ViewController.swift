@@ -13,8 +13,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    lazy var fetchedResultsController: NSFetchedResultsController = {
-        let descriptors = [NSSortDescriptor(key: "created", ascending: true)]
+    lazy var fetchedResultsController: NSFetchedResultsController<NSManagedObject> = {
+        let descriptors = [SortDescriptor(key: "created", ascending: true)]
         let controller = CoreDataManager.sharedManager.fetchedResultsController(forEntityName: "Todo", sortedBy: descriptors)
         
         controller.delegate = self
@@ -46,8 +46,8 @@ extension ViewController: UITableViewDataSource {
         return self.fetchedResultsController.fetchedObjects?.count ?? 0
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath as IndexPath)
         guard let todo = fetchedResultsController.fetchedObjects?[indexPath.row] as? Todo else { fatalError() }
         
         cell.textLabel?.text = todo.item
@@ -57,7 +57,7 @@ extension ViewController: UITableViewDataSource {
 }
 
 extension ViewController: NSFetchedResultsControllerDelegate {
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView?.reloadData()
     }
 }

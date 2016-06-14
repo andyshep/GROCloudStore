@@ -29,14 +29,14 @@ public protocol CloudDataSource {
     var configuration: Configuration { get }
     var database: CKDatabase { get }
     
-    func saveRecord(record:CKRecord, completion: RecordCompletion)
-    func recordWithID(recordID:CKRecordID, completion: RecordCompletion)
+    func save(withRecord record: CKRecord, completion: RecordCompletion)
+    func record(withRecordID recordID: CKRecordID, completion: RecordCompletion)
     
-    func recordsOfType(type: String, completion: RecordsCompletion)
-    func recordsOfType(type: String, fetched: RecordFetched, completion: QueryCompletion?)
+    func records(ofType type: String, completion: RecordsCompletion)
+    func records(ofType type: String, fetched: RecordFetched, completion: QueryCompletion?)
     
-    func changedRecordsOfType(type: String, token: CKServerChangeToken?, completion: ChangedRecordHandler)
-    func deleteRecordWithID(recordID: CKRecordID, completion: DeleteRecordCompletion)
+    func changedRecords(ofType type: String, token: CKServerChangeToken?, completion: ChangedRecordHandler)
+    func delete(withRecordID recordID: CKRecordID, completion: DeleteRecordCompletion)
     
     func verifySubscriptions(completion: FetchSubscriptionsCompletion)
     func createSubscriptions(subscriptions: [CKSubscription], completion: CreateSubscriptionsCompletion)

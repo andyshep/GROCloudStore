@@ -9,7 +9,7 @@
 import CoreData
 
 extension NSManagedObjectContext {
-    public func existingOrNewObjectForId(objectID: NSManagedObjectID?, entityName: String) throws -> NSManagedObject {
+    public func existingOrNewObjectForId(_ objectID: NSManagedObjectID?, entityName: String) throws -> NSManagedObject {
         do {
             if let objectID = objectID {
                 return try self.existingObject(with: objectID)

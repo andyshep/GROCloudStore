@@ -22,7 +22,7 @@ class FetchChangesOperation: AsyncOperation {
     
     private let dataSource: CloudDataSource
     
-    required init(request: NSFetchRequest, context: NSManagedObjectContext, backingContext: NSManagedObjectContext, dataSource: CloudDataSource) {
+    required init(request: NSFetchRequest<NSManagedObject>, context: NSManagedObjectContext, backingContext: NSManagedObjectContext, dataSource: CloudDataSource) {
         self.request = request
         self.context = context
         self.backingContext = backingContext
@@ -32,27 +32,27 @@ class FetchChangesOperation: AsyncOperation {
     }
     
     override func main() {
-        guard let request = self.request as? NSFetchRequest else { fatalError() }
+        guard let request = self.request as? NSFetchRequest<NSManagedObject> else { fatalError() }
         let recordType = request.recordType
         
         var token: CKServerChangeToken? = nil
         if let tokenObj = existingChangeToken(in: backingContext) {
-            if let lastToken = NSKeyedUnarchiver.unarchiveObject(with: tokenObj.content) as? CKServerChangeToken {
+            if let lastToken = NSKeyedUnarchiver.unarchiveObject(with: tokenObj.content as Data) as? CKServerChangeToken {
                 token = lastToken
             }
         }
         
-        dataSource.changedRecordsOfType(type: recordType, token: token) { (changedRecords, deletedRecordIDs, token) in
+        dataSource.changedRecords(ofType: recordType, token: token) { (changedRecords, deletedRecordIDs, token) in
             
             for record in changedRecords {
-                self.recordDidChange(record: record)
+                self.recordDidChange(record)
             }
             
             for recordID in deletedRecordIDs {
-                self.recordIDWasDeleted(recordID: recordID)
+                self.recordIDWasDeleted(recordID)
             }
             
-            self.saveToken(token: token)
+            self.saveToken(token)
             
             self.finish()
         }
@@ -60,11 +60,11 @@ class FetchChangesOperation: AsyncOperation {
     
     // MARK: - Private
     
-    private func recordDidChange(record: CKRecord) -> Void {
+    private func recordDidChange(_ record: CKRecord) -> Void {
         self.updatedRecords.append(record)
     }
     
-    private func recordIDWasDeleted(recordID: CKRecordID) -> Void {
+    private func recordIDWasDeleted(_ recordID: CKRecordID) -> Void {
         self.deletedRecordIDs.append(recordID)
     }
     
@@ -77,10 +77,10 @@ class FetchChangesOperation: AsyncOperation {
     }
     
     private func existingChangeToken(in context: NSManagedObjectContext) -> GROChangeToken? {
-        let request = NSFetchRequest(entityName: GROChangeToken.entityName)
+        let request = NSFetchRequest<GROChangeToken>(entityName: GROChangeToken.entityName)
         do {
             let result = try context.fetch(request)
-            if let token = result.first as? GROChangeToken {
+            if let token = result.first {
                 return token
             }
         }
@@ -100,7 +100,7 @@ class FetchChangesOperation: AsyncOperation {
         return token
     }
     
-    private func saveToken(token: CKServerChangeToken?) {
+    private func saveToken(_ token: CKServerChangeToken?) {
         if let token = token {
             self.backingContext.performAndWait {
                 let savedChangeToken = self.changeToken(in: self.backingContext)

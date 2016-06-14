@@ -14,9 +14,9 @@ import CoreData
 
 extension Todo {
 
-    @NSManaged var created: NSDate?
+    @NSManaged var created: Date?
     @NSManaged var item: String?
     
-    @NSManaged var encodedSystemFields: NSData?
+    @NSManaged var encodedSystemFields: Data?
 
 }

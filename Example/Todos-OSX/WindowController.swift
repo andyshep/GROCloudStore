@@ -11,8 +11,8 @@ import Cocoa
 class WindowController: NSWindowController {
     
     lazy var arrayController: NSArrayController = {
-        let descriptors = [NSSortDescriptor(key: "created", ascending: true)]
-        let controller = CoreDataManager.sharedManager.arrayControllerForEntityName(name: "Todo", sortDescriptors: descriptors)
+        let descriptors = [SortDescriptor(key: "created", ascending: true)]
+        let controller = CoreDataManager.sharedManager.arrayControllerForEntityName("Todo", sortDescriptors: descriptors)
         
         let context = CoreDataManager.sharedManager.managedObjectContext
         controller.managedObjectContext = context
@@ -28,7 +28,7 @@ class WindowController: NSWindowController {
         }
     }
 
-    @IBAction func handleAddButton(sender: AnyObject) {
+    @IBAction func handleAddButton(_ sender: AnyObject) {
         // TODO
     }
 }

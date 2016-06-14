@@ -10,7 +10,7 @@ import CoreData
 
 @objc(GROSavedData)
 class GROSavedData: NSManagedObject {
-    @NSManaged var content: NSData
+    @NSManaged var content: Data
     
     class var entityName: String {
         return String(self)

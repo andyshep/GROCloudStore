@@ -13,11 +13,13 @@ protocol CloudRecordType {
     var recordType: String { get }
 }
 
-extension NSFetchRequest {
-    override var recordType: String {
-        return self.entityName ?? ""
-    }
-}
+// FIXME: do you need this anymore?
+
+//extension NSFetchRequest where Self == NS {
+//    override var recordType: String {
+//        return self.entityName ?? ""
+//    }
+//}
 
 extension NSPersistentStoreRequest: CloudRecordType {
     var recordType: String {

@@ -9,7 +9,7 @@
 import CoreData
 import CloudKit
 
-class InjestDeletedRecordsOperation: NSOperation {
+class InjestDeletedRecordsOperation: Operation {
     unowned var operation: RecordChangeOperation
     weak var delegate: ManagedObjectIDProvider?
     

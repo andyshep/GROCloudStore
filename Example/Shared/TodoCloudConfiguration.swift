@@ -27,7 +27,7 @@ struct Subscription: SubscriptionType {
         let zoneId = CKRecordZoneID(zoneName: DefaultContainer().CustomZoneName, ownerName: CKOwnerDefaultName)
         
         let options = CKSubscriptionOptions.firesOnRecordCreation
-        let subscription = CKSubscription(recordType: "Todo", predicate: NSPredicate(format: "TRUEPREDICATE"), subscriptionID: subscriptionId, options: options)
+        let subscription = CKSubscription(recordType: "Todo", predicate: Predicate(format: "TRUEPREDICATE"), subscriptionID: subscriptionId, options: options)
         subscription.zoneID = zoneId
         
         let notificationInfo = CKNotificationInfo()

@@ -26,7 +26,7 @@ class AddViewController: UIViewController {
             guard let todo = NSEntityDescription.insertNewObject(forEntityName: "Todo", into: context) as? Todo else { return }
             
             todo.item = item
-            todo.created = NSDate()
+            todo.created = Date()
             
             context.saveOrLogError()
         }

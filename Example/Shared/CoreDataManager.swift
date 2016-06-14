@@ -34,9 +34,9 @@ class CoreDataManager {
     // MARK: - Public
   
     #if os(iOS)
-    func fetchedResultsController(forEntityName name: String, sortedBy sortDescriptors: [NSSortDescriptor], predicate:NSPredicate! = nil) -> NSFetchedResultsController {
+    func fetchedResultsController(forEntityName name: String, sortedBy sortDescriptors: [SortDescriptor], predicate: Predicate! = nil) -> NSFetchedResultsController<NSManagedObject> {
         let managedObjectContext = self.managedObjectContext
-        let fetchRequest = NSFetchRequest()
+        let fetchRequest = NSFetchRequest<NSManagedObject>()
         let entity = NSEntityDescription.entity(forEntityName: name, in: managedObjectContext!)
         
         fetchRequest.entity = entity
@@ -57,7 +57,7 @@ class CoreDataManager {
     }
     
     #elseif os(OSX)
-    func arrayControllerForEntityName(name: String, sortDescriptors: [NSSortDescriptor] = []) -> NSArrayController {
+    func arrayControllerForEntityName(_ name: String, sortDescriptors: [SortDescriptor] = []) -> NSArrayController {
         let controller = NSArrayController()
         
         controller.entityName = name
@@ -75,7 +75,7 @@ class CoreDataManager {
         let storeType = GROIncrementalStore.storeType
         
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = NSURL.applicationDocumentsDirectory().appendingPathComponent("Todos.sqlite")
+        let url = try! URL.applicationDocumentsDirectory().appendingPathComponent("Todos.sqlite")
         
         let options = [GROConfigurationKey: TodoCloudConfiguration()];
         
@@ -90,7 +90,7 @@ class CoreDataManager {
     }()
     
     private lazy var managedObjectModel: NSManagedObjectModel = {
-        let modelURL = NSBundle.main().urlForResource("Todos", withExtension: "momd")!
+        let modelURL = Bundle.main().urlForResource("Todos", withExtension: "momd")!
         return NSManagedObjectModel(contentsOf: modelURL)!
     }()
 }

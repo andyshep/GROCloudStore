@@ -13,8 +13,8 @@ GROCloudStore only supports the private CloudKit database. This is because GROCl
 
 ## Requirements
 
- * iOS 9.0+ / Mac OS X 10.11+
- * Xcode 7.3+
+ * Xcode 8
+ * Swift 3
 
 ## Installation
 

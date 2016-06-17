@@ -14,9 +14,9 @@ class PushChangesOperation: AsyncOperation {
     let backingContext: NSManagedObjectContext
     let request: NSPersistentStoreRequest
     
-    var insertedRecords: [CKRecord]
-    var updatedRecords: [CKRecord]
-    var deletedRecordIDs: [CKRecordID]
+    private(set) var insertedRecords: [CKRecord]
+    private(set) var updatedRecords: [CKRecord]
+    private(set) var deletedRecordIDs: [CKRecordID]
     
     private let dataSource: CloudDataSource
     

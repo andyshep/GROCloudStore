@@ -30,20 +30,20 @@ public enum GROIncrementalStoreError: ErrorProtocol {
 @objc(GROIncrementalStore)
 public class GROIncrementalStore: NSIncrementalStore {
     
-    private typealias RegisteredObjectsMap = [String: NSManagedObjectID]
-    private typealias RegisteredEntitiesMap = [String: RegisteredObjectsMap]
+    internal typealias RegisteredObjectsMap = [String: NSManagedObjectID]
+    internal typealias RegisteredEntitiesMap = [String: RegisteredObjectsMap]
     
     private let cache = NSMutableDictionary()
     private let backingObjectIDCache = Cache<NSString, NSManagedObjectID>()
-    private var registeredEntities: RegisteredEntitiesMap = [:]
-    private var registeredBackingEntities: RegisteredEntitiesMap = [:]
+    internal var registeredEntities: RegisteredEntitiesMap = [:]
+    internal var registeredBackingEntities: RegisteredEntitiesMap = [:]
     
-    private let dataSource: CloudDataSource
-    private let operationQueue = OperationQueue()
+    internal let dataSource: CloudDataSource
+    internal let operationQueue = OperationQueue()
     
     private var useInMemoryStores: Bool = false
     
-    private(set) var configuration: Configuration
+    internal(set) var configuration: Configuration
     
     public class var storeType: String {
         return String(GROIncrementalStore)

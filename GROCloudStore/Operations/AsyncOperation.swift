@@ -48,3 +48,7 @@ public class AsyncOperation: Operation {
         finish()
     }
 }
+
+internal func attemptCloudKitRecoveryFrom(error: NSError) {
+    print("try to recover from error: \(error)")
+}

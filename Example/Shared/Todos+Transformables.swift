@@ -59,4 +59,8 @@ extension Todo: CloudKitTransformable {
     var valid: Bool {
         return (self.item != "")
     }
+    
+    func secondaries(_ record: CKRecord) -> [String : [String : AnyObject]] {
+        return [:]
+    }
 }

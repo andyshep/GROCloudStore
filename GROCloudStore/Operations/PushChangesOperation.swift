@@ -33,18 +33,26 @@ class PushChangesOperation: AsyncOperation {
     
     override func main() {
         
+        let completion: () -> () = { [unowned self] in
+            self.finish()
+        }
+        
         let records = insertedRecords + updatedRecords
         let operation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: deletedRecordIDs)
         operation.qualityOfService = QualityOfService.userInitiated
         
         operation.modifyRecordsCompletionBlock = {(records, recordIds, error) in
             guard error == nil else {
-                // FIXME: error handling
+                if error!.domain == CKErrorDomain {
+                    attemptCloudKitRecoveryFrom(error: error!)
+                } else {
+                    fatalError()
+                }
                 
-                fatalError()
+                return completion()
             }
             
-            self.finish()
+            completion()
         }
         
         self.dataSource.database.add(operation)

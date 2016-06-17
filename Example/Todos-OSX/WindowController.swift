@@ -23,12 +23,23 @@ class WindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
         
+        self.window?.titleVisibility = .hidden
+        
         if let viewController = self.contentViewController as? ViewController {
             viewController.representedObject = self.arrayController
         }
     }
 
     @IBAction func handleAddButton(_ sender: AnyObject) {
-        // TODO
+        print("add")
+        
+        guard let context = arrayController.managedObjectContext else { fatalError() }
+        guard let todo = NSEntityDescription.insertNewObject(forEntityName: "Todo", into: context) as? Todo else { fatalError() }
+        
+        todo.item = "Automatic"
+        todo.created = Date()
+        
+        self.arrayController.insert(todo)
+        context.saveOrLogError()
     }
 }

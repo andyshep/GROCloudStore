@@ -22,7 +22,8 @@ public typealias QueryCompletion = (CKQueryCursor?, NSError?) -> Void
 public typealias FetchRecordZonesCompletion = ([CKRecordZoneID: CKRecordZone]?, NSError?) -> Void
 public typealias CreateRecordZoneCompletion = (CKRecordZone?, NSError?) -> Void
 
-public typealias ChangedRecordHandler = (changed: [CKRecord], deleted: [CKRecordID], token: CKServerChangeToken?) -> Void
+public typealias DatabaseChangesHandler = (changed: [CKRecordZoneID], deleted: [CKRecordZoneID], token: CKServerChangeToken?) -> Void
+public typealias ChangedRecordsHandler = (changed: [CKRecord], deleted: [CKRecordID], tokens: [CKRecordZoneID: CKServerChangeToken]) -> Void
 
 public protocol CloudDataSource {
     
@@ -36,7 +37,9 @@ public protocol CloudDataSource {
     func records(ofType type: String, completion: RecordsCompletion)
     func records(ofType type: String, fetched: RecordFetched, completion: QueryCompletion?)
     
-    func changedRecords(ofType type: String, token: CKServerChangeToken?, completion: ChangedRecordHandler)
+    func changes(since token: CKServerChangeToken?, completion: DatabaseChangesHandler)
+    func changedRecords(inZoneIds zoneIds: [CKRecordZoneID], tokens: [CKRecordZoneID: CKServerChangeToken]?, completion: ChangedRecordsHandler)
+    
     func delete(withRecordID recordID: CKRecordID, completion: DeleteRecordCompletion)
     
     func verifySubscriptions(completion: FetchSubscriptionsCompletion)

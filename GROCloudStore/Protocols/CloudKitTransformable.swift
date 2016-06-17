@@ -20,6 +20,7 @@ import CoreData
     func transform() -> CKRecord
     
     func references(_ record: CKRecord) -> [CKReference: String]
+    func secondaries(_ record: CKRecord) -> [String: [String: AnyObject]]
 }
 
 extension CloudKitTransformable where Self: NSManagedObject {
@@ -31,8 +32,8 @@ extension CloudKitTransformable where Self: NSManagedObject {
                 let psc = self.managedObjectContext?.persistentStoreCoordinator
                 guard let configuration = configurationFromPersistentStore(coordinator: psc) else { fatalError() }
                 
-                let zoneName = configuration.CloudContainer.CustomZoneName
-                let zoneId = CKRecordZoneID(zoneName: zoneName, ownerName: CKOwnerDefaultName)
+                let zoneName = configuration.CloudContainer.zoneName(forRecordType: recordType)
+                let zoneId = CKRecordZoneID(zoneName: zoneName, ownerName: CKCurrentUserDefaultName)
                 let recordName = UUID().uuidString
                 
                 let recordId = CKRecordID(recordName: recordName, zoneID: zoneId)

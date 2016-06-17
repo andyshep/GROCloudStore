@@ -14,24 +14,24 @@ struct DefaultContainer: CloudContainerType {
         return "iCloud.org.andyshep.example.Todos"
     }
     
-    var CustomZoneName: String {
-        return "examplezonename"
+    var CustomZoneNames: [String] {
+        return ["examplezonename"]
+    }
+    
+    var ZoneToRecordMappings: [String : String] {
+        return ["Todo": "examplezonename"]
     }
 }
 
-struct Subscription: SubscriptionType {
-    static let Todo = "iCloud.org.andyshep.example.Todos.subscription.Todo"
+public struct Subscription: SubscriptionType {
+    public static let Todo = "iCloud.org.andyshep.example.Todos.subscription.Todo"
     
-    var Default: [CKSubscription] {
-        let subscriptionId = Subscription.Todo
-        let zoneId = CKRecordZoneID(zoneName: DefaultContainer().CustomZoneName, ownerName: CKOwnerDefaultName)
-        
-        let options = CKSubscriptionOptions.firesOnRecordCreation
-        let subscription = CKSubscription(recordType: "Todo", predicate: Predicate(format: "TRUEPREDICATE"), subscriptionID: subscriptionId, options: options)
-        subscription.zoneID = zoneId
+    public var Default: [CKSubscription] {
+        let subscription = CKDatabaseSubscription(subscriptionID: Subscription.Todo)
         
         let notificationInfo = CKNotificationInfo()
         notificationInfo.shouldSendContentAvailable = true
+//        notificationInfo.soundName = ""
         subscription.notificationInfo = notificationInfo
         
         return [subscription]

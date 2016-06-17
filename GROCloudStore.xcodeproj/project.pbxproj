@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F7116A781CEF84EE005210FA /* GROTestConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7116A771CEF84EE005210FA /* GROTestConfiguration.swift */; };
+		F736B5B21D1B611F00CE858C /* DatabaseChangesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F736B5B11D1B611F00CE858C /* DatabaseChangesOperation.swift */; };
 		F73B5E501CF4B2BC00B92E55 /* Array+NSOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E4B1CF4B2BC00B92E55 /* Array+NSOperation.swift */; };
 		F73B5E511CF4B2BC00B92E55 /* GROIncrementalStore+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E4C1CF4B2BC00B92E55 /* GROIncrementalStore+Helpers.swift */; };
 		F73B5E521CF4B2BC00B92E55 /* NSManagedObjectContext+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E4D1CF4B2BC00B92E55 /* NSManagedObjectContext+Helpers.swift */; };
@@ -22,7 +23,7 @@
 		F73B5E621CF4B31400B92E55 /* NameableEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E5B1CF4B31400B92E55 /* NameableEntity.swift */; };
 		F73B5E6C1CF4B33800B92E55 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E631CF4B33800B92E55 /* AsyncOperation.swift */; };
 		F73B5E6D1CF4B33800B92E55 /* ContextOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E641CF4B33800B92E55 /* ContextOperation.swift */; };
-		F73B5E6E1CF4B33800B92E55 /* FetchChangesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E651CF4B33800B92E55 /* FetchChangesOperation.swift */; };
+		F73B5E6E1CF4B33800B92E55 /* ZoneChangesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E651CF4B33800B92E55 /* ZoneChangesOperation.swift */; };
 		F73B5E6F1CF4B33800B92E55 /* InjestDeletedRecordsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E661CF4B33800B92E55 /* InjestDeletedRecordsOperation.swift */; };
 		F73B5E701CF4B33800B92E55 /* InjestModifiedRecordsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E671CF4B33800B92E55 /* InjestModifiedRecordsOperation.swift */; };
 		F73B5E711CF4B33800B92E55 /* PushChangesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E681CF4B33800B92E55 /* PushChangesOperation.swift */; };
@@ -38,7 +39,7 @@
 		F73B5E831CF4B49600B92E55 /* NameableEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E5B1CF4B31400B92E55 /* NameableEntity.swift */; };
 		F73B5E841CF4B49A00B92E55 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E631CF4B33800B92E55 /* AsyncOperation.swift */; };
 		F73B5E851CF4B49A00B92E55 /* ContextOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E641CF4B33800B92E55 /* ContextOperation.swift */; };
-		F73B5E861CF4B49A00B92E55 /* FetchChangesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E651CF4B33800B92E55 /* FetchChangesOperation.swift */; };
+		F73B5E861CF4B49A00B92E55 /* ZoneChangesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E651CF4B33800B92E55 /* ZoneChangesOperation.swift */; };
 		F73B5E871CF4B49A00B92E55 /* InjestDeletedRecordsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E661CF4B33800B92E55 /* InjestDeletedRecordsOperation.swift */; };
 		F73B5E881CF4B49A00B92E55 /* InjestModifiedRecordsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E671CF4B33800B92E55 /* InjestModifiedRecordsOperation.swift */; };
 		F73B5E891CF4B49A00B92E55 /* PushChangesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E681CF4B33800B92E55 /* PushChangesOperation.swift */; };
@@ -58,6 +59,7 @@
 		F79736901D13636D000F68F2 /* GROIncrementalStore+Private.swift in Sources */ = {isa = PBXBuildFile; fileRef = F797368F1D13636D000F68F2 /* GROIncrementalStore+Private.swift */; };
 		F79736921D137509000F68F2 /* GROIncrementalStore+ManagedObjectIDProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79736911D137509000F68F2 /* GROIncrementalStore+ManagedObjectIDProvider.swift */; };
 		F79736941D13758E000F68F2 /* GROIncrementalStore+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79736931D13758E000F68F2 /* GROIncrementalStore+Notifications.swift */; };
+		F7AFF19E1D1B8E4500E70EAE /* GROChangeToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AFF19D1D1B8E4500E70EAE /* GROChangeToken.swift */; };
 		F7BE38731C98810A00D1CE87 /* GROTestDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BE38721C98810A00D1CE87 /* GROTestDataSource.swift */; };
 		F7BE38761C9881D200D1CE87 /* GRODefaultDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BE38751C9881D200D1CE87 /* GRODefaultDataSource.swift */; };
 		F7D099A21C98AF210023C220 /* CoreData+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D099A11C98AF210023C220 /* CoreData+Extensions.swift */; };
@@ -80,6 +82,7 @@
 
 /* Begin PBXFileReference section */
 		F7116A771CEF84EE005210FA /* GROTestConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GROTestConfiguration.swift; sourceTree = "<group>"; };
+		F736B5B11D1B611F00CE858C /* DatabaseChangesOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatabaseChangesOperation.swift; path = Operations/DatabaseChangesOperation.swift; sourceTree = "<group>"; };
 		F73B5E4B1CF4B2BC00B92E55 /* Array+NSOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Array+NSOperation.swift"; path = "Extensions/Array+NSOperation.swift"; sourceTree = "<group>"; };
 		F73B5E4C1CF4B2BC00B92E55 /* GROIncrementalStore+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "GROIncrementalStore+Helpers.swift"; path = "Extensions/GROIncrementalStore+Helpers.swift"; sourceTree = "<group>"; };
 		F73B5E4D1CF4B2BC00B92E55 /* NSManagedObjectContext+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSManagedObjectContext+Helpers.swift"; path = "Extensions/NSManagedObjectContext+Helpers.swift"; sourceTree = "<group>"; };
@@ -94,7 +97,7 @@
 		F73B5E5B1CF4B31400B92E55 /* NameableEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NameableEntity.swift; path = Protocols/NameableEntity.swift; sourceTree = "<group>"; };
 		F73B5E631CF4B33800B92E55 /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AsyncOperation.swift; path = Operations/AsyncOperation.swift; sourceTree = "<group>"; };
 		F73B5E641CF4B33800B92E55 /* ContextOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContextOperation.swift; path = Operations/ContextOperation.swift; sourceTree = "<group>"; };
-		F73B5E651CF4B33800B92E55 /* FetchChangesOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FetchChangesOperation.swift; path = Operations/FetchChangesOperation.swift; sourceTree = "<group>"; };
+		F73B5E651CF4B33800B92E55 /* ZoneChangesOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZoneChangesOperation.swift; path = Operations/ZoneChangesOperation.swift; sourceTree = "<group>"; };
 		F73B5E661CF4B33800B92E55 /* InjestDeletedRecordsOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InjestDeletedRecordsOperation.swift; path = Operations/InjestDeletedRecordsOperation.swift; sourceTree = "<group>"; };
 		F73B5E671CF4B33800B92E55 /* InjestModifiedRecordsOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InjestModifiedRecordsOperation.swift; path = Operations/InjestModifiedRecordsOperation.swift; sourceTree = "<group>"; };
 		F73B5E681CF4B33800B92E55 /* PushChangesOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PushChangesOperation.swift; path = Operations/PushChangesOperation.swift; sourceTree = "<group>"; };
@@ -112,6 +115,7 @@
 		F797368F1D13636D000F68F2 /* GROIncrementalStore+Private.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GROIncrementalStore+Private.swift"; sourceTree = "<group>"; };
 		F79736911D137509000F68F2 /* GROIncrementalStore+ManagedObjectIDProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GROIncrementalStore+ManagedObjectIDProvider.swift"; sourceTree = "<group>"; };
 		F79736931D13758E000F68F2 /* GROIncrementalStore+Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "GROIncrementalStore+Notifications.swift"; sourceTree = "<group>"; };
+		F7AFF19D1D1B8E4500E70EAE /* GROChangeToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GROChangeToken.swift; sourceTree = "<group>"; };
 		F7BE38721C98810A00D1CE87 /* GROTestDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GROTestDataSource.swift; sourceTree = "<group>"; };
 		F7BE38751C9881D200D1CE87 /* GRODefaultDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GRODefaultDataSource.swift; sourceTree = "<group>"; };
 		F7D099A11C98AF210023C220 /* CoreData+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreData+Extensions.swift"; sourceTree = "<group>"; };
@@ -178,6 +182,7 @@
 				F73B5E4C1CF4B2BC00B92E55 /* GROIncrementalStore+Helpers.swift */,
 				F7BE38751C9881D200D1CE87 /* GRODefaultDataSource.swift */,
 				F78D93021C934B09009EA958 /* GROSavedData.swift */,
+				F7AFF19D1D1B8E4500E70EAE /* GROChangeToken.swift */,
 				F78D93281C934BA8009EA958 /* Operations */,
 				F78D93271C934B8A009EA958 /* Protocols */,
 				F7116A761CEF82CB005210FA /* Extensions */,
@@ -218,7 +223,7 @@
 			children = (
 				F73B5E631CF4B33800B92E55 /* AsyncOperation.swift */,
 				F73B5E641CF4B33800B92E55 /* ContextOperation.swift */,
-				F73B5E651CF4B33800B92E55 /* FetchChangesOperation.swift */,
+				F73B5E651CF4B33800B92E55 /* ZoneChangesOperation.swift */,
 				F73B5E661CF4B33800B92E55 /* InjestDeletedRecordsOperation.swift */,
 				F73B5E671CF4B33800B92E55 /* InjestModifiedRecordsOperation.swift */,
 				F73B5E681CF4B33800B92E55 /* PushChangesOperation.swift */,
@@ -226,6 +231,7 @@
 				F73B5E6A1CF4B33800B92E55 /* VerifyRecordZoneOperation.swift */,
 				F73B5E6B1CF4B33800B92E55 /* VerifySubscriptionOperation.swift */,
 				F7D970F61D133EDF009133B2 /* AccountStatusOperation.swift */,
+				F736B5B11D1B611F00CE858C /* DatabaseChangesOperation.swift */,
 			);
 			name = Operations;
 			sourceTree = "<group>";
@@ -292,7 +298,10 @@
 				TargetAttributes = {
 					F78D92DC1C934AAD009EA958 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 9XH5KEL8D8;
+						DevelopmentTeamName = "Andrew Shepard";
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
 					};
 					F78D92E61C934AAD009EA958 = {
 						CreatedOnToolsVersion = 7.3;
@@ -341,6 +350,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7AFF19E1D1B8E4500E70EAE /* GROChangeToken.swift in Sources */,
 				F73B5E611CF4B31400B92E55 /* ManagedObjectTransformable.swift in Sources */,
 				F79736901D13636D000F68F2 /* GROIncrementalStore+Private.swift in Sources */,
 				F73B5E5F1CF4B31400B92E55 /* CloudDataSource.swift in Sources */,
@@ -352,10 +362,11 @@
 				F7D970F91D134445009133B2 /* CKAccountStatus+Available.swift in Sources */,
 				F73B5E621CF4B31400B92E55 /* NameableEntity.swift in Sources */,
 				F73B5E701CF4B33800B92E55 /* InjestModifiedRecordsOperation.swift in Sources */,
-				F73B5E6E1CF4B33800B92E55 /* FetchChangesOperation.swift in Sources */,
+				F73B5E6E1CF4B33800B92E55 /* ZoneChangesOperation.swift in Sources */,
 				F73B5E6F1CF4B33800B92E55 /* InjestDeletedRecordsOperation.swift in Sources */,
 				F73B5E5D1CF4B31400B92E55 /* CloudRecordType.swift in Sources */,
 				F73B5E5C1CF4B31400B92E55 /* CloudKitTransformable.swift in Sources */,
+				F736B5B21D1B611F00CE858C /* DatabaseChangesOperation.swift in Sources */,
 				F73B5E501CF4B2BC00B92E55 /* Array+NSOperation.swift in Sources */,
 				F73B5E731CF4B33800B92E55 /* VerifyRecordZoneOperation.swift in Sources */,
 				F73B5E601CF4B31400B92E55 /* ManagedObjectIDProvider.swift in Sources */,
@@ -383,7 +394,7 @@
 				F7BE38731C98810A00D1CE87 /* GROTestDataSource.swift in Sources */,
 				F73B5E881CF4B49A00B92E55 /* InjestModifiedRecordsOperation.swift in Sources */,
 				F73B5E801CF4B49600B92E55 /* CloudDataSource.swift in Sources */,
-				F73B5E861CF4B49A00B92E55 /* FetchChangesOperation.swift in Sources */,
+				F73B5E861CF4B49A00B92E55 /* ZoneChangesOperation.swift in Sources */,
 				F73B5E871CF4B49A00B92E55 /* InjestDeletedRecordsOperation.swift in Sources */,
 				F73B5E891CF4B49A00B92E55 /* PushChangesOperation.swift in Sources */,
 				F7D099A31C98B2580023C220 /* GROIncrementalStore.swift in Sources */,
@@ -458,12 +469,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "macosx iphonesimulator iphone";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VALID_ARCHS = "i386 x86_64 arm7s arm7 arm64";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -504,11 +515,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "macosx iphonesimulator iphone";
 				VALID_ARCHS = "i386 x86_64 arm7s arm7 arm64";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -519,6 +530,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -527,10 +539,11 @@
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = GROCloudStore/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.andyshep.GROCloudStore;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = 9XH5KEL8D8/;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -542,6 +555,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -550,7 +564,7 @@
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = GROCloudStore/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.andyshep.GROCloudStore;
 				PRODUCT_NAME = "$(TARGET_NAME)";

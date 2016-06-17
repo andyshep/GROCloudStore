@@ -57,13 +57,30 @@ public class GRODefaultDataSource: CloudDataSource {
         database.add(operation)
     }
     
-    public func changedRecords(ofType type: String, token: CKServerChangeToken?, completion: ChangedRecordHandler) {
+    public func changes(since token: CKServerChangeToken?, completion: DatabaseChangesHandler) {
+        let operation = CKFetchDatabaseChangesOperation(previousServerChangeToken: token)
         
-        // per wwdc, CKFetchRecordZoneChangesOperation
+        var changedRecordZoneIds: [CKRecordZoneID] = []
+        operation.recordZoneWithIDChangedBlock = { (zoneId: CKRecordZoneID) in
+            changedRecordZoneIds.append(zoneId)
+        }
         
-        let name = self.configuration.CloudContainer.CustomZoneName
-        let zoneId = CKRecordZoneID(zoneName: name, ownerName: CKOwnerDefaultName)
-        let operation = CKFetchRecordChangesOperation(recordZoneID: zoneId, previousServerChangeToken: token)
+        var deletedRecordZoneIds: [CKRecordZoneID] = []
+        operation.recordZoneWithIDWasDeletedBlock = { (zoneId: CKRecordZoneID) in
+            deletedRecordZoneIds.append(zoneId)
+        }
+        
+        operation.fetchDatabaseChangesCompletionBlock = { (token: CKServerChangeToken?, more: Bool, error: NSError?) in
+            completion(changed: changedRecordZoneIds, deleted: deletedRecordZoneIds, token: token)
+        }
+        
+        database.add(operation)
+    }
+    
+    public func changedRecords(inZoneIds zoneIds: [CKRecordZoneID], tokens: [CKRecordZoneID : CKServerChangeToken]?, completion: ChangedRecordsHandler) {
+        
+        let options = tokens?.optionsByRecordZoneID()
+        let operation = CKFetchRecordZoneChangesOperation(recordZoneIDs: zoneIds, optionsByRecordZoneID: options)
         
         var changedRecords: [CKRecord] = []
         operation.recordChangedBlock = { (record: CKRecord) in
@@ -71,20 +88,23 @@ public class GRODefaultDataSource: CloudDataSource {
         }
         
         var deletedRecordIDs: [CKRecordID] = []
-        operation.recordWithIDWasDeletedBlock = { (recordID: CKRecordID) in
+        operation.recordWithIDWasDeletedBlock = { (recordID: CKRecordID, identifier: String) in
             deletedRecordIDs.append(recordID)
         }
         
-        operation.fetchRecordChangesCompletionBlock = { (token: CKServerChangeToken?, data: Data?, error: NSError?) in
-            
-            if let error = error {
-                print("ignoring error fetching changes: \(error)")
-            }
-            
-            // FIXME: handle error
-            // use changeset to represent these three params; tuple.
-            
-            completion(changed: changedRecords, deleted: deletedRecordIDs, token: token)
+        var tokens: [CKRecordZoneID: CKServerChangeToken] = [:]
+        operation.recordZoneFetchCompletionBlock = { (zoneID: CKRecordZoneID, token: CKServerChangeToken?, _: Data?, _: Bool, _: NSError?) in
+            print("record zone has changes: \(zoneID)")
+            tokens[zoneID] = token
+        }
+        
+        // not used right now
+        operation.recordZoneChangeTokensUpdatedBlock = { (zoneID: CKRecordZoneID, token: CKServerChangeToken?, data: Data?) in
+            print("record zone change token updated: \(zoneID)")
+        }
+        
+        operation.fetchRecordZoneChangesCompletionBlock = { (error: NSError?) in
+            completion(changed: changedRecords, deleted: deletedRecordIDs, tokens: tokens)
         }
         
         database.add(operation)
@@ -126,7 +146,7 @@ public class GRODefaultDataSource: CloudDataSource {
     }
     
     public func createRecordZone(name: String, completion: CreateRecordZoneCompletion) -> Void {
-        let zoneId = CKRecordZoneID(zoneName: name, ownerName: CKOwnerDefaultName)
+        let zoneId = CKRecordZoneID(zoneName: name, ownerName: CKCurrentUserDefaultName)
         let zone = CKRecordZone(zoneID: zoneId)
         
         let operation = CKModifyRecordZonesOperation(recordZonesToSave: [zone], recordZoneIDsToDelete: nil)
@@ -136,5 +156,26 @@ public class GRODefaultDataSource: CloudDataSource {
         }
         
         database.add(operation)
+    }
+}
+
+extension Dictionary where Key: CKRecordZoneID, Value: CKServerChangeToken {
+    func optionsByRecordZoneID() -> [CKRecordZoneID: CKFetchRecordZoneChangesOptions]? {
+        var optionsByRecordZoneID: [CKRecordZoneID: CKFetchRecordZoneChangesOptions] = [:]
+        
+        for (zoneId, token) in self {
+            let options = CKFetchRecordZoneChangesOptions()
+            options.previousServerChangeToken = token
+            
+            optionsByRecordZoneID[zoneId] = options
+        }
+        
+        return (optionsByRecordZoneID.count > 0) ? optionsByRecordZoneID : nil
+    }
+}
+
+extension Array where Element : Hashable {
+    var unique: [Element] {
+        return Array(Set(self))
     }
 }

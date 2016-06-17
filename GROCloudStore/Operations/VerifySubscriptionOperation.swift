@@ -54,36 +54,26 @@ class VerifySubscriptionOperation: AsyncOperation {
     }
     
     private func didFetchSubscriptions(_ subscriptions: [CKSubscription]?, error: NSError?) {
-        if let _ = error {
-            // TODO: handle partial error when no records exist?
-            createSubscriptions()
+        
+        guard error == nil else {
+            attemptCloudKitRecoveryFrom(error: error!); return
+        }
+        
+        // FIXME: should handle more than one subscription 
+        
+        var foundSubscription = false
+        let defaultSubscription = self.configuration.Subscriptions.Default.first!
+        if let subscriptions = subscriptions {
+            if subscriptions.contains(defaultSubscription) {
+                foundSubscription = true
+            }
+        }
+        
+        if foundSubscription {
+            self.saveSubscription(defaultSubscription, context: self.context)
         }
         else {
-            
-            var foundSubscriptions: [CKSubscription: Bool] = [:]
-            for subscription in self.configuration.Subscriptions.Default {
-                foundSubscriptions[subscription] = false
-            }
-            
-            if let subscriptions = subscriptions {
-                for subscription in subscriptions {
-                    if let _ = foundSubscriptions[subscription] {
-                        foundSubscriptions[subscription] = true
-                    }
-                }
-            }
-            
-            for obj in foundSubscriptions {
-                let subscription = obj.0
-                let found = obj.1
-                
-                if found {
-                    self.saveSubscription(subscription, context: self.context)
-                }
-                else {
-                    createSubscriptions()
-                }
-            }
+            createSubscriptions()
         }
     }
     

@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreData
+import CloudKit
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,7 +18,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        let center = UNUserNotificationCenter.current()
+        let options: UNAuthorizationOptions = []
+        center.requestAuthorization(options) { (granted, error) in
+            guard error == nil else {
+                print("error: \(error)")
+                return
+            }
+            
+            if granted {
+                application.registerForRemoteNotifications()
+            }
+        }
+        
         return true
     }
 
@@ -40,6 +54,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        if let dictionary = userInfo as? [String: NSObject] {
+            let cloudNotification = CKNotification(fromRemoteNotificationDictionary: dictionary)
+            if cloudNotification.subscriptionID == Subscription.Todo {
+                
+                guard
+                    let navController = application.windows.first?.rootViewController as? UINavigationController,
+                    let viewController = navController.topViewController as? ViewController else {
+                    print("couldn't find controller to handle cloud change notification")
+                    return
+                }
+                
+                try! viewController.fetchedResultsController.performFetch()
+                completionHandler(.newData)
+            }
+        }
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        print("error registering for remote notification: \(error)")
     }
 
 }

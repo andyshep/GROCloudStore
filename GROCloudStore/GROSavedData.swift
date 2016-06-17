@@ -11,7 +11,9 @@ import CoreData
 @objc(GROSavedData)
 class GROSavedData: NSManagedObject {
     @NSManaged var content: Data
-    
+}
+
+extension NSManagedObject {
     class var entityName: String {
         return String(self)
     }
@@ -22,9 +24,6 @@ class GROSavedData: NSManagedObject {
         return object
     }
 }
-
-@objc(GROChangeToken)
-class GROChangeToken: GROSavedData { }
 
 @objc(GRORecordZone)
 class GRORecordZone: GROSavedData { }

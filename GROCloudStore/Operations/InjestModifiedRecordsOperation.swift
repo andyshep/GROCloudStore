@@ -75,7 +75,7 @@ class InjestModifiedRecordsOperation: Operation {
             for record in self.secondaryRecords {
                 self.updateRecord(record, context: context)
             }
-            
+                        
             lock?.signal()
         }
     }

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		F73B0B8E1CF77F2F00A47CF0 /* GROCloudStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F73B3E2D1CF60E8000393F1A /* GROCloudStore.framework */; };
-		F73B3E301CF60E9300393F1A /* GROCloudStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F73B3E2D1CF60E8000393F1A /* GROCloudStore.framework */; };
 		F7415D9F1CF408AC002A6275 /* TodoCloudConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7415D9E1CF408AC002A6275 /* TodoCloudConfiguration.swift */; };
 		F7415DA01CF408AC002A6275 /* TodoCloudConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7415D9E1CF408AC002A6275 /* TodoCloudConfiguration.swift */; };
 		F7417C6E1CF374C000FFDA3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7417C631CF374C000FFDA3F /* AppDelegate.swift */; };
@@ -31,10 +30,13 @@
 		F7417CB71CF39A4800FFDA3F /* NSURL+Directories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7417CB61CF39A4800FFDA3F /* NSURL+Directories.swift */; };
 		F7417CB81CF39A4800FFDA3F /* NSURL+Directories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7417CB61CF39A4800FFDA3F /* NSURL+Directories.swift */; };
 		F75E87671CF4C56100CBE3EA /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75E87661CF4C56100CBE3EA /* AddViewController.swift */; };
+		F7AFF1BC1D1B8FE900E70EAE /* GROCloudStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F73B3E2D1CF60E8000393F1A /* GROCloudStore.framework */; };
+		F7AFF1BE1D1B8FF300E70EAE /* GROCloudStore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F73B3E2D1CF60E8000393F1A /* GROCloudStore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F7B00F2C1D1B90ED00907B39 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F881A41CF62D220048484D /* CloudKit.framework */; };
+		F7B00F2F1D1B90F600907B39 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7B00F2E1D1B90F600907B39 /* CoreData.framework */; };
 		F7E685331CF40A3E00EEFD86 /* Todos+Transformables.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E685321CF40A3E00EEFD86 /* Todos+Transformables.swift */; };
 		F7E685341CF40A3E00EEFD86 /* Todos+Transformables.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E685321CF40A3E00EEFD86 /* Todos+Transformables.swift */; };
 		F7F84F5F1CF7864E0096AD06 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F84F5E1CF7864E0096AD06 /* WindowController.swift */; };
-		F7F881A51CF62D220048484D /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F881A41CF62D220048484D /* CloudKit.framework */; };
 		F7F881A81CF62D280048484D /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F881A41CF62D220048484D /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,7 +55,35 @@
 			remoteGlobalIDString = F78D92E71C934AAD009EA958;
 			remoteInfo = GROCloudStoreTests;
 		};
+		F7AFF1BA1D1B8FE500E70EAE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F73B3E271CF60E8000393F1A /* GROCloudStore.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F78D92DC1C934AAD009EA958;
+			remoteInfo = GROCloudStore;
+		};
+		F7AFF1BF1D1B8FF300E70EAE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F73B3E271CF60E8000393F1A /* GROCloudStore.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F78D92DC1C934AAD009EA958;
+			remoteInfo = GROCloudStore;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F7AFF1C11D1B8FF300E70EAE /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F7AFF1BE1D1B8FF300E70EAE /* GROCloudStore.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		F73B3E271CF60E8000393F1A /* GROCloudStore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GROCloudStore.xcodeproj; path = ../GROCloudStore.xcodeproj; sourceTree = "<group>"; };
@@ -79,6 +109,7 @@
 		F7417CB31CF39A1800FFDA3F /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		F7417CB61CF39A4800FFDA3F /* NSURL+Directories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+Directories.swift"; sourceTree = "<group>"; };
 		F75E87661CF4C56100CBE3EA /* AddViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddViewController.swift; path = Shared/AddViewController.swift; sourceTree = SOURCE_ROOT; };
+		F7B00F2E1D1B90F600907B39 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F7E685321CF40A3E00EEFD86 /* Todos+Transformables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Todos+Transformables.swift"; sourceTree = "<group>"; };
 		F7F84F5E1CF7864E0096AD06 /* WindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
 		F7F881A41CF62D220048484D /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -89,8 +120,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F73B3E301CF60E9300393F1A /* GROCloudStore.framework in Frameworks */,
-				F7F881A51CF62D220048484D /* CloudKit.framework in Frameworks */,
+				F7B00F2F1D1B90F600907B39 /* CoreData.framework in Frameworks */,
+				F7B00F2C1D1B90ED00907B39 /* CloudKit.framework in Frameworks */,
+				F7AFF1BC1D1B8FE900E70EAE /* GROCloudStore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,6 +155,7 @@
 				F7417C7A1CF3754100FFDA3F /* Todos-OSX */,
 				F7417CA51CF377A300FFDA3F /* Shared */,
 				F7417C4C1CF3748800FFDA3F /* Products */,
+				F7B00F2D1D1B90F600907B39 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -180,6 +213,14 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
+		F7B00F2D1D1B90F600907B39 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F7B00F2E1D1B90F600907B39 /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -190,10 +231,13 @@
 				F7417C471CF3748800FFDA3F /* Sources */,
 				F7417C481CF3748800FFDA3F /* Frameworks */,
 				F7417C491CF3748800FFDA3F /* Resources */,
+				F7AFF1C11D1B8FF300E70EAE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F7AFF1BB1D1B8FE500E70EAE /* PBXTargetDependency */,
+				F7AFF1C01D1B8FF300E70EAE /* PBXTargetDependency */,
 			);
 			name = "Todos-iOS";
 			productName = Todos;
@@ -231,6 +275,12 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 9XH5KEL8D8;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
 							com.apple.iCloud = {
 								enabled = 1;
 							};
@@ -241,6 +291,9 @@
 						DevelopmentTeam = 9XH5KEL8D8;
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
 							com.apple.iCloud = {
 								enabled = 1;
 							};
@@ -349,6 +402,19 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		F7AFF1BB1D1B8FE500E70EAE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GROCloudStore;
+			targetProxy = F7AFF1BA1D1B8FE500E70EAE /* PBXContainerItemProxy */;
+		};
+		F7AFF1C01D1B8FF300E70EAE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GROCloudStore;
+			targetProxy = F7AFF1BF1D1B8FF300E70EAE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		F7417C811CF3754100FFDA3F /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -414,7 +480,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -454,7 +520,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -465,10 +531,12 @@
 		F7417C611CF3748800FFDA3F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Todos-iOS/Todos-iOS.entitlements";
 				INFOPLIST_FILE = "$(SRCROOT)/Todos-iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.andyshep.Todos-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -479,10 +547,12 @@
 		F7417C621CF3748800FFDA3F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Todos-iOS/Todos-iOS.entitlements";
 				INFOPLIST_FILE = "$(SRCROOT)/Todos-iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.andyshep.Todos-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -500,7 +570,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "Todos-OSX/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.andyshep.Todos-OSX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -519,7 +589,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "Todos-OSX/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.andyshep.Todos-OSX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

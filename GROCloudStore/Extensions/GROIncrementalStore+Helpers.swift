@@ -62,6 +62,16 @@ extension NSAttributeDescription {
         
         return contentAttribute
     }
+    
+    class var zoneNameAttribute: NSAttributeDescription {
+        let zoneNameAttribute = NSAttributeDescription()
+        zoneNameAttribute.name = "zoneName"
+        zoneNameAttribute.attributeType = NSAttributeType.stringAttributeType
+        zoneNameAttribute.isOptional = true
+        zoneNameAttribute.isIndexed = false
+        
+        return zoneNameAttribute
+    }
 }
 
 extension NSManagedObjectModel {
@@ -103,7 +113,7 @@ extension NSManagedObjectModel {
         let changeTokenEntity = NSEntityDescription()
         changeTokenEntity.name = GROChangeToken.self.entityName
         changeTokenEntity.managedObjectClassName = String(GROChangeToken)
-        changeTokenEntity.properties = [NSAttributeDescription.contentAttribute]
+        changeTokenEntity.properties = [NSAttributeDescription.contentAttribute, NSAttributeDescription.zoneNameAttribute]
         
         let recordZoneEntity = NSEntityDescription()
         recordZoneEntity.name = GRORecordZone.entityName

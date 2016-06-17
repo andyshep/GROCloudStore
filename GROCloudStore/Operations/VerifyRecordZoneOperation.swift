@@ -48,28 +48,30 @@ class VerifyRecordZoneOperation: AsyncOperation {
     }
     
     private func didFetchRecordZones(_ zones: Zones?, error: NSError?) {
-        guard error == nil else { fatalError() }
-        guard let zones = zones else { return finish() }
+        guard error == nil else { attemptCloudKitRecoveryFrom(error: error!); return finish() }
+        guard zones != nil else { return finish() }
         
-        var found = false
-        let configuration = self.dataSource.configuration
-        let defaultZoneID = CKRecordZoneID(zoneName: configuration.CloudContainer.CustomZoneName, ownerName: CKOwnerDefaultName)
+//        var found = false
+//        let configuration = self.dataSource.configuration
+//        let defaultZoneID = CKRecordZoneID(zoneName: configuration.CloudContainer.CustomZoneName, ownerName: CKCurrentUserDefaultName)
+//        
+//        for (zoneId, _) in zones {
+//            if zoneId == defaultZoneID {
+//                found = true
+//                break
+//            }
+//        }
+//        
+//        if found {
+//            saveRecordZoneID(defaultZoneID, context: self.context)
+//            finish()
+//        }
+//        else {
+//            let configuration = dataSource.configuration
+//            self.dataSource.createRecordZone(name: configuration.CloudContainer.CustomZoneName, completion: didCreateRecordZone)
+//        }
         
-        for (zoneId, _) in zones {
-            if zoneId == defaultZoneID {
-                found = true
-                break
-            }
-        }
-        
-        if found {
-            saveRecordZoneID(defaultZoneID, context: self.context)
-            finish()
-        }
-        else {
-            let configuration = dataSource.configuration
-            self.dataSource.createRecordZone(name: configuration.CloudContainer.CustomZoneName, completion: didCreateRecordZone)
-        }
+        finish()
     }
     
     private func didCreateRecordZone(_ recordZone: CKRecordZone?, error: NSError?) {

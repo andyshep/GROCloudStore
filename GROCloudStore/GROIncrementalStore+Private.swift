@@ -94,19 +94,23 @@ extension GROIncrementalStore {
         let verifyRecordZone = VerifyRecordZoneOperation(context: backingContext, dataSource: dataSource)
         let verifySubscriptions = VerifySubscriptionOperation(context: backingContext, dataSource: dataSource, configuration: configuration)
         
-        let fetchChanges = FetchChangesOperation(request: request, context: context, backingContext: backingContext, dataSource: dataSource)
-        let injestDeletedRecords = InjestDeletedRecordsOperation(operation: fetchChanges)
-        let injestModifiedRecords = InjestModifiedRecordsOperation(operation: fetchChanges)
+        let databaseChanges = DatabaseChangesOperation(context: backingContext, dataSource: dataSource)
+        let recordZoneChanges = ZoneChangesOperation(operation: databaseChanges, request: request, context: context)
         
-        fetchChanges.delegate = self
+        let injestDeletedRecords = InjestDeletedRecordsOperation(operation: recordZoneChanges)
+        let injestModifiedRecords = InjestModifiedRecordsOperation(operation: recordZoneChanges)
+        
+        recordZoneChanges.delegate = self
         injestDeletedRecords.delegate = self
         injestModifiedRecords.delegate = self
         
-        injestDeletedRecords.addDependency(fetchChanges)
+        recordZoneChanges.addDependency(databaseChanges)
+        
+        injestDeletedRecords.addDependency(recordZoneChanges)
         injestModifiedRecords.addDependency(injestDeletedRecords)
         
         verifySubscriptions.addDependency(verifyRecordZone)
-        fetchChanges.addDependency(verifySubscriptions)
+        recordZoneChanges.addDependency(verifySubscriptions)
         
         [injestDeletedRecords, injestModifiedRecords].onFinish {
             self.backingContext.performAndWait({
@@ -116,7 +120,8 @@ extension GROIncrementalStore {
         
         operationQueue.addOperation(verifyRecordZone)
         operationQueue.addOperation(verifySubscriptions)
-        operationQueue.addOperation(fetchChanges)
+        operationQueue.addOperation(databaseChanges)
+        operationQueue.addOperation(recordZoneChanges)
         operationQueue.addOperation(injestDeletedRecords)
         operationQueue.addOperation(injestModifiedRecords)
     }

@@ -33,7 +33,7 @@ class FetchChangesOperation: AsyncOperation {
     
     override func main() {
         guard let request = self.request as? NSFetchRequest<NSManagedObject> else { fatalError() }
-        let recordType = request.recordType
+        let recordType = request.entityName!
         
         var token: CKServerChangeToken? = nil
         if let tokenObj = existingChangeToken(in: backingContext) {

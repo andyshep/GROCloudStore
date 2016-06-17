@@ -35,9 +35,15 @@ class PushChangesOperation: AsyncOperation {
         
         let records = insertedRecords + updatedRecords
         let operation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: deletedRecordIDs)
+        operation.qualityOfService = QualityOfService.userInitiated
         
         operation.modifyRecordsCompletionBlock = {(records, recordIds, error) in
-            // TODO: handle error
+            guard error == nil else {
+                // FIXME: error handling
+                
+                fatalError()
+            }
+            
             self.finish()
         }
         

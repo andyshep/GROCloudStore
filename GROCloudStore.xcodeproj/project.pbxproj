@@ -142,7 +142,6 @@
 			isa = PBXGroup;
 			children = (
 				F73B5E4B1CF4B2BC00B92E55 /* Array+NSOperation.swift */,
-				F73B5E4C1CF4B2BC00B92E55 /* GROIncrementalStore+Helpers.swift */,
 				F73B5E4D1CF4B2BC00B92E55 /* NSManagedObjectContext+Helpers.swift */,
 				F73B5E4E1CF4B2BC00B92E55 /* NSSaveChangesRequest+Records.swift */,
 				F73B5E4F1CF4B2BC00B92E55 /* NSURL+Directories.swift */,
@@ -176,6 +175,7 @@
 				F79736911D137509000F68F2 /* GROIncrementalStore+ManagedObjectIDProvider.swift */,
 				F79736931D13758E000F68F2 /* GROIncrementalStore+Notifications.swift */,
 				F797368F1D13636D000F68F2 /* GROIncrementalStore+Private.swift */,
+				F73B5E4C1CF4B2BC00B92E55 /* GROIncrementalStore+Helpers.swift */,
 				F7BE38751C9881D200D1CE87 /* GRODefaultDataSource.swift */,
 				F78D93021C934B09009EA958 /* GROSavedData.swift */,
 				F78D93281C934BA8009EA958 /* Operations */,

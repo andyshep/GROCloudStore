@@ -77,17 +77,20 @@ extension NSManagedObjectModel {
             resourceIdProperty.name = Attribute.ResourceIdentifier
             resourceIdProperty.attributeType = .stringAttributeType
             resourceIdProperty.isIndexed = true
+//            resourceIdProperty.isOptional = true
             
             let lastModifiedProperty = NSAttributeDescription()
             lastModifiedProperty.name = Attribute.LastModified
             lastModifiedProperty.attributeType = .dateAttributeType
             lastModifiedProperty.isIndexed = false
+//            lastModifiedProperty.isOptional = true
             
             let needsDeletion = NSAttributeDescription()
             needsDeletion.name = Attribute.NeedsDeletion
             needsDeletion.attributeType = .booleanAttributeType
             needsDeletion.isIndexed = false
             needsDeletion.defaultValue = false
+//            needsDeletion.isOptional = true
             
             var properties = entity.properties
             properties.append(resourceIdProperty)
@@ -121,4 +124,31 @@ extension NSManagedObjectModel {
         
         return augmentedModel
     }
+}
+
+internal func resourceIdentifier(_ referenceObject: AnyObject) -> String {
+    let refObj = String(referenceObject.description)
+    let prefix = Attribute.Prefix
+    
+    if refObj.hasPrefix(prefix) {
+        let index = refObj.index(refObj.startIndex, offsetBy: prefix.characters.count)
+        let identifier = refObj.substring(from: index)
+        return identifier
+    }
+    
+    return refObj
+}
+
+internal func uniqueStoreIdentifier() -> String {
+    guard let token = FileManager.default().ubiquityIdentityToken else {
+        return GROIncrementalStore.storeType
+    }
+    
+    var identifier = String(token)
+    
+    identifier = identifier.replacingOccurrences(of: "<", with: "")
+    identifier = identifier.replacingOccurrences(of: ">", with: "")
+    identifier = identifier.replacingOccurrences(of: " ", with: "-")
+    
+    return identifier
 }

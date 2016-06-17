@@ -24,7 +24,6 @@ public class GRODefaultDataSource: CloudDataSource {
     public var container: CKContainer {
         return CKContainer(identifier: self.configuration.CloudContainer.Identifier)
     }
-
     
     // MARK: - Records
     
@@ -59,6 +58,8 @@ public class GRODefaultDataSource: CloudDataSource {
     }
     
     public func changedRecords(ofType type: String, token: CKServerChangeToken?, completion: ChangedRecordHandler) {
+        
+        // per wwdc, CKFetchRecordZoneChangesOperation
         
         let name = self.configuration.CloudContainer.CustomZoneName
         let zoneId = CKRecordZoneID(zoneName: name, ownerName: CKOwnerDefaultName)
@@ -112,9 +113,10 @@ public class GRODefaultDataSource: CloudDataSource {
     // MARK: - Record Zones
     
     public func fetchRecordsZones(completion: FetchRecordZonesCompletion) -> Void {
-        let operation = CKFetchRecordZonesOperation.fetchAllRecordZonesOperation()
+        // per wwdc, CKDatabaseSubscription and CKFetchDatabaseChangesOperation should replace
         
-        //        operation.qualityOfService = NSQualityOfService.UserInitiated
+        let operation = CKFetchRecordZonesOperation.fetchAllRecordZonesOperation()
+        operation.qualityOfService = QualityOfService.userInitiated
         
         operation.fetchRecordZonesCompletionBlock = {(zones, error) in
             completion(zones, error)

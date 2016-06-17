@@ -10,11 +10,15 @@ import Foundation
 import CloudKit
 
 public protocol CloudContainerType {
+    // container identifier
     var Identifier: String { get }
+    
+    // custom zone name
     var CustomZoneName: String { get }
 }
 
 public protocol SubscriptionType {
+    // set of subscriptions
     var Default: [CKSubscription] { get }
 }
 

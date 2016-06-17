@@ -28,6 +28,7 @@ public protocol CloudDataSource {
     
     var configuration: Configuration { get }
     var database: CKDatabase { get }
+    var container: CKContainer { get }
     
     func save(withRecord record: CKRecord, completion: RecordCompletion)
     func record(withRecordID recordID: CKRecordID, completion: RecordCompletion)
@@ -43,4 +44,5 @@ public protocol CloudDataSource {
     
     func fetchRecordsZones(completion: FetchRecordZonesCompletion) -> Void
     func createRecordZone(name: String, completion: CreateRecordZoneCompletion) -> Void
+    
 }

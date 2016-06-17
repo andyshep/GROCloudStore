@@ -31,21 +31,42 @@ class InjestModifiedRecordsOperation: Operation {
     }
     
     private var secondaryRecords: [CKRecord] {
-        return records.filter { $0.recordType != operation.request.recordType }
+        if let _ = self.operation.request as? NSSaveChangesRequest {
+            return records.filter { $0.recordType != "" }
+        }
+        else if let fetchReq = self.operation.request as? NSFetchRequest<NSManagedObject> {
+            return records.filter { $0.recordType != fetchReq.entityName }
+        }
+        else {
+            return []
+        }
     }
     
     private var primaryRecords: [CKRecord] {
-        return records.filter { $0.recordType == operation.request.recordType }
+        if let _ = self.operation.request as? NSSaveChangesRequest {
+            return records.filter { $0.recordType == "" }
+        }
+        else if let fetchReq = self.operation.request as? NSFetchRequest<NSManagedObject> {
+            return records.filter { $0.recordType == fetchReq.entityName }
+        }
+        else {
+            return []
+        }
     }
     
     override func main() {
         if self.records.count == 0 { return }
         
-        processRecordsOnContext(context)
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        processRecordsOnContext(context, lock: semaphore)
+        
+        semaphore.wait()
+        
         processRecordsOnContext(backingContext)
     }
     
-    private func processRecordsOnContext(_ context: NSManagedObjectContext) {
+    private func processRecordsOnContext(_ context: NSManagedObjectContext, lock: DispatchSemaphore? = nil) {
         context.performAndWait {
             for record in self.primaryRecords {
                 self.updateRecord(record, context: context)
@@ -54,6 +75,8 @@ class InjestModifiedRecordsOperation: Operation {
             for record in self.secondaryRecords {
                 self.updateRecord(record, context: context)
             }
+            
+            lock?.signal()
         }
     }
     

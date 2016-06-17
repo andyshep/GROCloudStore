@@ -27,6 +27,8 @@ extension NSManagedObjectContext {
             catch {
                 print("error saving context: \(error)")
             }
+        } else {
+            print("no changes")
         }
     }
 }

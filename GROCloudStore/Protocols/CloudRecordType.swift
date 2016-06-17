@@ -9,20 +9,20 @@
 import Foundation
 import CoreData
 
-protocol CloudRecordType {
-    var recordType: String { get }
-}
+// FIXME: this isn't working right now, fix it
 
-// FIXME: do you need this anymore?
+//protocol CloudRecordType {
+//    var recordType: String { get }
+//}
 
-//extension NSFetchRequest where Self == NS {
-//    override var recordType: String {
-//        return self.entityName ?? ""
+//extension CloudRecordType {
+//    var recordType: String {
+//        return ""
 //    }
 //}
 
-extension NSPersistentStoreRequest: CloudRecordType {
-    var recordType: String {
-        return ""
-    }
-}
+//extension NSFetchRequest {
+//    var recordType: String {
+//        return self.entityName ?? ""
+//    }
+//}

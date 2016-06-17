@@ -68,7 +68,7 @@ class InjestModifiedRecordsOperation: Operation {
             let object = try context.existingOrNewObjectForId(objectId, entityName: entityName)
             
             if objectId == nil {
-                self.delegate?.register(object.objectID, for: identifier, context: context)
+                self.delegate?.register(objectID: object.objectID, for: identifier, in: context)
             }
             
             if context == self.backingContext {
@@ -83,7 +83,7 @@ class InjestModifiedRecordsOperation: Operation {
             for (reference, key) in references {
                 
                 let identifier = reference.recordID.recordName
-                guard let entity = self.delegate?.entity(for: identifier, context: context) else { fatalError("missing entity") }
+                guard let entity = self.delegate?.entity(for: identifier, in: context) else { fatalError("missing entity") }
                 guard let referenceObjectID = try self.objectIDMatching(identifier, entity, context) else { fatalError("missing object id") }
                 let referenceObject = try context.existingObject(with: referenceObjectID)
                 
@@ -105,10 +105,10 @@ class InjestModifiedRecordsOperation: Operation {
     private func objectIDMatching(_ identifier: String, _ entity: NSEntityDescription, _ context: NSManagedObjectContext) throws -> NSManagedObjectID? {
         
         if context == self.backingContext {
-            let objectId = try self.delegate?.backingObjectID(for: entity, identifier: identifier)
+            let objectId = try self.delegate?.backingObjectID(for: entity, with: identifier)
             return objectId
         } else {
-            let objectId = try self.delegate?.objectID(for: entity, identifier: identifier)
+            let objectId = try self.delegate?.objectID(for: entity, with: identifier)
             return objectId
         }
     }

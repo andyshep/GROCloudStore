@@ -39,12 +39,14 @@ class InjestDeletedRecordsOperation: Operation {
             
             for record in deletedRecordIDs {
                 let identifier = record.recordName
-                guard let entity = self.delegate?.entity(for: identifier, context: self.context) else {
-                    fatalError("entity not found")
+                guard let entity = self.delegate?.entity(for: identifier, in: self.context) else {
+                    // if the record was never sync'd to the device
+                    // it won't be available for deletion.
+                    continue
                 }
                 
                 do {
-                    guard let objectId = try self.delegate?.backingObjectID(for: entity, identifier: identifier) else { return }
+                    guard let objectId = try self.delegate?.backingObjectID(for: entity, with: identifier) else { return }
                     let obj = self.backingContext.object(with: objectId)
                     self.backingContext.delete(obj)
                 }
@@ -57,12 +59,14 @@ class InjestDeletedRecordsOperation: Operation {
         context.performAndWait { 
             for record in deletedRecordIDs {
                 let identifier = record.recordName
-                guard let entity = self.delegate?.entity(for: identifier, context: self.context) else {
-                    fatalError("entity not found")
+                guard let entity = self.delegate?.entity(for: identifier, in: self.context) else {
+                    // if the record was never sync'd to the device
+                    // it won't be available for deletion.
+                    continue
                 }
                 
                 do {
-                    guard let objectId = try self.delegate?.objectID(for: entity, identifier: identifier) else { return }
+                    guard let objectId = try self.delegate?.objectID(for: entity, with: identifier) else { return }
                     let obj = self.context.object(with: objectId)
                     self.context.delete(obj)
                 }

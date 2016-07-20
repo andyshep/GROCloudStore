@@ -175,7 +175,7 @@ extension GROIncrementalStore {
             else {
                 DispatchQueue.main.async {
                     let name = NSNotification.Name.GROCloudKitNotAvailable
-                    NotificationCenter.default().post(name: name, object: nil)
+                    NotificationCenter.default.post(name: name, object: nil)
                 }
             }
         }

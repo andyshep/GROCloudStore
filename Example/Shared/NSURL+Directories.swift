@@ -10,7 +10,7 @@ import Foundation
 
 extension URL {
     static func applicationDocumentsDirectory() -> URL {
-        let urls = FileManager.default().urlsForDirectory(.documentDirectory, inDomains: .userDomainMask)
+        let urls = FileManager.default.urlsForDirectory(.documentDirectory, inDomains: .userDomainMask)
         return urls[urls.count-1]
     }
 }

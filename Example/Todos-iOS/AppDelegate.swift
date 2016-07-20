@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         let center = UNUserNotificationCenter.current()
         let options: UNAuthorizationOptions = []
-        center.requestAuthorization(options) { (granted, error) in
+        center.requestAuthorization(options: options) { (granted, error) in
             guard error == nil else {
                 print("error: \(error)")
                 return

@@ -46,7 +46,7 @@ public class GROIncrementalStore: NSIncrementalStore {
     internal(set) var configuration: Configuration
     
     public class var storeType: String {
-        return String(GROIncrementalStore)
+        return String(GROIncrementalStore.self)
     }
     
     public override class func initialize() {
@@ -66,15 +66,15 @@ public class GROIncrementalStore: NSIncrementalStore {
         
         super.init(persistentStoreCoordinator: root, configurationName: name, at: url as URL, options: options)
         
-        NotificationCenter.default().addObserver(self, selector: #selector(GROIncrementalStore.contextDidChange(_:)), name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GROIncrementalStore.contextDidChange(_:)), name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
         
-        NotificationCenter.default().addObserver(self, selector: #selector(GROIncrementalStore.didCreateRecord(_:)), name: GRODidCreateRecordNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GROIncrementalStore.didCreateRecord(_:)), name: NSNotification.Name(rawValue: GRODidCreateRecordNotification), object: nil)
         
-        NotificationCenter.default().addObserver(self, selector: #selector(GROIncrementalStore.cloudDidChange(_:)), name: NSNotification.Name.NSUbiquityIdentityDidChange, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(GROIncrementalStore.cloudDidChange(_:)), name: NSNotification.Name.NSUbiquityIdentityDidChange, object: nil)
     }
     
     deinit {
-        NotificationCenter.default().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     lazy var backingPersistentStoreCoordinator: NSPersistentStoreCoordinator = {

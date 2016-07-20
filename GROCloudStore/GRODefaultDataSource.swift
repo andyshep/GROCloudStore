@@ -117,7 +117,7 @@ public class GRODefaultDataSource: CloudDataSource {
     // MARK: - Subscriptions
     
     public func verifySubscriptions(completion: FetchSubscriptionsCompletion) {
-        database.fetchAll(completionHandler: completion)
+//        database.fetchAll(completionHandler: completion)
     }
     
     public func createSubscriptions(subscriptions: [CKSubscription], completion: CreateSubscriptionsCompletion) {

@@ -90,7 +90,7 @@ class CoreDataManager {
     }()
     
     private lazy var managedObjectModel: NSManagedObjectModel = {
-        let modelURL = Bundle.main().urlForResource("Todos", withExtension: "momd")!
+        let modelURL = Bundle.main.urlForResource("Todos", withExtension: "momd")!
         return NSManagedObjectModel(contentsOf: modelURL)!
     }()
 }

@@ -44,7 +44,7 @@ extension CloudKitTransformable where Self: NSManagedObject {
                 print("generated new record id: \(recordName)")
                 
                 let info = [GROObjectIDKey: objectID, GRORecordNameKey: recordName]
-                NotificationCenter.default().post(name: NSNotification.Name(rawValue: GRODidCreateRecordNotification), object: nil, userInfo: info)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: GRODidCreateRecordNotification), object: nil, userInfo: info)
                 
                 return rec
             }

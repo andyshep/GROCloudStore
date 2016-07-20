@@ -112,17 +112,17 @@ extension NSManagedObjectModel {
         
         let changeTokenEntity = NSEntityDescription()
         changeTokenEntity.name = GROChangeToken.self.entityName
-        changeTokenEntity.managedObjectClassName = String(GROChangeToken)
+        changeTokenEntity.managedObjectClassName = String(GROChangeToken.self)
         changeTokenEntity.properties = [NSAttributeDescription.contentAttribute, NSAttributeDescription.zoneNameAttribute]
         
         let recordZoneEntity = NSEntityDescription()
         recordZoneEntity.name = GRORecordZone.entityName
-        recordZoneEntity.managedObjectClassName = String(GRORecordZone)
+        recordZoneEntity.managedObjectClassName = String(GRORecordZone.self)
         recordZoneEntity.properties = [NSAttributeDescription.contentAttribute]
         
         let subscriptionEntity = NSEntityDescription()
         subscriptionEntity.name = GROSubscription.entityName
-        subscriptionEntity.managedObjectClassName = String(GROSubscription)
+        subscriptionEntity.managedObjectClassName = String(GROSubscription.self)
         subscriptionEntity.properties = [NSAttributeDescription.contentAttribute]
         
         var entities = augmentedModel.entities
@@ -150,7 +150,7 @@ internal func resourceIdentifier(_ referenceObject: AnyObject) -> String {
 }
 
 internal func uniqueStoreIdentifier() -> String {
-    guard let token = FileManager.default().ubiquityIdentityToken else {
+    guard let token = FileManager.default.ubiquityIdentityToken else {
         return GROIncrementalStore.storeType
     }
     

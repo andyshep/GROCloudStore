@@ -15,8 +15,12 @@ struct DefaultTestContainer: CloudContainerType {
         return "iCloud.org.andyshep.GROCloudStore"
     }
     
-    var CustomZoneName: String {
-        return "zone1"
+    var CustomZoneNames: [String] {
+        return ["zone1"]
+    }
+    
+    var ZoneToRecordMappings: [String : String] {
+        return [:]
     }
 }
 
@@ -25,7 +29,7 @@ struct TestSubscription: SubscriptionType {
     
     var Default: [CKSubscription] {
         let subscriptionId = TestSubscription.TestSubscriptionName
-        let zoneId = CKRecordZoneID(zoneName: DefaultTestContainer().CustomZoneName, ownerName: CKOwnerDefaultName)
+        let zoneId = CKRecordZoneID(zoneName: DefaultTestContainer().CustomZoneNames.first!, ownerName: CKOwnerDefaultName)
         
         let options = CKSubscriptionOptions.firesOnRecordCreation
         let subscription = CKSubscription(recordType: "GROTestEntity", predicate: Predicate(format: "TRUEPREDICATE"), subscriptionID: subscriptionId, options: options)

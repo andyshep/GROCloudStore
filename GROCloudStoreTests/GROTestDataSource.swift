@@ -20,49 +20,64 @@ class GROTestDataSource: CloudDataSource {
         fatalError()
     }
     
+    var container: CKContainer {
+        fatalError()
+    }
+    
+    
     // MARK: - Records
     
-    func saveRecord(_ record: CKRecord, completion: RecordCompletion) {
+    func save(withRecord record: CKRecord, completion: RecordCompletion) {
         //
     }
     
-    func recordWithID(_ recordID: CKRecordID, completion: RecordCompletion) {
+    func record(withRecordID recordID: CKRecordID, completion: RecordCompletion) {
         //
     }
     
-    func recordsOfType(_ type: String, completion: RecordsCompletion) {
+    func records(ofType type: String, completion: RecordsCompletion) {
         //
     }
     
-    func recordsOfType(_ type: String, fetched: RecordFetched, completion: QueryCompletion?) {
+    func records(ofType type: String, fetched: RecordFetched, completion: QueryCompletion?) {
         //
     }
     
-    func changedRecordsOfType(_ type: String, token: CKServerChangeToken?, completion: ChangedRecordHandler) {
+    func changedRecordsOfType(_ type: String, token: CKServerChangeToken?, completion: ChangedRecordsHandler) {
         //
     }
     
-    func deleteRecordWithID(_ recordID: CKRecordID, completion: DeleteRecordCompletion) {
+    func changedRecords(inZoneIds zoneIds: [CKRecordZoneID], tokens: [CKRecordZoneID : CKServerChangeToken]?, completion: ChangedRecordsHandler) {
+        //
+    }
+    
+    func delete(withRecordID recordID: CKRecordID, completion: DeleteRecordCompletion) {
         //
     }
     
     // MARK: - Subscriptions
     
-    func verifySubscriptions(_ completion: FetchSubscriptionsCompletion) {
+    func verifySubscriptions(completion: FetchSubscriptionsCompletion) {
         //
     }
     
-    func createSubscriptions(_ subscriptions: [CKSubscription], completion: CreateSubscriptionsCompletion) {
+    func createSubscriptions(subscriptions: [CKSubscription], completion: CreateSubscriptionsCompletion) {
         //
     }
     
     // MARK: - Record Zones
     
-    func fetchRecordsZones(_ completion: FetchRecordZonesCompletion) -> Void {
+    func fetchRecordsZones(completion: FetchRecordZonesCompletion) {
         //
     }
     
-    func createRecordZone(_ name: String, completion: CreateRecordZoneCompletion) -> Void {
+    func createRecordZone(name: String, completion: CreateRecordZoneCompletion) {
         //
     }
+    
+    func changes(since token: CKServerChangeToken?, completion: DatabaseChangesHandler) {
+        //
+    }
+    
+    
 }

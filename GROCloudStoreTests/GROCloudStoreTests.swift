@@ -41,7 +41,7 @@ class GROCloudStoreTests: XCTestCase {
     func test_canCreateContext() {
         
         let model = self.model
-        let context = createInMemoryContext(model: model)
+        let context = createInMemoryContext(model)
         
         XCTAssert(context != nil, "context should not be nil")
     }

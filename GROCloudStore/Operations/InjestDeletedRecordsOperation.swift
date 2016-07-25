@@ -27,7 +27,7 @@ class InjestDeletedRecordsOperation: Operation {
     }
     
     private var recordIDs: [CKRecordID] {
-        return self.operation.deletedRecordIDs ?? []
+        return self.operation.deletedRecordIDs
     }
     
     override func main() {
@@ -46,7 +46,7 @@ class InjestDeletedRecordsOperation: Operation {
                 }
                 
                 do {
-                    guard let objectId = try self.delegate?.backingObjectID(for: entity, with: identifier) else { return }
+                    guard let objectId = try self.delegate?.backingObjectID(for: entity, with: identifier as NSString?) else { return }
                     let obj = self.backingContext.object(with: objectId)
                     self.backingContext.delete(obj)
                 }
@@ -66,7 +66,7 @@ class InjestDeletedRecordsOperation: Operation {
                 }
                 
                 do {
-                    guard let objectId = try self.delegate?.objectID(for: entity, with: identifier) else { return }
+                    guard let objectId = try self.delegate?.objectID(for: entity, with: identifier as NSString?) else { return }
                     let obj = self.context.object(with: objectId)
                     self.context.delete(obj)
                 }

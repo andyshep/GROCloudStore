@@ -17,6 +17,6 @@ extension Todo {
     @NSManaged var created: Date?
     @NSManaged var item: String?
     
-    @NSManaged var encodedSystemFields: Data?
+//    @NSManaged var encodedSystemFields: Data?
 
 }

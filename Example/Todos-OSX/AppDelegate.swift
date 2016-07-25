@@ -28,22 +28,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         print("registered for notifications: \(deviceToken)")
     }
     
-    func application(_ application: NSApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+    func application(_ application: NSApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("could not register for notfications: \(error)")
     }
 
-    func application(_ application: NSApplication, didReceiveRemoteNotification userInfo: [String : AnyObject]) {
-        if let dictionary = userInfo as? [String: NSObject] {
-            let cloudNotification = CKNotification(fromRemoteNotificationDictionary: dictionary)
-            if cloudNotification.subscriptionID == Subscription.Todo {
-                guard let windowController = NSApp.windows.first?.windowController as? WindowController else {
-                    print("couldn't find controller to handle cloud change notification")
-                    return
-                }
-                
-                windowController.arrayController.fetch(nil)
-            }
-        }
-    }
+//    func application(_ application: NSApplication, didReceiveRemoteNotification userInfo: [String : AnyObject]) {
+//        if let dictionary = userInfo as? [String: NSObject] {
+//            let cloudNotification = CKNotification(fromRemoteNotificationDictionary: dictionary)
+//            if cloudNotification.subscriptionID == Subscription.Todo {
+//                guard let windowController = NSApp.windows.first?.windowController as? WindowController else {
+//                    print("couldn't find controller to handle cloud change notification")
+//                    return
+//                }
+//                
+//                windowController.arrayController.fetch(nil)
+//            }
+//        }
+//    }
 }
 

@@ -16,8 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         let center = UNUserNotificationCenter.current()
         let options: UNAuthorizationOptions = []
         center.requestAuthorization(options: options) { (granted, error) in
@@ -56,25 +55,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        if let dictionary = userInfo as? [String: NSObject] {
-            let cloudNotification = CKNotification(fromRemoteNotificationDictionary: dictionary)
-            if cloudNotification.subscriptionID == Subscription.Todo {
-                
-                guard
-                    let navController = application.windows.first?.rootViewController as? UINavigationController,
-                    let viewController = navController.topViewController as? ViewController else {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        
+        let cloudNotification = CKNotification(fromRemoteNotificationDictionary: userInfo as! [String : NSObject])
+        if cloudNotification.subscriptionID == Subscription.Todo {
+            
+            guard
+                let navController = application.windows.first?.rootViewController as? UINavigationController,
+                let viewController = navController.topViewController as? ViewController else {
                     print("couldn't find controller to handle cloud change notification")
                     return
-                }
-                
-                try! viewController.fetchedResultsController.performFetch()
-                completionHandler(.newData)
             }
+            
+            try! viewController.fetchedResultsController.performFetch()
+            completionHandler(.newData)
         }
     }
     
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("error registering for remote notification: \(error)")
     }
 

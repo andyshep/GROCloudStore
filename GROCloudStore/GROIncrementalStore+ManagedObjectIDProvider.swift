@@ -39,7 +39,7 @@ extension GROIncrementalStore: ManagedObjectIDProvider {
             context.performAndWait {
                 for object in context.registeredObjects {
                     let refObj = self.referenceObject(for: object.objectID)
-                    if identifier == resourceIdentifier(refObj) {
+                    if identifier as String == resourceIdentifier(refObj as AnyObject) {
                         managedObjectId = object.objectID
                         break
                     }
@@ -68,7 +68,7 @@ extension GROIncrementalStore: ManagedObjectIDProvider {
         fetchRequest.resultType = .managedObjectIDResultType
         fetchRequest.fetchLimit = 1
         
-        let predicate = Predicate(format: "%K = %@", Attribute.ResourceIdentifier, identifier)
+        let predicate = NSPredicate(format: "%K = %@", Attribute.ResourceIdentifier, identifier)
         fetchRequest.predicate = predicate
         
         var backingObjectId: NSManagedObjectID?
@@ -79,7 +79,7 @@ extension GROIncrementalStore: ManagedObjectIDProvider {
         }
         
         if backingObjectId == nil {
-            var fetchError: ErrorProtocol?
+            var fetchError: Error?
             
             self.backingContext.performAndWait {
                 do {

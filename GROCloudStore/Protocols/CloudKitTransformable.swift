@@ -11,7 +11,7 @@ import CoreData
 
 @objc public protocol CloudKitTransformable {
     
-    var encodedSystemFields: Data? { get set }
+//    var encodedSystemFields: Data? { get set }
     
     var recordType: String { get }
     var valid: Bool { get }
@@ -24,6 +24,25 @@ import CoreData
 }
 
 extension CloudKitTransformable where Self: NSManagedObject {
+    
+    var encodedSystemFields: Data? {
+        
+        // http://stackoverflow.com/a/33125474
+        
+        get {
+            let mobj = self as NSManagedObject
+            guard let data = mobj.value(forKey: "encodedSystemFields") as? Data else {
+                return nil
+            }
+            
+            return data
+        }
+        
+        set {
+            let mobj = self as NSManagedObject
+            mobj.setValue(newValue, forKey: "encodedSystemFields")
+        }
+    }
     
     public var record: CKRecord {
         get {
@@ -43,7 +62,7 @@ extension CloudKitTransformable where Self: NSManagedObject {
                 
                 print("generated new record id: \(recordName)")
                 
-                let info = [GROObjectIDKey: objectID, GRORecordNameKey: recordName]
+                let info = [GROObjectIDKey: objectID, GRORecordNameKey: recordName] as [String : Any]
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: GRODidCreateRecordNotification), object: nil, userInfo: info)
                 
                 return rec
@@ -67,7 +86,7 @@ extension CloudKitTransformable where Self: NSManagedObject {
             newValue.encodeSystemFields(with: coder)
             coder.finishEncoding()
             
-            self.encodedSystemFields = NSData(data: data as Data as Data) as Data
+            self.encodedSystemFields = data as Data
         }
     }
 }

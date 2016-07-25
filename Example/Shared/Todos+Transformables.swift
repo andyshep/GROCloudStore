@@ -19,8 +19,8 @@ extension Todo: ManagedObjectTransformable {
         guard let created = object.value(forKeyPath: "created") as? Date else { return }
         self.created = created
         
-        guard let data = object.value(forKeyPath: "encodedSystemFields") as? Data else { fatalError() }
-        self.encodedSystemFields = data
+//        guard let data = object.value(forKeyPath: "encodedSystemFields") as? Data else { fatalError() }
+//        self.encodedSystemFields = data
     }
     
     class var entityName: String {
@@ -42,8 +42,10 @@ extension Todo: CloudKitTransformable {
     
     func transform() -> CKRecord {
         let record = self.record
-        record["item"] = self.item
-        record["created"] = self.created
+        record["item"] = NSString(string: self.item ?? "")
+        
+        let interval = self.created?.timeIntervalSinceReferenceDate ?? 0
+        record["created"] = NSDate(timeIntervalSinceReferenceDate: interval)
         
         return record
     }

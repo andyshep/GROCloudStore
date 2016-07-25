@@ -15,7 +15,7 @@ class GROSavedData: NSManagedObject {
 
 extension NSManagedObject {
     class var entityName: String {
-        return String(self)
+        return String(describing: self)
     }
     
     class func newObject(in context: NSManagedObjectContext) -> NSManagedObject {

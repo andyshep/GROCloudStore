@@ -53,10 +53,10 @@ class VerifySubscriptionOperation: AsyncOperation {
         dataSource.createSubscriptions(subscriptions: subscriptions, completion: didCreateSubscription)
     }
     
-    private func didFetchSubscriptions(_ subscriptions: [CKSubscription]?, error: NSError?) {
+    private func didFetchSubscriptions(_ subscriptions: [CKSubscription]?, error: Error?) {
         
         guard error == nil else {
-            attemptCloudKitRecoveryFrom(error: error!); return
+            attemptCloudKitRecoveryFrom(error: error! as NSError); return
         }
         
         // FIXME: should handle more than one subscription 
@@ -77,7 +77,7 @@ class VerifySubscriptionOperation: AsyncOperation {
         }
     }
     
-    private func didCreateSubscription(_ subscription: CKSubscription?, error: NSError?) {
+    private func didCreateSubscription(_ subscription: CKSubscription?, error: Error?) {
         if let error = error {
             print("error: \(error)")
         }

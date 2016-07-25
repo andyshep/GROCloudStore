@@ -128,10 +128,10 @@ class InjestModifiedRecordsOperation: Operation {
     private func objectIDMatching(_ identifier: String, _ entity: NSEntityDescription, _ context: NSManagedObjectContext) throws -> NSManagedObjectID? {
         
         if context == self.backingContext {
-            let objectId = try self.delegate?.backingObjectID(for: entity, with: identifier)
+            let objectId = try self.delegate?.backingObjectID(for: entity, with: identifier as NSString?)
             return objectId
         } else {
-            let objectId = try self.delegate?.objectID(for: entity, with: identifier)
+            let objectId = try self.delegate?.objectID(for: entity, with: identifier as NSString?)
             return objectId
         }
     }

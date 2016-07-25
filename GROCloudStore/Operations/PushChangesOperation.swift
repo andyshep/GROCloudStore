@@ -8,6 +8,7 @@
 
 import CloudKit
 import CoreData
+import Foundation
 
 class PushChangesOperation: AsyncOperation {
     let context: NSManagedObjectContext
@@ -33,29 +34,59 @@ class PushChangesOperation: AsyncOperation {
     
     override func main() {
         
-        let completion: () -> () = { [unowned self] in
-            self.finish()
+        let completion: (Bool) -> () = { [unowned self] done in
+            if done { self.finish() }
         }
         
-        let records = insertedRecords + updatedRecords
-        let operation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: deletedRecordIDs)
-        operation.qualityOfService = QualityOfService.userInitiated
+        let createZoneCompletion: (CKRecordZone?, Error?) -> () = { recordZone, error in
+            guard error == nil else {
+                return completion(false)
+            }
+            
+            let operation = self.modifyRecordsOperation()
+            operation.modifyRecordsCompletionBlock = {(records, recordIds, error) in
+                return completion(true)
+            }
+            
+            self.dataSource.database.add(operation)
+        }
+        
+        let operation = modifyRecordsOperation()
         
         operation.modifyRecordsCompletionBlock = {(records, recordIds, error) in
             guard error == nil else {
-                if error!.domain == CKErrorDomain {
-                    attemptCloudKitRecoveryFrom(error: error!)
+                if error!._domain == CKErrorDomain {
+                    if error!._code == 2 {
+                        // record zone missing
+                        
+                        let configuration = self.dataSource.configuration
+                        let zoneName = configuration.CloudContainer.CustomZoneNames.first!
+                        self.dataSource.createRecordZone(name: zoneName, completion: createZoneCompletion)
+                        
+                        return completion(false)
+                    }
+                    else {
+                        attemptCloudKitRecoveryFrom(error: error! as NSError)
+                    }
                 } else {
                     fatalError()
                 }
                 
-                return completion()
+                return completion(false)
             }
             
-            completion()
+            completion(true)
         }
         
         self.dataSource.database.add(operation)
+    }
+    
+    private func modifyRecordsOperation() -> CKModifyRecordsOperation {
+        let records = insertedRecords + updatedRecords
+        let operation = CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: deletedRecordIDs)
+        operation.qualityOfService = QualityOfService.userInitiated
+        
+        return operation
     }
 }
 

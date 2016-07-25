@@ -47,34 +47,35 @@ class VerifyRecordZoneOperation: AsyncOperation {
         }
     }
     
-    private func didFetchRecordZones(_ zones: Zones?, error: NSError?) {
+    private func didFetchRecordZones(_ zones: Zones?, error: Error?) {
         guard error == nil else { attemptCloudKitRecoveryFrom(error: error!); return finish() }
-        guard zones != nil else { return finish() }
+        guard let zones = zones else { return finish() }
         
-//        var found = false
-//        let configuration = self.dataSource.configuration
-//        let defaultZoneID = CKRecordZoneID(zoneName: configuration.CloudContainer.CustomZoneName, ownerName: CKCurrentUserDefaultName)
-//        
-//        for (zoneId, _) in zones {
-//            if zoneId == defaultZoneID {
-//                found = true
-//                break
-//            }
-//        }
-//        
-//        if found {
-//            saveRecordZoneID(defaultZoneID, context: self.context)
-//            finish()
-//        }
-//        else {
-//            let configuration = dataSource.configuration
-//            self.dataSource.createRecordZone(name: configuration.CloudContainer.CustomZoneName, completion: didCreateRecordZone)
-//        }
+        var found = false
+        let configuration = self.dataSource.configuration
+        
+        let zoneName = configuration.CloudContainer.CustomZoneNames.first!
+        let defaultZoneID = CKRecordZoneID(zoneName: zoneName, ownerName: CKCurrentUserDefaultName)
+        
+        for (zoneId, _) in zones {
+            if zoneId == defaultZoneID {
+                found = true
+                break
+            }
+        }
+        
+        if found {
+            saveRecordZoneID(defaultZoneID, context: self.context)
+            finish()
+        }
+        else {
+            self.dataSource.createRecordZone(name: zoneName, completion: didCreateRecordZone)
+        }
         
         finish()
     }
     
-    private func didCreateRecordZone(_ recordZone: CKRecordZone?, error: NSError?) {
+    private func didCreateRecordZone(_ recordZone: CKRecordZone?, error: Error?) {
         finish()
     }
     

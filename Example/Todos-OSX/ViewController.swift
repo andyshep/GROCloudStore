@@ -18,7 +18,7 @@ class ViewController: NSViewController {
         self.view.window?.titleVisibility = .hidden
     }
 
-    override var representedObject: AnyObject? {
+    override var representedObject: Any? {
         didSet {
             guard let controller = representedObject as? NSArrayController else { return }
             

@@ -32,9 +32,13 @@ class DatabaseChangesOperation: AsyncOperation {
         
         dataSource.changes(since: token) { [unowned self] (changed, deleted, token) in
             
-            // TODO: save token
-            print("TODO save database token: \(token)")
-            
+            if let token = token {
+                let savedToken = newChangeToken(in: self.context)
+                savedToken.content = NSKeyedArchiver.archivedData(withRootObject: token)
+                savedToken.zoneName = ""
+                self.context.saveOrLogError()
+            }
+                
             for changedZone in changed {
                 self.changedRecordZoneIds.append(changedZone)
             }

@@ -9,21 +9,21 @@
 import Foundation
 import CloudKit
 
-public typealias RecordsCompletion = ([CKRecord]?, NSError?) -> Void
-public typealias RecordCompletion = (CKRecord?, NSError?) -> Void
-public typealias DeleteRecordCompletion = (CKRecordID?, NSError?) -> Void
+public typealias RecordsCompletion = ([CKRecord]?, Error?) -> Void
+public typealias RecordCompletion = (CKRecord?, Error?) -> Void
+public typealias DeleteRecordCompletion = (CKRecordID?, Error?) -> Void
 
-public typealias FetchSubscriptionsCompletion = ([CKSubscription]?, NSError?) -> Void
-public typealias CreateSubscriptionsCompletion = (CKSubscription?, NSError?) -> Void
+public typealias FetchSubscriptionsCompletion = ([CKSubscription]?, Error?) -> Void
+public typealias CreateSubscriptionsCompletion = (CKSubscription?, Error?) -> Void
 
 public typealias RecordFetched = (CKRecord) -> Void
-public typealias QueryCompletion = (CKQueryCursor?, NSError?) -> Void
+public typealias QueryCompletion = (CKQueryCursor?, Error?) -> Void
 
-public typealias FetchRecordZonesCompletion = ([CKRecordZoneID: CKRecordZone]?, NSError?) -> Void
-public typealias CreateRecordZoneCompletion = (CKRecordZone?, NSError?) -> Void
+public typealias FetchRecordZonesCompletion = ([CKRecordZoneID: CKRecordZone]?, Error?) -> Void
+public typealias CreateRecordZoneCompletion = (CKRecordZone?, Error?) -> Void
 
-public typealias DatabaseChangesHandler = (changed: [CKRecordZoneID], deleted: [CKRecordZoneID], token: CKServerChangeToken?) -> Void
-public typealias ChangedRecordsHandler = (changed: [CKRecord], deleted: [CKRecordID], tokens: [CKRecordZoneID: CKServerChangeToken]) -> Void
+public typealias DatabaseChangesHandler = (_ changed: [CKRecordZoneID], _ deleted: [CKRecordZoneID], _ token: CKServerChangeToken?) -> Void
+public typealias ChangedRecordsHandler = (_ changed: [CKRecord], _ deleted: [CKRecordID], _ tokens: [CKRecordZoneID: CKServerChangeToken]) -> Void
 
 public protocol CloudDataSource {
     
@@ -31,21 +31,21 @@ public protocol CloudDataSource {
     var database: CKDatabase { get }
     var container: CKContainer { get }
     
-    func save(withRecord record: CKRecord, completion: RecordCompletion)
-    func record(withRecordID recordID: CKRecordID, completion: RecordCompletion)
+    func save(withRecord record: CKRecord, completion: @escaping RecordCompletion)
+    func record(withRecordID recordID: CKRecordID, completion: @escaping RecordCompletion)
     
-    func records(ofType type: String, completion: RecordsCompletion)
-    func records(ofType type: String, fetched: RecordFetched, completion: QueryCompletion?)
+    func records(ofType type: String, completion: @escaping RecordsCompletion)
+    func records(ofType type: String, fetched: @escaping RecordFetched, completion: QueryCompletion?)
     
-    func changes(since token: CKServerChangeToken?, completion: DatabaseChangesHandler)
-    func changedRecords(inZoneIds zoneIds: [CKRecordZoneID], tokens: [CKRecordZoneID: CKServerChangeToken]?, completion: ChangedRecordsHandler)
+    func changes(since token: CKServerChangeToken?, completion: @escaping DatabaseChangesHandler)
+    func changedRecords(inZoneIds zoneIds: [CKRecordZoneID], tokens: [CKRecordZoneID: CKServerChangeToken]?, completion: @escaping ChangedRecordsHandler)
     
-    func delete(withRecordID recordID: CKRecordID, completion: DeleteRecordCompletion)
+    func delete(withRecordID recordID: CKRecordID, completion: @escaping DeleteRecordCompletion)
     
-    func verifySubscriptions(completion: FetchSubscriptionsCompletion)
-    func createSubscriptions(subscriptions: [CKSubscription], completion: CreateSubscriptionsCompletion)
+    func verifySubscriptions(completion: @escaping FetchSubscriptionsCompletion)
+    func createSubscriptions(subscriptions: [CKSubscription], completion: @escaping CreateSubscriptionsCompletion)
     
-    func fetchRecordsZones(completion: FetchRecordZonesCompletion) -> Void
-    func createRecordZone(name: String, completion: CreateRecordZoneCompletion) -> Void
+    func fetchRecordsZones(completion: @escaping FetchRecordZonesCompletion) -> Void
+    func createRecordZone(name: String, completion: @escaping CreateRecordZoneCompletion) -> Void
     
 }

@@ -112,17 +112,17 @@ extension NSManagedObjectModel {
         
         let changeTokenEntity = NSEntityDescription()
         changeTokenEntity.name = GROChangeToken.self.entityName
-        changeTokenEntity.managedObjectClassName = String(GROChangeToken.self)
+        changeTokenEntity.managedObjectClassName = String(describing: GROChangeToken.self)
         changeTokenEntity.properties = [NSAttributeDescription.contentAttribute, NSAttributeDescription.zoneNameAttribute]
         
         let recordZoneEntity = NSEntityDescription()
         recordZoneEntity.name = GRORecordZone.entityName
-        recordZoneEntity.managedObjectClassName = String(GRORecordZone.self)
+        recordZoneEntity.managedObjectClassName = String(describing: GRORecordZone.self)
         recordZoneEntity.properties = [NSAttributeDescription.contentAttribute]
         
         let subscriptionEntity = NSEntityDescription()
         subscriptionEntity.name = GROSubscription.entityName
-        subscriptionEntity.managedObjectClassName = String(GROSubscription.self)
+        subscriptionEntity.managedObjectClassName = String(describing: GROSubscription.self)
         subscriptionEntity.properties = [NSAttributeDescription.contentAttribute]
         
         var entities = augmentedModel.entities
@@ -140,13 +140,13 @@ internal func resourceIdentifier(_ referenceObject: AnyObject) -> String {
     let refObj = String(referenceObject.description)
     let prefix = Attribute.Prefix
     
-    if refObj.hasPrefix(prefix) {
-        let index = refObj.index(refObj.startIndex, offsetBy: prefix.characters.count)
-        let identifier = refObj.substring(from: index)
-        return identifier
+    if (refObj?.hasPrefix(prefix))! {
+        let index = refObj?.index((refObj?.startIndex)!, offsetBy: prefix.characters.count)
+        let identifier = refObj?.substring(from: index!)
+        return identifier!
     }
     
-    return refObj
+    return refObj!
 }
 
 internal func uniqueStoreIdentifier() -> String {
@@ -154,7 +154,7 @@ internal func uniqueStoreIdentifier() -> String {
         return GROIncrementalStore.storeType
     }
     
-    var identifier = String(token)
+    var identifier = String(describing: token)
     
     identifier = identifier.replacingOccurrences(of: "<", with: "")
     identifier = identifier.replacingOccurrences(of: ">", with: "")

@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     lazy var fetchedResultsController: NSFetchedResultsController<NSManagedObject> = {
-        let descriptors = [SortDescriptor(key: "created", ascending: true)]
+        let descriptors = [NSSortDescriptor(key: "created", ascending: true)]
         let controller = CoreDataManager.sharedManager.fetchedResultsController(forEntityName: "Todo", sortedBy: descriptors)
         
         controller.delegate = self
@@ -31,9 +31,9 @@ class ViewController: UIViewController {
         self.tableView.dataSource = self
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddTodoItem" {
-            guard let navController = segue.destinationViewController as? UINavigationController else { return }
+            guard let navController = segue.destination as? UINavigationController else { return }
             guard let addViewController = navController.viewControllers.first as? AddViewController else { return }
             
             addViewController.context = self.fetchedResultsController.managedObjectContext

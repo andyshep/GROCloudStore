@@ -75,7 +75,7 @@ extension GROIncrementalStore {
                 let managedObject = context.object(with: objectId)
                 guard let transformableObj = managedObject as? ManagedObjectTransformable else { fatalError() }
                 
-                let predicate = Predicate(format: "%K = %@", Attribute.ResourceIdentifier, resourceId)
+                let predicate = NSPredicate(format: "%K = %@", Attribute.ResourceIdentifier, resourceId)
                 guard let backingObj = results.filtered(using: predicate).first as? NSManagedObject else { fatalError() }
                 
                 transformableObj.transform(object: backingObj)
@@ -91,9 +91,11 @@ extension GROIncrementalStore {
     
     private func fetchRemoteObjects(_ request: NSFetchRequest<NSManagedObject>, context: NSManagedObjectContext) {
         
-        let verifyRecordZone = VerifyRecordZoneOperation(context: backingContext, dataSource: dataSource)
-        let verifySubscriptions = VerifySubscriptionOperation(context: backingContext, dataSource: dataSource, configuration: configuration)
+//        let verifyRecordZone = VerifyRecordZoneOperation(context: backingContext, dataSource: dataSource)
+//        let verifySubscriptions = VerifySubscriptionOperation(context: backingContext, dataSource: dataSource, configuration: configuration)
         
+        // FIXME: do you need both database and zone changes operation?
+        // what is the difference?
         let databaseChanges = DatabaseChangesOperation(context: backingContext, dataSource: dataSource)
         let recordZoneChanges = ZoneChangesOperation(operation: databaseChanges, request: request, context: context)
         
@@ -109,8 +111,8 @@ extension GROIncrementalStore {
         injestDeletedRecords.addDependency(recordZoneChanges)
         injestModifiedRecords.addDependency(injestDeletedRecords)
         
-        verifySubscriptions.addDependency(verifyRecordZone)
-        recordZoneChanges.addDependency(verifySubscriptions)
+//        verifySubscriptions.addDependency(verifyRecordZone)
+//        recordZoneChanges.addDependency(verifySubscriptions)
         
         [injestDeletedRecords, injestModifiedRecords].onFinish {
             self.backingContext.performAndWait({
@@ -118,8 +120,8 @@ extension GROIncrementalStore {
             })
         }
         
-        operationQueue.addOperation(verifyRecordZone)
-        operationQueue.addOperation(verifySubscriptions)
+//        operationQueue.addOperation(verifyRecordZone)
+//        operationQueue.addOperation(verifySubscriptions)
         operationQueue.addOperation(databaseChanges)
         operationQueue.addOperation(recordZoneChanges)
         operationQueue.addOperation(injestDeletedRecords)
@@ -153,21 +155,21 @@ extension GROIncrementalStore {
         operationQueue.addOperation(injestModifiedRecords)
     }
     
-    private func checkCloudKitAccountStatus(completion: (status: CKAccountStatus) -> ()) {
+    private func checkCloudKitAccountStatus(completion: @escaping (_ status: CKAccountStatus) -> ()) {
         let accountStatus = AccountStatusOperation(dataSource: dataSource)
         
         accountStatus.completionBlock = {
             if let status = accountStatus.status {
-                completion(status: status)
+                completion(status)
             } else {
-                completion(status: .couldNotDetermine)
+                completion(.couldNotDetermine)
             }
         }
         
         operationQueue.addOperation(accountStatus)
     }
     
-    private func withValidCloudKitAccount(_ block: () -> ()) {
+    private func withValidCloudKitAccount(_ block: @escaping () -> ()) {
         checkCloudKitAccountStatus { (status) in
             if status == CKAccountStatus.available {
                 block()

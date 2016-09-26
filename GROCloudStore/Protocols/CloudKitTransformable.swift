@@ -11,7 +11,7 @@ import CoreData
 
 @objc public protocol CloudKitTransformable {
     
-//    var encodedSystemFields: Data? { get set }
+    var encodedSystemFields: Data? { get set }
     
     var recordType: String { get }
     var valid: Bool { get }

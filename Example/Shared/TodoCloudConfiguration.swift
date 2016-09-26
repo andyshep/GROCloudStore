@@ -31,7 +31,6 @@ public struct Subscription: SubscriptionType {
         
         let notificationInfo = CKNotificationInfo()
         notificationInfo.shouldSendContentAvailable = true
-//        notificationInfo.soundName = ""
         subscription.notificationInfo = notificationInfo
         
         return [subscription]

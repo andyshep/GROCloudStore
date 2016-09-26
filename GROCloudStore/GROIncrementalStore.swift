@@ -136,7 +136,7 @@ public class GROIncrementalStore: NSIncrementalStore {
     
     public override func newValuesForObject(with objectID: NSManagedObjectID, with context: NSManagedObjectContext) throws -> NSIncrementalStoreNode {
         guard let name = objectID.entity.name else { fatalError("missing entity name") }
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: name)
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: name)
         fetchRequest.resultType = .dictionaryResultType
         fetchRequest.fetchLimit = 1
         fetchRequest.includesSubentities = false

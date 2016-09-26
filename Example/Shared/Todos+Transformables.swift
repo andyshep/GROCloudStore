@@ -19,12 +19,12 @@ extension Todo: ManagedObjectTransformable {
         guard let created = object.value(forKeyPath: "created") as? Date else { return }
         self.created = created
         
-//        guard let data = object.value(forKeyPath: "encodedSystemFields") as? Data else { fatalError() }
-//        self.encodedSystemFields = data
+        guard let data = object.value(forKeyPath: "encodedSystemFields") as? Data else { fatalError() }
+        self.encodedSystemFields = data
     }
     
     class var entityName: String {
-        return "GROPlant"
+        return "Todo"
     }
 }
 

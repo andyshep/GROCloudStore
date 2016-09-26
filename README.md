@@ -7,7 +7,7 @@
 ![Platform](https://img.shields.io/cocoapods/p/GROCloudStore.svg)
 [![license MIT](https://img.shields.io/cocoapods/l/GROCloudStore.svg)](http://opensource.org/licenses/MIT)
 
-GROCloudStore provides an `NSIncrementalStore` subclass that is backed by CloudKit, allowing data to be loaded from the cloud into your Core Data model. GROCloudStore works by augmenting your existing Core Data model with attributes so that records and entities can be tracked together. When saving to Core Data, `CKRecord` objects are creates from managed objects and saved to CloudKit.****
+GROCloudStore provides an `NSIncrementalStore` subclass that is backed by CloudKit, allowing data to be loaded from the cloud into your Core Data model. GROCloudStore works by augmenting your existing Core Data model with attributes so that records and entities can be tracked together. When saving to Core Data, `CKRecord` objects are created from managed objects and then saved to CloudKit.
 
 GROCloudStore only supports the private CloudKit database. This is because GROCloudStore uses custom record zones which are not supported in the public database.
 
@@ -18,7 +18,7 @@ GROCloudStore only supports the private CloudKit database. This is because GROCl
 
 ## Installation
 
-GROCloudStore is compatible with both Carthage and CocoaPods. You can also install it manually.
+GROCloudStore is compatible with both Carthage and CocoaPods.
 
 ### Carthage
 
@@ -73,16 +73,16 @@ Below these configuration points are discussed in more detail.
 
 2. Provide an instance of this configuration object when creating your Core Data stack. This should be done along with specifying `GROIncrementalStore.storeType` as the Persistent Store type.
 
-		let modelURL = NSBundle.mainBundle().URLForResource("Model", withExtension: "momd")!
-		let model = NSManagedObjectModel(contentsOfURL: modelURL)!
+		let modelURL = Bundle.main.url(forResource: "Todos", withExtension: "momd")!
+		let model = NSManagedObjectModel(contentsOf: modelURL)!
 		let coordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
 	
 		let options = [GROConfigurationKey: SampleConfiguration()]
 		let type = GROIncrementalStore.storeType
             
-		try! coordinator.addPersistentStoreWithType(type, configuration: nil, URL: nil, options: options)
+		try! coordinator.addPersistentStore(ofType: storeType, configurationName: nil, at: url, options: options)
 		
-		let managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+		let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
         
         // continue to use the managed object context               
@@ -92,23 +92,23 @@ Below these configuration points are discussed in more detail.
 
 		class MyModelObject: NSManagedObject {
 			@NSManaged var name: String?
-			@NSManaged var date: NSDate?
+			@NSManaged var date: Date?
     
-			@NSManaged var encodedSystemFields: NSData?
+			@NSManaged var encodedSystemFields: Data?
 		}
 
 4. Conform to the `ManagedObjectTransformable` and `CloudKitTransformable` protocols on your model objects. These protocols allow you to define how objects are translated between `CKRecords` and `NSManagedObjects`.
 	
 		extension MyModelObject: ManagedObjectTransformable {
     
-		    func transform(object object: NSManagedObject) {
-		        guard let name = object.valueForKeyPath("name") as? String else { return }
-		        self.name = name
+		    func transform(using object: NSManagedObject) {
+		        guard let item = object.value(forKeyPath: "item") as? String else { return }
+		        self.item = item
 		        
-		        guard let date = object.valueForKeyPath("date") as? NSDate else { return }
-		        self.date = date
+		        guard let created = object.value(forKeyPath: "created") as? Date else { return }
+		        self.created = created
 		        
-		        guard let data = object.valueForKeyPath("encodedSystemFields") as? NSData else { fatalError() }
+		        guard let data = object.value(forKeyPath: "encodedSystemFields") as? Data else { fatalError() }
 		        self.encodedSystemFields = data
 		    }
 		}

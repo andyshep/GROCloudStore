@@ -78,7 +78,7 @@ extension GROIncrementalStore {
                 let predicate = NSPredicate(format: "%K = %@", Attribute.ResourceIdentifier, resourceId)
                 guard let backingObj = results.filtered(using: predicate).first as? NSManagedObject else { fatalError() }
                 
-                transformableObj.transform(object: backingObj)
+                transformableObj.transform(using: backingObj)
                 
                 return managedObject
             })

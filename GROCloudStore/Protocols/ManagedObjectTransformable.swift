@@ -9,5 +9,5 @@
 import CoreData
 
 @objc public protocol ManagedObjectTransformable {
-    func transform(object _: NSManagedObject) -> Void
+    func transform(using object: NSManagedObject) -> Void
 }

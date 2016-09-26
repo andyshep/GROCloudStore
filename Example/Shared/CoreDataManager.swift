@@ -25,7 +25,7 @@ class CoreDataManager {
             return nil
         }
         
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        let managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
         managedObjectContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return managedObjectContext
@@ -77,7 +77,7 @@ class CoreDataManager {
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         let url = URL.applicationDocumentsDirectory().appendingPathComponent("Todos.sqlite")
         
-        let options = [GROConfigurationKey: TodoCloudConfiguration()];
+        let options = [GROConfigurationKey: TodoCloudConfiguration()]
         
         do {
            try coordinator.addPersistentStore(ofType: storeType, configurationName: nil, at: url, options: options)

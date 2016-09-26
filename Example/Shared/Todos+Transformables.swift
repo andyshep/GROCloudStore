@@ -12,7 +12,7 @@ import GROCloudStore
 
 extension Todo: ManagedObjectTransformable {
     
-    func transform(object: NSManagedObject) {
+    func transform(using object: NSManagedObject) {
         guard let item = object.value(forKeyPath: "item") as? String else { return }
         self.item = item
         

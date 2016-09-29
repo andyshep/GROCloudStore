@@ -39,7 +39,7 @@ class InjestDeletedRecordsOperation: Operation {
             
             for record in deletedRecordIDs {
                 let identifier = record.recordName
-                guard let entity = self.delegate?.entity(for: identifier, in: self.context) else {
+                guard let entity = self.delegate?.entity(for: identifier, in: self.backingContext) else {
                     // if the record was never sync'd to the device
                     // it won't be available for deletion.
                     continue

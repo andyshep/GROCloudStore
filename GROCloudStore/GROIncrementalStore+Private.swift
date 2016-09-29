@@ -91,8 +91,8 @@ extension GROIncrementalStore {
     
     private func fetchRemoteObjects(_ request: NSFetchRequest<NSManagedObject>, context: NSManagedObjectContext) {
         
-//        let verifyRecordZone = VerifyRecordZoneOperation(context: backingContext, dataSource: dataSource)
-//        let verifySubscriptions = VerifySubscriptionOperation(context: backingContext, dataSource: dataSource, configuration: configuration)
+        let verifyRecordZone = VerifyRecordZoneOperation(context: backingContext, dataSource: dataSource)
+        let verifySubscriptions = VerifySubscriptionOperation(context: backingContext, dataSource: dataSource, configuration: configuration)
         
         // FIXME: do you need both database and zone changes operation?
         // what is the difference?
@@ -111,8 +111,8 @@ extension GROIncrementalStore {
         injestDeletedRecords.addDependency(recordZoneChanges)
         injestModifiedRecords.addDependency(injestDeletedRecords)
         
-//        verifySubscriptions.addDependency(verifyRecordZone)
-//        recordZoneChanges.addDependency(verifySubscriptions)
+        verifySubscriptions.addDependency(verifyRecordZone)
+        recordZoneChanges.addDependency(verifySubscriptions)
         
         [injestDeletedRecords, injestModifiedRecords].onFinish {
             self.backingContext.performAndWait({
@@ -120,15 +120,15 @@ extension GROIncrementalStore {
             })
         }
         
-//        operationQueue.addOperation(verifyRecordZone)
-//        operationQueue.addOperation(verifySubscriptions)
+        operationQueue.addOperation(verifyRecordZone)
+        operationQueue.addOperation(verifySubscriptions)
         operationQueue.addOperation(databaseChanges)
         operationQueue.addOperation(recordZoneChanges)
         operationQueue.addOperation(injestDeletedRecords)
         operationQueue.addOperation(injestModifiedRecords)
     }
     
-    private func saveRemoteObjects(_ request: NSPersistentStoreRequest, context: NSManagedObjectContext) {
+    private func saveRemoteObjects(for request: NSPersistentStoreRequest, in context: NSManagedObjectContext) {
         guard let saveRequest = request as? NSSaveChangesRequest else {
 //            throw GROIncrementalStoreError.wrongRequestType
             fatalError()

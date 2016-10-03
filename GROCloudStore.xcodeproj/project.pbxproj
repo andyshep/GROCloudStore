@@ -15,7 +15,6 @@
 		F73B5E531CF4B2BC00B92E55 /* NSSaveChangesRequest+Records.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E4E1CF4B2BC00B92E55 /* NSSaveChangesRequest+Records.swift */; };
 		F73B5E541CF4B2BC00B92E55 /* NSURL+Directories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E4F1CF4B2BC00B92E55 /* NSURL+Directories.swift */; };
 		F73B5E5C1CF4B31400B92E55 /* CloudKitTransformable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E551CF4B31400B92E55 /* CloudKitTransformable.swift */; };
-		F73B5E5D1CF4B31400B92E55 /* CloudRecordType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E561CF4B31400B92E55 /* CloudRecordType.swift */; };
 		F73B5E5E1CF4B31400B92E55 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E571CF4B31400B92E55 /* Configuration.swift */; };
 		F73B5E5F1CF4B31400B92E55 /* CloudDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E581CF4B31400B92E55 /* CloudDataSource.swift */; };
 		F73B5E601CF4B31400B92E55 /* ManagedObjectIDProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73B5E591CF4B31400B92E55 /* ManagedObjectIDProvider.swift */; };
@@ -65,7 +64,6 @@
 		F73B5E4E1CF4B2BC00B92E55 /* NSSaveChangesRequest+Records.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSSaveChangesRequest+Records.swift"; path = "Extensions/NSSaveChangesRequest+Records.swift"; sourceTree = "<group>"; };
 		F73B5E4F1CF4B2BC00B92E55 /* NSURL+Directories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSURL+Directories.swift"; path = "Extensions/NSURL+Directories.swift"; sourceTree = "<group>"; };
 		F73B5E551CF4B31400B92E55 /* CloudKitTransformable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudKitTransformable.swift; path = Protocols/CloudKitTransformable.swift; sourceTree = "<group>"; };
-		F73B5E561CF4B31400B92E55 /* CloudRecordType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudRecordType.swift; path = Protocols/CloudRecordType.swift; sourceTree = "<group>"; };
 		F73B5E571CF4B31400B92E55 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Configuration.swift; path = Protocols/Configuration.swift; sourceTree = "<group>"; };
 		F73B5E581CF4B31400B92E55 /* CloudDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CloudDataSource.swift; path = Protocols/CloudDataSource.swift; sourceTree = "<group>"; };
 		F73B5E591CF4B31400B92E55 /* ManagedObjectIDProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManagedObjectIDProvider.swift; path = Protocols/ManagedObjectIDProvider.swift; sourceTree = "<group>"; };
@@ -184,7 +182,6 @@
 			isa = PBXGroup;
 			children = (
 				F73B5E551CF4B31400B92E55 /* CloudKitTransformable.swift */,
-				F73B5E561CF4B31400B92E55 /* CloudRecordType.swift */,
 				F73B5E571CF4B31400B92E55 /* Configuration.swift */,
 				F73B5E581CF4B31400B92E55 /* CloudDataSource.swift */,
 				F73B5E591CF4B31400B92E55 /* ManagedObjectIDProvider.swift */,
@@ -340,7 +337,6 @@
 				F73B5E701CF4B33800B92E55 /* InjestModifiedRecordsOperation.swift in Sources */,
 				F73B5E6E1CF4B33800B92E55 /* ZoneChangesOperation.swift in Sources */,
 				F73B5E6F1CF4B33800B92E55 /* InjestDeletedRecordsOperation.swift in Sources */,
-				F73B5E5D1CF4B31400B92E55 /* CloudRecordType.swift in Sources */,
 				F73B5E5C1CF4B31400B92E55 /* CloudKitTransformable.swift in Sources */,
 				F736B5B21D1B611F00CE858C /* DatabaseChangesOperation.swift in Sources */,
 				F73B5E501CF4B2BC00B92E55 /* Array+NSOperation.swift in Sources */,
@@ -426,7 +422,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				SUPPORTED_PLATFORMS = "macosx iphonesimulator iphone";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VALID_ARCHS = "i386 x86_64 arm7s arm7 arm64";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -471,7 +467,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SUPPORTED_PLATFORMS = "macosx iphonesimulator iphone";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				VALID_ARCHS = "i386 x86_64 arm7s arm7 arm64";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

@@ -33,7 +33,6 @@
 		F7AFF1BC1D1B8FE900E70EAE /* GROCloudStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F73B3E2D1CF60E8000393F1A /* GROCloudStore.framework */; };
 		F7AFF1BE1D1B8FF300E70EAE /* GROCloudStore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F73B3E2D1CF60E8000393F1A /* GROCloudStore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F7B00F2C1D1B90ED00907B39 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F881A41CF62D220048484D /* CloudKit.framework */; };
-		F7B00F2F1D1B90F600907B39 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7B00F2E1D1B90F600907B39 /* CoreData.framework */; };
 		F7E685331CF40A3E00EEFD86 /* Todos+Transformables.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E685321CF40A3E00EEFD86 /* Todos+Transformables.swift */; };
 		F7E685341CF40A3E00EEFD86 /* Todos+Transformables.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E685321CF40A3E00EEFD86 /* Todos+Transformables.swift */; };
 		F7F84F5F1CF7864E0096AD06 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F84F5E1CF7864E0096AD06 /* WindowController.swift */; };
@@ -55,14 +54,7 @@
 			remoteGlobalIDString = F78D92E71C934AAD009EA958;
 			remoteInfo = GROCloudStoreTests;
 		};
-		F7AFF1BA1D1B8FE500E70EAE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F73B3E271CF60E8000393F1A /* GROCloudStore.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F78D92DC1C934AAD009EA958;
-			remoteInfo = GROCloudStore;
-		};
-		F7AFF1BF1D1B8FF300E70EAE /* PBXContainerItemProxy */ = {
+		F78698F41D9D91CD00BDF7AB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F73B3E271CF60E8000393F1A /* GROCloudStore.xcodeproj */;
 			proxyType = 1;
@@ -120,7 +112,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7B00F2F1D1B90F600907B39 /* CoreData.framework in Frameworks */,
 				F7B00F2C1D1B90ED00907B39 /* CloudKit.framework in Frameworks */,
 				F7AFF1BC1D1B8FE900E70EAE /* GROCloudStore.framework in Frameworks */,
 			);
@@ -236,8 +227,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				F7AFF1BB1D1B8FE500E70EAE /* PBXTargetDependency */,
-				F7AFF1C01D1B8FF300E70EAE /* PBXTargetDependency */,
 			);
 			name = "Todos-iOS";
 			productName = Todos;
@@ -255,6 +244,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F78698F51D9D91CD00BDF7AB /* PBXTargetDependency */,
 			);
 			name = "Todos-OSX";
 			productName = "Todos-OSX";
@@ -404,15 +394,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		F7AFF1BB1D1B8FE500E70EAE /* PBXTargetDependency */ = {
+		F78698F51D9D91CD00BDF7AB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = GROCloudStore;
-			targetProxy = F7AFF1BA1D1B8FE500E70EAE /* PBXContainerItemProxy */;
-		};
-		F7AFF1C01D1B8FF300E70EAE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = GROCloudStore;
-			targetProxy = F7AFF1BF1D1B8FF300E70EAE /* PBXContainerItemProxy */;
+			targetProxy = F78698F41D9D91CD00BDF7AB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

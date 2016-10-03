@@ -82,7 +82,15 @@ public class GROIncrementalStore: NSIncrementalStore {
         
         let storeType = self.useInMemoryStores ? NSInMemoryStoreType : NSSQLiteStoreType
         let path = identifier + ".sqlite"
+        
+        #if os(iOS)
         let url = URL.applicationDocumentsDirectory.appendingPathComponent(path)
+        #endif
+        
+        #if os(macOS)
+        let url = URL.applicationSupportDirectory.appendingPathComponent(path)
+        #endif
+        
         let options = [NSMigratePersistentStoresAutomaticallyOption: NSNumber(value: true),
             NSInferMappingModelAutomaticallyOption: NSNumber(value: true)];
         

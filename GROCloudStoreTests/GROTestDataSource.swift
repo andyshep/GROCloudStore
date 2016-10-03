@@ -27,19 +27,19 @@ class GROTestDataSource: CloudDataSource {
     
     // MARK: - Records
     
-    func save(withRecord record: CKRecord, completion: RecordCompletion) {
+    func save(withRecord record: CKRecord, completion: @escaping RecordCompletion) {
         //
     }
     
-    func record(withRecordID recordID: CKRecordID, completion: RecordCompletion) {
+    func record(withRecordID recordID: CKRecordID, completion: @escaping  RecordCompletion) {
         //
     }
     
-    func records(ofType type: String, completion: RecordsCompletion) {
+    func records(ofType type: String, completion: @escaping  RecordsCompletion) {
         //
     }
     
-    func records(ofType type: String, fetched: RecordFetched, completion: QueryCompletion?) {
+    func records(ofType type: String, fetched: @escaping RecordFetched, completion: QueryCompletion?) {
         //
     }
     
@@ -47,35 +47,35 @@ class GROTestDataSource: CloudDataSource {
         //
     }
     
-    func changedRecords(inZoneIds zoneIds: [CKRecordZoneID], tokens: [CKRecordZoneID : CKServerChangeToken]?, completion: ChangedRecordsHandler) {
+    func changedRecords(inZoneIds zoneIds: [CKRecordZoneID], tokens: [CKRecordZoneID : CKServerChangeToken]?, completion: @escaping ChangedRecordsHandler) {
         //
     }
     
-    func delete(withRecordID recordID: CKRecordID, completion: DeleteRecordCompletion) {
+    func delete(withRecordID recordID: CKRecordID, completion: @escaping DeleteRecordCompletion) {
         //
     }
     
     // MARK: - Subscriptions
     
-    func verifySubscriptions(completion: FetchSubscriptionsCompletion) {
+    func verifySubscriptions(completion: @escaping FetchSubscriptionsCompletion) {
         //
     }
     
-    func createSubscriptions(subscriptions: [CKSubscription], completion: CreateSubscriptionsCompletion) {
+    func createSubscriptions(subscriptions: [CKSubscription], completion: @escaping CreateSubscriptionsCompletion) {
         //
     }
     
     // MARK: - Record Zones
     
-    func fetchRecordsZones(completion: FetchRecordZonesCompletion) {
+    func fetchRecordsZones(completion: @escaping FetchRecordZonesCompletion) {
         //
     }
     
-    func createRecordZone(name: String, completion: CreateRecordZoneCompletion) {
+    func createRecordZone(name: String, completion: @escaping CreateRecordZoneCompletion) {
         //
     }
     
-    func changes(since token: CKServerChangeToken?, completion: DatabaseChangesHandler) {
+    func changes(since token: CKServerChangeToken?, completion: @escaping DatabaseChangesHandler) {
         //
     }
     

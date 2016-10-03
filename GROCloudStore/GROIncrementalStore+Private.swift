@@ -37,7 +37,7 @@ extension GROIncrementalStore {
     
     internal func executeSaveChangesRequest(_ request: NSPersistentStoreRequest, with context: NSManagedObjectContext!) throws -> [NSManagedObject] {
         
-        self.saveRemoteObjects(request, context: context)
+        self.saveRemoteObjects(for: request, in: context)
         
         return []
     }
@@ -169,7 +169,7 @@ extension GROIncrementalStore {
         operationQueue.addOperation(accountStatus)
     }
     
-    private func withValidCloudKitAccount(_ block: @escaping () -> ()) {
+    private func withValidCloudKitAccount(execute block: @escaping () -> ()) {
         checkCloudKitAccountStatus { (status) in
             if status == CKAccountStatus.available {
                 block()

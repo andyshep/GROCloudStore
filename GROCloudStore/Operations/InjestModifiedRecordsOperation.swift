@@ -59,35 +59,35 @@ class InjestModifiedRecordsOperation: Operation {
         
         let semaphore = DispatchSemaphore(value: 0)
         
-        processRecordsOnContext(context, lock: semaphore)
+        processRecords(on: context, using: semaphore)
         
         semaphore.wait()
         
-        processRecordsOnContext(backingContext)
+        processRecords(on: backingContext)
     }
     
-    private func processRecordsOnContext(_ context: NSManagedObjectContext, lock: DispatchSemaphore? = nil) {
+    private func processRecords(on context: NSManagedObjectContext, using lock: DispatchSemaphore? = nil) {
         context.performAndWait {
             for record in self.primaryRecords {
-                self.updateRecord(record, context: context)
+                self.update(record: record, in: context)
             }
             
             for record in self.secondaryRecords {
-                self.updateRecord(record, context: context)
+                self.update(record: record, in: context)
             }
                         
             lock?.signal()
         }
     }
     
-    private func updateRecord(_ record: CKRecord, context: NSManagedObjectContext) {
+    fileprivate func update(record: CKRecord, in context: NSManagedObjectContext) {
         let identifier = record.recordID.recordName
         let entityName = record.entityName
         
         guard let entity = NSEntityDescription.entity(forEntityName: entityName, in: context) else { fatalError("missing entity") }
         
         do {
-            let objectId = try self.objectIDMatching(identifier, entity, context)
+            let objectId = try self.objectID(matching: identifier, description: entity, in: context)
             let object = try context.existingOrNewObjectForId(objectId, entityName: entityName)
             
             if objectId == nil {
@@ -107,7 +107,7 @@ class InjestModifiedRecordsOperation: Operation {
                 
                 let identifier = reference.recordID.recordName
                 guard let entity = self.delegate?.entity(for: identifier, in: context) else { fatalError("missing entity") }
-                guard let referenceObjectID = try self.objectIDMatching(identifier, entity, context) else { fatalError("missing object id") }
+                guard let referenceObjectID = try self.objectID(matching: identifier, description: entity, in: context) else { fatalError("missing object id") }
                 let referenceObject = try context.existingObject(with: referenceObjectID)
                 
                 guard let relationship = object.entity.relationshipsByName[key] else { fatalError("relationship not found") }
@@ -125,7 +125,7 @@ class InjestModifiedRecordsOperation: Operation {
         }
     }
     
-    private func objectIDMatching(_ identifier: String, _ entity: NSEntityDescription, _ context: NSManagedObjectContext) throws -> NSManagedObjectID? {
+    fileprivate func objectID(matching identifier: String, description entity: NSEntityDescription, in context: NSManagedObjectContext) throws -> NSManagedObjectID? {
         
         if context == self.backingContext {
             let objectId = try self.delegate?.backingObjectID(for: entity, with: identifier as NSString?)

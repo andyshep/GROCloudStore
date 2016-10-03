@@ -64,8 +64,7 @@ class PushChangesOperation: AsyncOperation {
                         self.dataSource.createRecordZone(name: zoneName, completion: createZoneCompletion)
                         
                         return completion(false)
-                    }
-                    else {
+                    } else {
                         attemptCloudKitRecoveryFrom(error: error! as NSError)
                     }
                 } else {

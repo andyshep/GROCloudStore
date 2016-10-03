@@ -9,11 +9,11 @@
 import CoreData
 import CloudKit
 
-class VerifySubscriptionOperation: AsyncOperation {
+final class VerifySubscriptionOperation: AsyncOperation {
     
-    private let context: NSManagedObjectContext
-    private let dataSource: CloudDataSource
-    private let configuration: Configuration
+    fileprivate let context: NSManagedObjectContext
+    fileprivate let dataSource: CloudDataSource
+    fileprivate let configuration: Configuration
     
     init(context: NSManagedObjectContext, dataSource: CloudDataSource, configuration: Configuration) {
         self.context = context
@@ -32,28 +32,26 @@ class VerifySubscriptionOperation: AsyncOperation {
                 if let _ = results.first {
                     shouldCreateSubscription = false
                 }
-            }
-            catch {
+            } catch {
                 //
             }
         }
         
         if shouldCreateSubscription {
-            dataSource.verifySubscriptions(completion: didFetchSubscriptions)
-        }
-        else {
+            dataSource.verifySubscriptions(completion: didFetch)
+        } else {
             print("subscription verified, skipping creation")
             finish()
         }
     }
     
-    private func createSubscriptions() {
+    fileprivate func createSubscriptions() {
         let configuration = dataSource.configuration
         let subscriptions = configuration.Subscriptions.Default
-        dataSource.createSubscriptions(subscriptions: subscriptions, completion: didCreateSubscription)
+        dataSource.createSubscriptions(subscriptions: subscriptions, completion: didCreate)
     }
     
-    private func didFetchSubscriptions(_ subscriptions: [CKSubscription]?, error: Error?) {
+    fileprivate func didFetch(subscriptions: [CKSubscription]?, error: Error?) {
         
         guard error == nil else {
             attemptCloudKitRecoveryFrom(error: error! as NSError); return
@@ -70,14 +68,13 @@ class VerifySubscriptionOperation: AsyncOperation {
         }
         
         if foundSubscription {
-            self.saveSubscription(defaultSubscription, context: self.context)
-        }
-        else {
+            self.save(subscription: defaultSubscription, in: context)
+        } else {
             createSubscriptions()
         }
     }
     
-    private func didCreateSubscription(_ subscription: CKSubscription?, error: Error?) {
+    fileprivate func didCreate(subscription: CKSubscription?, error: Error?) {
         if let error = error {
             print("error: \(error)")
         }
@@ -89,7 +86,7 @@ class VerifySubscriptionOperation: AsyncOperation {
         finish()
     }
     
-    private func saveSubscription(_ subscription: CKSubscription, context: NSManagedObjectContext) {
+    fileprivate func save(subscription: CKSubscription, in context: NSManagedObjectContext) {
         context.perform {
             guard let savedSubscription = GROSubscription.newObject(in: context) as? GROSubscription else { return }
             

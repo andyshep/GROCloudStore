@@ -11,10 +11,10 @@ import CloudKit
 
 typealias Zones = [CKRecordZoneID: CKRecordZone]
 
-class VerifyRecordZoneOperation: AsyncOperation {
+final class VerifyRecordZoneOperation: AsyncOperation {
     
-    private let context: NSManagedObjectContext
-    private let dataSource: CloudDataSource
+    fileprivate let context: NSManagedObjectContext
+    fileprivate let dataSource: CloudDataSource
     
     init(context: NSManagedObjectContext, dataSource: CloudDataSource) {
         self.context = context
@@ -32,22 +32,20 @@ class VerifyRecordZoneOperation: AsyncOperation {
                 if let _ = results.first {
                     shouldCreateZone = false
                 }
-            }
-            catch {
+            } catch {
                 //
             }
         }
         
         if shouldCreateZone {
-            dataSource.fetchRecordsZones(completion: didFetchRecordZones)
-        }
-        else {
+            dataSource.fetchRecordsZones(completion: didFetch)
+        } else {
             print("zone verified, skipping creation")
             finish()
         }
     }
     
-    private func didFetchRecordZones(_ zones: Zones?, error: Error?) {
+    fileprivate func didFetch(recordZones zones: Zones?, error: Error?) {
         guard error == nil else { attemptCloudKitRecoveryFrom(error: error!); return finish() }
         guard let zones = zones else { return finish() }
         
@@ -65,21 +63,21 @@ class VerifyRecordZoneOperation: AsyncOperation {
         }
         
         if found {
-            saveRecordZoneID(defaultZoneID, context: self.context)
+            save(recordZoneID: defaultZoneID, in: context)
             finish()
         }
         else {
-            self.dataSource.createRecordZone(name: zoneName, completion: didCreateRecordZone)
+            self.dataSource.createRecordZone(name: zoneName, completion: didCreate)
         }
         
         finish()
     }
     
-    private func didCreateRecordZone(_ recordZone: CKRecordZone?, error: Error?) {
+    fileprivate func didCreate(recordZone: CKRecordZone?, error: Error?) {
         finish()
     }
     
-    private func saveRecordZoneID(_ recordZoneID: CKRecordZoneID, context: NSManagedObjectContext) {
+    private func save(recordZoneID: CKRecordZoneID, in context: NSManagedObjectContext) {
         context.perform { 
             guard let savedZone = GRORecordZone.newObject(in: context) as? GRORecordZone else { return }
             

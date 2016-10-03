@@ -9,7 +9,7 @@
 import CoreData
 import CloudKit
 
-class InjestDeletedRecordsOperation: Operation {
+final class InjestDeletedRecordsOperation: Operation {
     unowned var operation: RecordChangeOperation
     weak var delegate: ManagedObjectIDProvider?
     
@@ -49,8 +49,7 @@ class InjestDeletedRecordsOperation: Operation {
                     guard let objectId = try self.delegate?.backingObjectID(for: entity, with: identifier as NSString?) else { return }
                     let obj = self.backingContext.object(with: objectId)
                     self.backingContext.delete(obj)
-                }
-                catch {
+                } catch {
                     print("could not find backing object for identifier: \(error)")
                 }
             }
@@ -69,8 +68,7 @@ class InjestDeletedRecordsOperation: Operation {
                     guard let objectId = try self.delegate?.objectID(for: entity, with: identifier as NSString?) else { return }
                     let obj = self.context.object(with: objectId)
                     self.context.delete(obj)
-                }
-                catch {
+                } catch {
                     print("could not find object for identifier: \(error)")
                 }
             }

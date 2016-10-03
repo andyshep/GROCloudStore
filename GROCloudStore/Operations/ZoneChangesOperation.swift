@@ -9,7 +9,7 @@
 import CoreData
 import CloudKit
 
-class ZoneChangesOperation: AsyncOperation {
+final class ZoneChangesOperation: AsyncOperation {
     let context: NSManagedObjectContext
     let backingContext: NSManagedObjectContext
     let request: NSPersistentStoreRequest
@@ -57,11 +57,11 @@ class ZoneChangesOperation: AsyncOperation {
     
     // MARK: - Private
     
-    private func recordDidChange(_ record: CKRecord) -> Void {
+    fileprivate func recordDidChange(_ record: CKRecord) -> Void {
         self.updatedRecords.append(record)
     }
     
-    private func recordIDWasDeleted(_ recordID: CKRecordID) -> Void {
+    fileprivate func recordIDWasDeleted(_ recordID: CKRecordID) -> Void {
         self.deletedRecordIDs.append(recordID)
     }
 }

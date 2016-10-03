@@ -136,6 +136,7 @@ public class GRODefaultDataSource: CloudDataSource {
     
     public func fetchRecordsZones(completion: @escaping FetchRecordZonesCompletion) -> Void {
         // per wwdc, CKDatabaseSubscription and CKFetchDatabaseChangesOperation should replace
+        // only supporting one record zone right now.
         
         let operation = CKFetchRecordZonesOperation.fetchAllRecordZonesOperation()
         operation.qualityOfService = QualityOfService.userInitiated
@@ -161,7 +162,7 @@ public class GRODefaultDataSource: CloudDataSource {
     }
 }
 
-extension Dictionary where Key: CKRecordZoneID, Value: CKServerChangeToken {
+fileprivate extension Dictionary where Key: CKRecordZoneID, Value: CKServerChangeToken {
     func optionsByRecordZoneID() -> [CKRecordZoneID: CKFetchRecordZoneChangesOptions]? {
         var optionsByRecordZoneID: [CKRecordZoneID: CKFetchRecordZoneChangesOptions] = [:]
         
@@ -176,7 +177,7 @@ extension Dictionary where Key: CKRecordZoneID, Value: CKServerChangeToken {
     }
 }
 
-extension Array where Element : Hashable {
+fileprivate extension Array where Element : Hashable {
     var unique: [Element] {
         return Array(Set(self))
     }

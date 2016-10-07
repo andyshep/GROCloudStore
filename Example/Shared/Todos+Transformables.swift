@@ -50,7 +50,7 @@ extension Todo: CloudKitTransformable {
         return record
     }
     
-    func references(_ record: CKRecord) -> [CKReference: String] {
+    func references(for record: CKRecord) -> [CKReference: String] {
         return [:]
     }
     
@@ -62,7 +62,7 @@ extension Todo: CloudKitTransformable {
         return (self.item != "")
     }
     
-    func secondaries(_ record: CKRecord) -> [String : [String : AnyObject]] {
+    func secondaries(for record: CKRecord) -> [String : [String : AnyObject]] {
         return [:]
     }
 }

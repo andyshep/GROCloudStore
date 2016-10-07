@@ -9,7 +9,7 @@
 import CoreData
 import CloudKit
 
-final class ZoneChangesOperation: AsyncOperation {
+final internal class ZoneChangesOperation: AsyncOperation {
     let context: NSManagedObjectContext
     let backingContext: NSManagedObjectContext
     let request: NSPersistentStoreRequest

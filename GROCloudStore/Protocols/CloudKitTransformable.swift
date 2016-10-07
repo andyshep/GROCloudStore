@@ -9,23 +9,27 @@
 import CloudKit
 import CoreData
 
+/**
+ A protocol the defines how an object is to be transformed for CloudKit.
+ */
 @objc public protocol CloudKitTransformable {
     
-    var encodedSystemFields: Data? { get set }
-    
+    /// The type of `CKRecord` the object should be transformed into.
     var recordType: String { get }
-    var valid: Bool { get }
     
     func transform(record _: CKRecord) -> Void
     func transform() -> CKRecord
     
-    func references(_ record: CKRecord) -> [CKReference: String]
-    func secondaries(_ record: CKRecord) -> [String: [String: AnyObject]]
+    func references(for record: CKRecord) -> [CKReference: String]
+    func secondaries(for record: CKRecord) -> [String: [String: AnyObject]]
+    
+    var encodedSystemFields: Data? { get set }
+    var valid: Bool { get }
 }
 
 extension CloudKitTransformable where Self: NSManagedObject {
     
-    var encodedSystemFields: Data? {
+    private var encodedSystemFields: Data? {
         
         // http://stackoverflow.com/a/33125474
         
@@ -78,6 +82,7 @@ extension CloudKitTransformable where Self: NSManagedObject {
                 fatalError()
             }
         }
+        
         set {
             let data = NSMutableData()
             let coder = NSKeyedArchiver(forWritingWith: data)
@@ -91,7 +96,7 @@ extension CloudKitTransformable where Self: NSManagedObject {
     }
 }
 
-private func encodeSystemFieldsWithRecord(record: CKRecord) -> NSData {
+fileprivate func encodeSystemFieldsWithRecord(record: CKRecord) -> NSData {
     let data = NSMutableData()
     let coder = NSKeyedArchiver(forWritingWith: data)
     coder.requiresSecureCoding = true
@@ -102,7 +107,7 @@ private func encodeSystemFieldsWithRecord(record: CKRecord) -> NSData {
     return NSData(data: data as Data)
 }
 
-private func configurationFromPersistentStore(coordinator: NSPersistentStoreCoordinator?) -> Configuration? {
+fileprivate func configurationFromPersistentStore(coordinator: NSPersistentStoreCoordinator?) -> Configuration? {
     guard let _ = coordinator else { return nil }
     
     for store in coordinator!.persistentStores {

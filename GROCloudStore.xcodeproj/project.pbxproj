@@ -40,6 +40,7 @@
 		F7AFF19E1D1B8E4500E70EAE /* GROChangeToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AFF19D1D1B8E4500E70EAE /* GROChangeToken.swift */; };
 		F7BE38731C98810A00D1CE87 /* GROTestDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BE38721C98810A00D1CE87 /* GROTestDataSource.swift */; };
 		F7BE38761C9881D200D1CE87 /* GRODefaultDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7BE38751C9881D200D1CE87 /* GRODefaultDataSource.swift */; };
+		F7C108EF1DA81963001CABB3 /* NSManagedObject+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C108EE1DA81963001CABB3 /* NSManagedObject+Helpers.swift */; };
 		F7D099A21C98AF210023C220 /* CoreData+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D099A11C98AF210023C220 /* CoreData+Extensions.swift */; };
 		F7D970F71D133EDF009133B2 /* AccountStatusOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D970F61D133EDF009133B2 /* AccountStatusOperation.swift */; };
 		F7D970F91D134445009133B2 /* CKAccountStatus+Available.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D970F81D134445009133B2 /* CKAccountStatus+Available.swift */; };
@@ -92,6 +93,7 @@
 		F7AFF19D1D1B8E4500E70EAE /* GROChangeToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GROChangeToken.swift; sourceTree = "<group>"; };
 		F7BE38721C98810A00D1CE87 /* GROTestDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GROTestDataSource.swift; sourceTree = "<group>"; };
 		F7BE38751C9881D200D1CE87 /* GRODefaultDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GRODefaultDataSource.swift; sourceTree = "<group>"; };
+		F7C108EE1DA81963001CABB3 /* NSManagedObject+Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "NSManagedObject+Helpers.swift"; path = "Extensions/NSManagedObject+Helpers.swift"; sourceTree = "<group>"; };
 		F7D099A11C98AF210023C220 /* CoreData+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreData+Extensions.swift"; sourceTree = "<group>"; };
 		F7D970F61D133EDF009133B2 /* AccountStatusOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountStatusOperation.swift; path = Operations/AccountStatusOperation.swift; sourceTree = "<group>"; };
 		F7D970F81D134445009133B2 /* CKAccountStatus+Available.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CKAccountStatus+Available.swift"; path = "Extensions/CKAccountStatus+Available.swift"; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				F73B5E4E1CF4B2BC00B92E55 /* NSSaveChangesRequest+Records.swift */,
 				F73B5E4F1CF4B2BC00B92E55 /* NSURL+Directories.swift */,
 				F7D970F81D134445009133B2 /* CKAccountStatus+Available.swift */,
+				F7C108EE1DA81963001CABB3 /* NSManagedObject+Helpers.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				F73B5E501CF4B2BC00B92E55 /* Array+NSOperation.swift in Sources */,
 				F73B5E731CF4B33800B92E55 /* VerifyRecordZoneOperation.swift in Sources */,
 				F73B5E601CF4B31400B92E55 /* ManagedObjectIDProvider.swift in Sources */,
+				F7C108EF1DA81963001CABB3 /* NSManagedObject+Helpers.swift in Sources */,
 				F7D970F71D133EDF009133B2 /* AccountStatusOperation.swift in Sources */,
 				F73B5E711CF4B33800B92E55 /* PushChangesOperation.swift in Sources */,
 				F73B5E521CF4B2BC00B92E55 /* NSManagedObjectContext+Helpers.swift in Sources */,

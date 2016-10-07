@@ -10,12 +10,12 @@ import CoreData
 import CloudKit
 
 @objc(GROChangeToken)
-class GROChangeToken: NSManagedObject {
+internal class GROChangeToken: NSManagedObject {
     @NSManaged var content: Data
     @NSManaged var zoneName: String?
 }
 
-func changeTokens(forZoneIds zoneIds: [CKRecordZoneID], in context: NSManagedObjectContext) -> [CKRecordZoneID: CKServerChangeToken]? {
+internal func changeTokens(forZoneIds zoneIds: [CKRecordZoneID], in context: NSManagedObjectContext) -> [CKRecordZoneID: CKServerChangeToken]? {
     let request = NSFetchRequest<GROChangeToken>(entityName: GROChangeToken.entityName)
     do {
         let zoneNames = zoneIds.map { return $0.zoneName }
@@ -34,13 +34,12 @@ func changeTokens(forZoneIds zoneIds: [CKRecordZoneID], in context: NSManagedObj
         }
         
         return tokens.count > 0 ? tokens : nil
-    }
-    catch {
+    } catch {
         fatalError("error fetching change tokens: \(error)")
     }
 }
 
-func changeToken(forRecordZoneId zoneId: CKRecordZoneID, in context: NSManagedObjectContext) -> GROChangeToken {
+internal func changeToken(forRecordZoneId zoneId: CKRecordZoneID, in context: NSManagedObjectContext) -> GROChangeToken {
     if let tokens = existingChangeTokens(in: context) {
         let matches = tokens.filter { return $0.zoneName == zoneId.zoneName }
         
@@ -52,7 +51,7 @@ func changeToken(forRecordZoneId zoneId: CKRecordZoneID, in context: NSManagedOb
     return newChangeToken(in: context)
 }
 
-func existingChangeTokens(in context: NSManagedObjectContext) -> [GROChangeToken]? {
+internal func existingChangeTokens(in context: NSManagedObjectContext) -> [GROChangeToken]? {
     let request = NSFetchRequest<GROChangeToken>(entityName: GROChangeToken.entityName)
     do {
         return try context.fetch(request)
@@ -64,7 +63,7 @@ func existingChangeTokens(in context: NSManagedObjectContext) -> [GROChangeToken
     return nil
 }
 
-func newChangeToken(in context: NSManagedObjectContext) -> GROChangeToken {
+internal func newChangeToken(in context: NSManagedObjectContext) -> GROChangeToken {
     let object = GROChangeToken.newObject(in: context)
     guard let token = object as? GROChangeToken else {
         fatalError()
@@ -73,7 +72,7 @@ func newChangeToken(in context: NSManagedObjectContext) -> GROChangeToken {
     return token
 }
 
-func save(token: CKServerChangeToken?, forRecordZoneId zoneId: CKRecordZoneID, in context: NSManagedObjectContext) {
+internal func save(token: CKServerChangeToken?, forRecordZoneId zoneId: CKRecordZoneID, in context: NSManagedObjectContext) {
     if let token = token {
         context.performAndWait {
             let savedChangeToken = changeToken(forRecordZoneId: zoneId, in: context)
@@ -84,7 +83,7 @@ func save(token: CKServerChangeToken?, forRecordZoneId zoneId: CKRecordZoneID, i
     }
 }
 
-func databaseChangeToken(in context: NSManagedObjectContext) -> CKServerChangeToken? {
+internal func databaseChangeToken(in context: NSManagedObjectContext) -> CKServerChangeToken? {
     let request = NSFetchRequest<GROChangeToken>(entityName: GROChangeToken.entityName)
     do {
         let results = try context.fetch(request)
@@ -97,19 +96,5 @@ func databaseChangeToken(in context: NSManagedObjectContext) -> CKServerChangeTo
     catch {
         print("error fetching change token: \(error)")
         return nil
-    }
-}
-
-func save(token: CKServerChangeToken?, in context: NSManagedObjectContext) {
-    // TODO: different type for this token?
-    // you're going to end up with several tokens that have an empty zone name
-    
-    if let token = token {
-        context.performAndWait {
-            let databaseChangeToken = GROChangeToken(context: context)
-            databaseChangeToken.content = NSKeyedArchiver.archivedData(withRootObject: token)
-            databaseChangeToken.zoneName = ""
-            context.saveOrLogError()
-        }
     }
 }

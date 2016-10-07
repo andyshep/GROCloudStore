@@ -9,7 +9,7 @@
 import Foundation
 import CloudKit
 
-public class GRODefaultDataSource: CloudDataSource {
+open class GRODefaultDataSource: CloudDataSource {
     
     public var configuration: Configuration
     

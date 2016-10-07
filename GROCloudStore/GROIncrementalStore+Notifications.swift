@@ -8,12 +8,12 @@
 
 import Foundation
 
-public extension NSNotification.Name {
+internal extension NSNotification.Name {
     static let GROCloudKitAccountChanged = NSNotification.Name.init("GROCloudKitAccountChanged")
     static let GROCloudKitNotAvailable = NSNotification.Name.init("GROCloudKitNotAvailable")
 }
 
-extension GROIncrementalStore {
+internal extension GROIncrementalStore {
     internal func contextDidChange(_ notification: Notification) {
         guard let context = notification.object as? NSManagedObjectContext else { return }
         let contextSaveInfo = (notification as NSNotification).userInfo ?? [:]

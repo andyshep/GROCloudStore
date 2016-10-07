@@ -9,7 +9,7 @@
 import Foundation
 import CloudKit
 
-protocol RecordChangeOperation: ContextOperation {
+internal protocol RecordChangeOperation: ContextOperation {
     var insertedRecords: [CKRecord] { get }
     var updatedRecords: [CKRecord] { get }
     var deletedRecordIDs: [CKRecordID] { get }

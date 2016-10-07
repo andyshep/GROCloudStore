@@ -9,7 +9,7 @@
 import CoreData
 import CloudKit
 
-class InjestModifiedRecordsOperation: Operation {
+final internal class InjestModifiedRecordsOperation: Operation {
     unowned var operation: RecordChangeOperation
     weak var delegate: ManagedObjectIDProvider?
     
@@ -102,7 +102,7 @@ class InjestModifiedRecordsOperation: Operation {
             guard let transformableObject = object as? CloudKitTransformable else { fatalError("wrong object type") }
             transformableObject.transform(record: record)
             
-            let references = transformableObject.references(record)
+            let references = transformableObject.references(for: record)
             for (reference, key) in references {
                 
                 let identifier = reference.recordID.recordName

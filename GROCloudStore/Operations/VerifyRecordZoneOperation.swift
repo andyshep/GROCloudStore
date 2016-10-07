@@ -11,7 +11,7 @@ import CloudKit
 
 typealias Zones = [CKRecordZoneID: CKRecordZone]
 
-final class VerifyRecordZoneOperation: AsyncOperation {
+final internal class VerifyRecordZoneOperation: AsyncOperation {
     
     fileprivate let context: NSManagedObjectContext
     fileprivate let dataSource: CloudDataSource

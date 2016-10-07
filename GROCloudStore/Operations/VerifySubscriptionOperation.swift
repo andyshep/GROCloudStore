@@ -9,7 +9,7 @@
 import CoreData
 import CloudKit
 
-final class VerifySubscriptionOperation: AsyncOperation {
+final internal class VerifySubscriptionOperation: AsyncOperation {
     
     fileprivate let context: NSManagedObjectContext
     fileprivate let dataSource: CloudDataSource

@@ -9,7 +9,7 @@
 import CloudKit
 import CoreData
 
-class DatabaseChangesOperation: AsyncOperation {
+final internal class DatabaseChangesOperation: AsyncOperation {
     let context: NSManagedObjectContext
 //    let request: NSPersistentStoreRequest
     

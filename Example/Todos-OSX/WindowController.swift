@@ -40,6 +40,11 @@ class WindowController: NSWindowController {
         todo.created = Date()
         
         self.arrayController.insert(todo)
-        context.saveOrLogError()
+        
+        do {
+            try context.save()
+        } catch {
+            print("error saving context: \(error)")
+        }
     }
 }

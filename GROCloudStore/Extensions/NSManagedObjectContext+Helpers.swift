@@ -9,7 +9,7 @@
 import CoreData
 
 extension NSManagedObjectContext {
-    public func existingOrNewObjectForId(_ objectID: NSManagedObjectID?, entityName: String) throws -> NSManagedObject {
+    func existingOrNewObjectForId(_ objectID: NSManagedObjectID?, entityName: String) throws -> NSManagedObject {
         do {
             if let objectID = objectID {
                 return try self.existingObject(with: objectID)
@@ -21,7 +21,7 @@ extension NSManagedObjectContext {
         } catch { throw error }
     }
     
-    public func saveOrLogError() -> Void {
+    func saveOrLogError() -> Void {
         if hasChanges {
             do { try self.save() }
             catch {

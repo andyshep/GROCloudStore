@@ -20,7 +20,7 @@ extension GROIncrementalStore: ManagedObjectIDProvider {
      - returns: NSManagedObjectID assocated with the entity and identifier
      */
     
-    func objectID(for entity: NSEntityDescription, with identifier: NSString?) throws -> NSManagedObjectID {
+    internal func objectID(for entity: NSEntityDescription, with identifier: NSString?) throws -> NSManagedObjectID {
         guard let identifier = identifier else { throw GROIncrementalStoreError.noRemoteIdentifier }
         guard let name = entity.name else { throw GROIncrementalStoreError.noEntityName }
         
@@ -60,7 +60,7 @@ extension GROIncrementalStore: ManagedObjectIDProvider {
         return managedObjectId!
     }
     
-    func backingObjectID(for entity: NSEntityDescription, with identifier: NSString?) throws -> NSManagedObjectID? {
+    internal func backingObjectID(for entity: NSEntityDescription, with identifier: NSString?) throws -> NSManagedObjectID? {
         guard let identifier = identifier else { throw GROIncrementalStoreError.noRemoteIdentifier }
         guard let name = entity.name else { throw GROIncrementalStoreError.noEntityName }
         
@@ -102,7 +102,7 @@ extension GROIncrementalStore: ManagedObjectIDProvider {
         return backingObjectId
     }
     
-    func entity(for identifier: String, in context: NSManagedObjectContext) -> NSEntityDescription? {
+    internal func entity(for identifier: String, in context: NSManagedObjectContext) -> NSEntityDescription? {
         for (name, identifiers) in self.registeredEntities {
             for (id, _) in identifiers {
                 if id == identifier {
@@ -126,7 +126,7 @@ extension GROIncrementalStore: ManagedObjectIDProvider {
         return nil
     }
     
-    func register(objectID: NSManagedObjectID, for identifier: String, in context: NSManagedObjectContext) {
+    internal func register(objectID: NSManagedObjectID, for identifier: String, in context: NSManagedObjectContext) {
         guard let name = objectID.entity.name else { return }
         
         if context == self.backingContext {

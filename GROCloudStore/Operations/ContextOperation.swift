@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-protocol ContextOperation: class {
+internal protocol ContextOperation: class {
     var request: NSPersistentStoreRequest { get }
     var context: NSManagedObjectContext { get }
     var backingContext: NSManagedObjectContext { get }

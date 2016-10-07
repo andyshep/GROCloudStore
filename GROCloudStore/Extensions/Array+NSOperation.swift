@@ -10,7 +10,7 @@
 
 import Foundation
 
-extension Array where Element: Operation {
+internal extension Array where Element: Operation {
     func onFinish(_ block: @escaping () -> Void) {
         let completion = BlockOperation(block: block)
         self.forEach { [unowned completion] in completion.addDependency($0) }

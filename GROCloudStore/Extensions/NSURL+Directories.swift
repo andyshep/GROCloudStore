@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension URL {
+internal extension URL {
     static var applicationDocumentsDirectory: URL {
         let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return urls.last!
@@ -23,6 +23,8 @@ extension URL {
         guard let url = urls.last?.appendingPathComponent(identifier) else {
             fatalError("missing url for application support directory")
         }
+        
+        // need to check for existing directory, cannot crate it twice
         
         do {
             try FileManager.default.createDirectory(at: url, withIntermediateDirectories: false, attributes: nil)

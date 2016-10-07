@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AccountStatusOperation: AsyncOperation {
+final internal class AccountStatusOperation: AsyncOperation {
 
     private(set) var status: CKAccountStatus?
     private let dataSource: CloudDataSource

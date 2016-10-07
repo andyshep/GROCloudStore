@@ -10,7 +10,7 @@ import CloudKit
 import CoreData
 import Foundation
 
-class PushChangesOperation: AsyncOperation {
+final internal class PushChangesOperation: AsyncOperation {
     let context: NSManagedObjectContext
     let backingContext: NSManagedObjectContext
     let request: NSPersistentStoreRequest

@@ -8,7 +8,7 @@
 
 import CloudKit
 
-extension CKAccountStatus {
+internal extension CKAccountStatus {
     var isAvailable: Bool {
         switch self {
         case .available:

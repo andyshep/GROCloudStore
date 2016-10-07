@@ -9,7 +9,7 @@
 import CoreData
 import CloudKit
 
-extension NSSaveChangesRequest {
+internal extension NSSaveChangesRequest {
     
     var insertedRecords: [CKRecord] {
         let objects = self.insertedObjects ?? []

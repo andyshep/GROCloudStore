@@ -13,18 +13,6 @@ class GROSavedData: NSManagedObject {
     @NSManaged var content: Data
 }
 
-extension NSManagedObject {
-    class var entityName: String {
-        return String(describing: self)
-    }
-    
-    class func newObject(in context: NSManagedObjectContext) -> NSManagedObject {
-        let name = self.entityName
-        let object = NSEntityDescription.insertNewObject(forEntityName: name, into: context)
-        return object
-    }
-}
-
 @objc(GRORecordZone)
 class GRORecordZone: GROSavedData { }
 

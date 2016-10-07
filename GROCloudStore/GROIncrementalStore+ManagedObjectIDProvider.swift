@@ -24,7 +24,7 @@ extension GROIncrementalStore: ManagedObjectIDProvider {
         guard let identifier = identifier else { throw GROIncrementalStoreError.noRemoteIdentifier }
         guard let name = entity.name else { throw GROIncrementalStoreError.noEntityName }
         
-        let cachedObjectIdentifier = Attribute.Prefix + String(identifier)
+        let cachedObjectIdentifier = GROAttribute.prefix + String(identifier)
         
         var managedObjectId: NSManagedObjectID? = nil
         if let entities = self.registeredEntities[name] {
@@ -68,7 +68,7 @@ extension GROIncrementalStore: ManagedObjectIDProvider {
         fetchRequest.resultType = .managedObjectIDResultType
         fetchRequest.fetchLimit = 1
         
-        let predicate = NSPredicate(format: "%K = %@", Attribute.ResourceIdentifier, identifier)
+        let predicate = NSPredicate(format: "%K = %@", GROAttribute.resourceIdentifier, identifier)
         fetchRequest.predicate = predicate
         
         var backingObjectId: NSManagedObjectID?

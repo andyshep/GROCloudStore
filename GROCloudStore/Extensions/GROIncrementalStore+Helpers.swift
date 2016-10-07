@@ -8,20 +8,20 @@
 
 import CoreData
 
-struct Attribute {
-    static var ResourceIdentifier: String {
+internal struct GROAttribute {
+    static var resourceIdentifier: String {
         return  "__gro__resourceIdentifier"
     }
     
-    static var LastModified: String {
+    static var lastModified: String {
         return "__gro__lastModified"
     }
     
-    static var NeedsDeletion: String {
+    static var needsDeletion: String {
         return "__gro__needsDeletion"
     }
     
-    static var Prefix: String {
+    static var prefix: String {
         return "__gro__"
     }
 }
@@ -35,24 +35,24 @@ protocol GROBackingStoreResourceType {
 extension NSManagedObject: GROBackingStoreResourceType {
     var GROResourceIdentifier: String {
         get {
-            return self.value(forKey: Attribute.ResourceIdentifier) as? String ?? ""
+            return self.value(forKey: GROAttribute.resourceIdentifier) as? String ?? ""
         }
         set {
-            self.setValue(newValue, forKey: Attribute.ResourceIdentifier)
+            self.setValue(newValue, forKey: GROAttribute.resourceIdentifier)
         }
     }
     
     var GROLastModified: Date {
         get {
-            return self.value(forKey: Attribute.LastModified) as? Date ?? Date()
+            return self.value(forKey: GROAttribute.lastModified) as? Date ?? Date()
         }
         set {
-            self.setValue(newValue, forKey: Attribute.LastModified)
+            self.setValue(newValue, forKey: GROAttribute.lastModified)
         }
     }
 }
 
-extension NSAttributeDescription {
+internal extension NSAttributeDescription {
     class var contentAttribute: NSAttributeDescription {
         let contentAttribute = NSAttributeDescription()
         contentAttribute.name = "content"
@@ -74,8 +74,8 @@ extension NSAttributeDescription {
     }
 }
 
-extension NSManagedObjectModel {
-    var GROAugmentedModel: NSManagedObjectModel {
+internal extension NSManagedObjectModel {
+    var augmentedModel: NSManagedObjectModel {
         guard let augmentedModel = self.copy() as? NSManagedObjectModel else {
             fatalError("could not copy model")
         }
@@ -84,19 +84,19 @@ extension NSManagedObjectModel {
             if entity.superentity != nil { continue }
             
             let resourceIdProperty = NSAttributeDescription()
-            resourceIdProperty.name = Attribute.ResourceIdentifier
+            resourceIdProperty.name = GROAttribute.resourceIdentifier
             resourceIdProperty.attributeType = .stringAttributeType
             resourceIdProperty.isIndexed = true
 //            resourceIdProperty.isOptional = true
             
             let lastModifiedProperty = NSAttributeDescription()
-            lastModifiedProperty.name = Attribute.LastModified
+            lastModifiedProperty.name = GROAttribute.lastModified
             lastModifiedProperty.attributeType = .dateAttributeType
             lastModifiedProperty.isIndexed = false
 //            lastModifiedProperty.isOptional = true
             
             let needsDeletion = NSAttributeDescription()
-            needsDeletion.name = Attribute.NeedsDeletion
+            needsDeletion.name = GROAttribute.needsDeletion
             needsDeletion.attributeType = .booleanAttributeType
             needsDeletion.isIndexed = false
             needsDeletion.defaultValue = false
@@ -138,7 +138,7 @@ extension NSManagedObjectModel {
 
 internal func resourceIdentifier(_ referenceObject: AnyObject) -> String {
     let refObj = String(referenceObject.description)
-    let prefix = Attribute.Prefix
+    let prefix = GROAttribute.prefix
     
     if (refObj?.hasPrefix(prefix))! {
         let index = refObj?.index((refObj?.startIndex)!, offsetBy: prefix.characters.count)

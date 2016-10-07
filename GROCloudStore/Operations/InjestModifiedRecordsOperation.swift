@@ -95,8 +95,8 @@ class InjestModifiedRecordsOperation: Operation {
             }
             
             if context == self.backingContext {
-                object.setValue(identifier, forKey: Attribute.ResourceIdentifier)
-                object.setValue(Date(), forKey: Attribute.LastModified)
+                object.setValue(identifier, forKey: GROAttribute.resourceIdentifier)
+                object.setValue(Date(), forKey: GROAttribute.lastModified)
             }
             
             guard let transformableObject = object as? CloudKitTransformable else { fatalError("wrong object type") }

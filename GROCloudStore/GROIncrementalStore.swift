@@ -117,7 +117,7 @@ public class GROIncrementalStore: NSIncrementalStore {
             fatalError("model not found")
         }
         
-        return model.GROAugmentedModel
+        return model.augmentedModel
     }()
     
     public override func loadMetadata() throws {
@@ -152,7 +152,7 @@ public class GROIncrementalStore: NSIncrementalStore {
         let referenceObj = self.referenceObject(for: objectID)
         let identifier = resourceIdentifier(referenceObj as AnyObject)
         
-        let predicate = NSPredicate(format: "%K = %@", Attribute.ResourceIdentifier, identifier)
+        let predicate = NSPredicate(format: "%K = %@", GROAttribute.resourceIdentifier, identifier)
         fetchRequest.predicate = predicate
         
         var results: [AnyObject]? = nil
@@ -185,9 +185,7 @@ public class GROIncrementalStore: NSIncrementalStore {
                         
                         guard let relatedObjs = backingRelationshipObj as? NSObject else { fatalError() }
                         guard let entity = relationship.destinationEntity else { fatalError("missing entity") }
-                        
-                        guard let identifierSet = relatedObjs.value(forKeyPath: Attribute.ResourceIdentifier) as? NSSet else { fatalError() }
-                        
+                        guard let identifierSet = relatedObjs.value(forKeyPath: GROAttribute.resourceIdentifier) as? NSSet else { fatalError() }
                         guard let identifiers = identifierSet.allObjects as? [String] else { fatalError() }
                         
                         for identifier in identifiers {

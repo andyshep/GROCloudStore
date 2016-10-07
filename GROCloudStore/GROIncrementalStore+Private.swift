@@ -51,7 +51,7 @@ extension GROIncrementalStore {
         let backingContext = self.backingContext
         cacheFetchRequest.entity = NSEntityDescription.entity(forEntityName: entityName, in: backingContext)
         cacheFetchRequest.resultType = []
-        cacheFetchRequest.propertiesToFetch = [Attribute.ResourceIdentifier]
+        cacheFetchRequest.propertiesToFetch = [GROAttribute.resourceIdentifier]
         
         var cachedObjects: [AnyObject] = []
         backingContext.performAndWait {
@@ -66,7 +66,7 @@ extension GROIncrementalStore {
         print("found \(cachedObjects.count) objects in backing store")
         
         let results = cachedObjects as NSArray
-        let resourceIds = results.value(forKeyPath: Attribute.ResourceIdentifier) as? [NSString] ?? []
+        let resourceIds = results.value(forKeyPath: GROAttribute.resourceIdentifier) as? [NSString] ?? []
         
         var mainObjects: [NSManagedObject] = []
         context.performAndWait {
@@ -75,7 +75,7 @@ extension GROIncrementalStore {
                 let managedObject = context.object(with: objectId)
                 guard let transformableObj = managedObject as? ManagedObjectTransformable else { fatalError() }
                 
-                let predicate = NSPredicate(format: "%K = %@", Attribute.ResourceIdentifier, resourceId)
+                let predicate = NSPredicate(format: "%K = %@", GROAttribute.resourceIdentifier, resourceId)
                 guard let backingObj = results.filtered(using: predicate).first as? NSManagedObject else { fatalError() }
                 
                 transformableObj.transform(using: backingObj)

@@ -47,7 +47,7 @@ final internal class VerifySubscriptionOperation: AsyncOperation {
     
     fileprivate func createSubscriptions() {
         let configuration = dataSource.configuration
-        let subscriptions = configuration.Subscriptions.Default
+        let subscriptions = configuration.subscriptions.all
         dataSource.createSubscriptions(subscriptions: subscriptions, completion: didCreate)
     }
     
@@ -60,7 +60,7 @@ final internal class VerifySubscriptionOperation: AsyncOperation {
         // FIXME: should handle more than one subscription 
         
         var foundSubscription = false
-        let defaultSubscription = self.configuration.Subscriptions.Default.first!
+        let defaultSubscription = self.configuration.subscriptions.all.first!
         if let subscriptions = subscriptions {
             if subscriptions.contains(defaultSubscription) {
                 foundSubscription = true

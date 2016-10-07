@@ -10,24 +10,26 @@ import Foundation
 import GROCloudStore
 
 struct DefaultContainer: CloudContainerType {
-    var Identifier: String {
+    var identifier: String {
         return "iCloud.org.andyshep.example.Todos"
     }
     
-    var CustomZoneNames: [String] {
+    var customZoneNames: [String] {
         return ["examplezonename"]
     }
     
-    var ZoneToRecordMappings: [String : String] {
+    var zoneToRecordMappings: [String : String] {
         return ["Todo": "examplezonename"]
     }
 }
 
 public struct Subscription: SubscriptionType {
-    public static let Todo = "iCloud.org.andyshep.example.Todos.subscription.Todo"
+    public enum Name: String {
+        case Todo = "iCloud.org.andyshep.example.Todos.subscription.Todo"
+    }
     
-    public var Default: [CKSubscription] {
-        let subscription = CKDatabaseSubscription(subscriptionID: Subscription.Todo)
+    public var all: [CKSubscription] {
+        let subscription = CKDatabaseSubscription(subscriptionID: Name.Todo.rawValue)
         
         let notificationInfo = CKNotificationInfo()
         notificationInfo.shouldSendContentAvailable = true
@@ -38,11 +40,11 @@ public struct Subscription: SubscriptionType {
 }
 
 class TodoCloudConfiguration: Configuration {
-    var Subscriptions: SubscriptionType {
+    var subscriptions: SubscriptionType {
         return Subscription()
     }
     
-    var CloudContainer: CloudContainerType {
+    var container: CloudContainerType {
         return DefaultContainer()
     }
 }

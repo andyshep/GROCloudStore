@@ -9,9 +9,7 @@
 import CloudKit
 import CoreData
 
-/**
- A protocol the defines how an object is to be transformed for CloudKit.
- */
+/// A protocol the defines how an object is to be transformed for CloudKit.
 @objc public protocol CloudKitTransformable {
     
     /// The type of `CKRecord` the object should be transformed into.
@@ -55,7 +53,7 @@ extension CloudKitTransformable where Self: NSManagedObject {
                 let psc = self.managedObjectContext?.persistentStoreCoordinator
                 guard let configuration = configurationFromPersistentStore(coordinator: psc) else { fatalError() }
                 
-                let zoneName = configuration.CloudContainer.zoneName(forRecordType: recordType)
+                let zoneName = configuration.container.zoneName(forRecordType: recordType)
                 let zoneId = CKRecordZoneID(zoneName: zoneName, ownerName: CKCurrentUserDefaultName)
                 let recordName = UUID().uuidString
                 

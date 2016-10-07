@@ -22,7 +22,7 @@ open class GRODefaultDataSource: CloudDataSource {
     }
     
     public var container: CKContainer {
-        return CKContainer(identifier: self.configuration.CloudContainer.Identifier)
+        return CKContainer(identifier: self.configuration.container.identifier)
     }
     
     // MARK: - Records

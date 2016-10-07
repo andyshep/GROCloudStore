@@ -52,7 +52,7 @@ final internal class VerifyRecordZoneOperation: AsyncOperation {
         var found = false
         let configuration = self.dataSource.configuration
         
-        let zoneName = configuration.CloudContainer.CustomZoneNames.first!
+        let zoneName = configuration.container.customZoneNames.first!
         let defaultZoneID = CKRecordZoneID(zoneName: zoneName, ownerName: CKCurrentUserDefaultName)
         
         for (zoneId, _) in zones {

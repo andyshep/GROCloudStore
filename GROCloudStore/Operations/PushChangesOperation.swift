@@ -60,7 +60,7 @@ final internal class PushChangesOperation: AsyncOperation {
                         // record zone missing
                         
                         let configuration = self.dataSource.configuration
-                        let zoneName = configuration.CloudContainer.CustomZoneNames.first!
+                        let zoneName = configuration.container.customZoneNames.first!
                         self.dataSource.createRecordZone(name: zoneName, completion: createZoneCompletion)
                         
                         return completion(false)

@@ -15,13 +15,13 @@ import CloudKit
 public protocol CloudContainerType {
     
     /// Identifier represents the CloudKit container identifier used by the client.
-    var Identifier: String { get }
+    var identifier: String { get }
     
     /// An array of `CKRecordZone` names used to store records.
-    var CustomZoneNames: [String] { get }
+    var customZoneNames: [String] { get }
     
     /// A dictionary to maps record types to `CKRecordZone` names.
-    var ZoneToRecordMappings: [String: String] { get }
+    var zoneToRecordMappings: [String: String] { get }
 }
 
 /**
@@ -30,7 +30,7 @@ public protocol CloudContainerType {
 public protocol SubscriptionType {
     
     /// The set of `CKSubscription` objects used by the client.
-    var Default: [CKSubscription] { get }
+    var all: [CKSubscription] { get }
 }
 
 /**
@@ -39,17 +39,17 @@ public protocol SubscriptionType {
 public protocol Configuration {
     
     /// Describes the CloudKit container used by the client.
-    var CloudContainer: CloudContainerType { get }
+    var container: CloudContainerType { get }
     
     /// Describes the CloudKit subscriptons used by the client.
-    var Subscriptions: SubscriptionType { get }
+    var subscriptions: SubscriptionType { get }
 }
 
 internal extension CloudContainerType {
     func zoneName(forRecordType type: String) -> String {
-        guard let name = ZoneToRecordMappings[type] else {
+        guard let name = zoneToRecordMappings[type] else {
             print("warning: missing zone name for type: \(type)")
-            return CustomZoneNames.first ?? ""
+            return customZoneNames.first ?? ""
         }
         
         return name

@@ -45,7 +45,7 @@ internal extension GROIncrementalStore {
     
     internal func cloudDidChange(_ notification: Notification) {
         let token = FileManager.default.ubiquityIdentityToken
-        print("change token: \(token)")
+        print("change token: \(String(describing: token))")
         
         DispatchQueue.main.async {
             let name = NSNotification.Name.GROCloudKitAccountChanged

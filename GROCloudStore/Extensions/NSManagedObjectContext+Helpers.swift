@@ -8,7 +8,7 @@
 
 import CoreData
 
-extension NSManagedObjectContext {
+public extension NSManagedObjectContext {
     func existingOrNewObjectForId(_ objectID: NSManagedObjectID?, entityName: String) throws -> NSManagedObject {
         do {
             if let objectID = objectID {

@@ -140,13 +140,13 @@ internal func resourceIdentifier(_ referenceObject: AnyObject) -> String {
     let refObj = String(referenceObject.description)
     let prefix = GROAttribute.prefix
     
-    if (refObj?.hasPrefix(prefix))! {
-        let index = refObj?.index((refObj?.startIndex)!, offsetBy: prefix.characters.count)
-        let identifier = refObj?.substring(from: index!)
-        return identifier!
+    if (refObj.hasPrefix(prefix)) {
+        let index = refObj.index((refObj.startIndex), offsetBy: prefix.count)
+        let identifier = String(refObj[index...])
+        return identifier
     }
     
-    return refObj!
+    return refObj
 }
 
 internal func uniqueStoreIdentifier() -> String {

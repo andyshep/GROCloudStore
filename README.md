@@ -2,7 +2,7 @@
 
 # GROCloudStore
 
-![Swift 3.0](https://img.shields.io/badge/swift-3.0-orange.svg)
+![Swift 3.0](https://img.shields.io/badge/swift-4.0-orange.svg)
 ![Platform](https://img.shields.io/badge/platform-ios%20%7C%20macos-lightgrey.svg)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 ![Version Status](https://img.shields.io/cocoapods/v/GROCloudStore.svg)
@@ -14,8 +14,8 @@ GROCloudStore only supports the private CloudKit database. This is because GROCl
 
 ## Requirements
 
- * Xcode 8
- * Swift 3
+ * Xcode 9
+ * Swift 4
 
 ## Installation
 

@@ -1,11 +1,8 @@
 .DS_Store
+*.swp
+*.lock
 
-*.xcodeproj/xcuserdata/*
-*.xcodeproj/*.xcworkspace/*
+xcuserdata/
 
-*.xcworkspace/xcuserdata/*
-*.xcworkspace
 
-Example/*.xcodeproj/xcuserdata/*
 
-Carthage/*

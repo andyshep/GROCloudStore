@@ -25,10 +25,10 @@
 		F75777A21EF0647A0033BB36 /* ContextOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757777B1EF0647A0033BB36 /* ContextOperation.swift */; };
 		F75777A31EF0647A0033BB36 /* DatabaseChangesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757777C1EF0647A0033BB36 /* DatabaseChangesOperation.swift */; };
 		F75777A41EF0647A0033BB36 /* DatabaseChangesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757777C1EF0647A0033BB36 /* DatabaseChangesOperation.swift */; };
-		F75777A51EF0647A0033BB36 /* InjestDeletedRecordsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757777D1EF0647A0033BB36 /* InjestDeletedRecordsOperation.swift */; };
-		F75777A61EF0647A0033BB36 /* InjestDeletedRecordsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757777D1EF0647A0033BB36 /* InjestDeletedRecordsOperation.swift */; };
-		F75777A71EF0647A0033BB36 /* InjestModifiedRecordsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757777E1EF0647A0033BB36 /* InjestModifiedRecordsOperation.swift */; };
-		F75777A81EF0647A0033BB36 /* InjestModifiedRecordsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757777E1EF0647A0033BB36 /* InjestModifiedRecordsOperation.swift */; };
+		F75777A51EF0647A0033BB36 /* IngestDeletedRecordsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757777D1EF0647A0033BB36 /* IngestDeletedRecordsOperation.swift */; };
+		F75777A61EF0647A0033BB36 /* IngestDeletedRecordsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757777D1EF0647A0033BB36 /* IngestDeletedRecordsOperation.swift */; };
+		F75777A71EF0647A0033BB36 /* IngestModifiedRecordsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757777E1EF0647A0033BB36 /* IngestModifiedRecordsOperation.swift */; };
+		F75777A81EF0647A0033BB36 /* IngestModifiedRecordsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757777E1EF0647A0033BB36 /* IngestModifiedRecordsOperation.swift */; };
 		F75777A91EF0647A0033BB36 /* PushChangesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757777F1EF0647A0033BB36 /* PushChangesOperation.swift */; };
 		F75777AA1EF0647A0033BB36 /* PushChangesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F757777F1EF0647A0033BB36 /* PushChangesOperation.swift */; };
 		F75777AB1EF0647A0033BB36 /* RecordChangeOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75777801EF0647A0033BB36 /* RecordChangeOperation.swift */; };
@@ -117,8 +117,8 @@
 		F757777A1EF0647A0033BB36 /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		F757777B1EF0647A0033BB36 /* ContextOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextOperation.swift; sourceTree = "<group>"; };
 		F757777C1EF0647A0033BB36 /* DatabaseChangesOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseChangesOperation.swift; sourceTree = "<group>"; };
-		F757777D1EF0647A0033BB36 /* InjestDeletedRecordsOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InjestDeletedRecordsOperation.swift; sourceTree = "<group>"; };
-		F757777E1EF0647A0033BB36 /* InjestModifiedRecordsOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InjestModifiedRecordsOperation.swift; sourceTree = "<group>"; };
+		F757777D1EF0647A0033BB36 /* IngestDeletedRecordsOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngestDeletedRecordsOperation.swift; sourceTree = "<group>"; };
+		F757777E1EF0647A0033BB36 /* IngestModifiedRecordsOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IngestModifiedRecordsOperation.swift; sourceTree = "<group>"; };
 		F757777F1EF0647A0033BB36 /* PushChangesOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushChangesOperation.swift; sourceTree = "<group>"; };
 		F75777801EF0647A0033BB36 /* RecordChangeOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordChangeOperation.swift; sourceTree = "<group>"; };
 		F75777811EF0647A0033BB36 /* VerifyRecordZoneOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyRecordZoneOperation.swift; sourceTree = "<group>"; };
@@ -241,8 +241,8 @@
 				F757777A1EF0647A0033BB36 /* AsyncOperation.swift */,
 				F757777B1EF0647A0033BB36 /* ContextOperation.swift */,
 				F757777C1EF0647A0033BB36 /* DatabaseChangesOperation.swift */,
-				F757777D1EF0647A0033BB36 /* InjestDeletedRecordsOperation.swift */,
-				F757777E1EF0647A0033BB36 /* InjestModifiedRecordsOperation.swift */,
+				F757777D1EF0647A0033BB36 /* IngestDeletedRecordsOperation.swift */,
+				F757777E1EF0647A0033BB36 /* IngestModifiedRecordsOperation.swift */,
 				F757777F1EF0647A0033BB36 /* PushChangesOperation.swift */,
 				F75777801EF0647A0033BB36 /* RecordChangeOperation.swift */,
 				F75777811EF0647A0033BB36 /* VerifyRecordZoneOperation.swift */,
@@ -462,7 +462,7 @@
 				F757779D1EF0647A0033BB36 /* AccountStatusOperation.swift in Sources */,
 				F75777991EF0647A0033BB36 /* GROSavedData.swift in Sources */,
 				F757779F1EF0647A0033BB36 /* AsyncOperation.swift in Sources */,
-				F75777A71EF0647A0033BB36 /* InjestModifiedRecordsOperation.swift in Sources */,
+				F75777A71EF0647A0033BB36 /* IngestModifiedRecordsOperation.swift in Sources */,
 				F75777CD1EF0647B0033BB36 /* NameableEntity.swift in Sources */,
 				F75777B51EF0647A0033BB36 /* CKAccountStatus+Available.swift in Sources */,
 				F75777C11EF0647B0033BB36 /* NSURL+Directories.swift in Sources */,
@@ -470,7 +470,7 @@
 				F75777B31EF0647A0033BB36 /* Array+NSOperation.swift in Sources */,
 				F75777D71EF0647B0033BB36 /* GROIncrementalStore.swift in Sources */,
 				F75777CF1EF0647B0033BB36 /* GROIncrementalStore+ManagedObjectIDProvider.swift in Sources */,
-				F75777A51EF0647A0033BB36 /* InjestDeletedRecordsOperation.swift in Sources */,
+				F75777A51EF0647A0033BB36 /* IngestDeletedRecordsOperation.swift in Sources */,
 				F75777D51EF0647B0033BB36 /* GROIncrementalStore+Notifications.swift in Sources */,
 				F75777C71EF0647B0033BB36 /* Configuration.swift in Sources */,
 				F75777B71EF0647B0033BB36 /* GROIncrementalStore+Helpers.swift in Sources */,
@@ -511,7 +511,7 @@
 				F757779E1EF0647A0033BB36 /* AccountStatusOperation.swift in Sources */,
 				F757779A1EF0647A0033BB36 /* GROSavedData.swift in Sources */,
 				F75777A01EF0647A0033BB36 /* AsyncOperation.swift in Sources */,
-				F75777A81EF0647A0033BB36 /* InjestModifiedRecordsOperation.swift in Sources */,
+				F75777A81EF0647A0033BB36 /* IngestModifiedRecordsOperation.swift in Sources */,
 				F75777CE1EF0647B0033BB36 /* NameableEntity.swift in Sources */,
 				F75777B61EF0647A0033BB36 /* CKAccountStatus+Available.swift in Sources */,
 				F75777C21EF0647B0033BB36 /* NSURL+Directories.swift in Sources */,
@@ -519,7 +519,7 @@
 				F75777B41EF0647A0033BB36 /* Array+NSOperation.swift in Sources */,
 				F75777D81EF0647B0033BB36 /* GROIncrementalStore.swift in Sources */,
 				F75777D01EF0647B0033BB36 /* GROIncrementalStore+ManagedObjectIDProvider.swift in Sources */,
-				F75777A61EF0647A0033BB36 /* InjestDeletedRecordsOperation.swift in Sources */,
+				F75777A61EF0647A0033BB36 /* IngestDeletedRecordsOperation.swift in Sources */,
 				F75777D61EF0647B0033BB36 /* GROIncrementalStore+Notifications.swift in Sources */,
 				F75777C81EF0647B0033BB36 /* Configuration.swift in Sources */,
 				F75777B81EF0647B0033BB36 /* GROIncrementalStore+Helpers.swift in Sources */,

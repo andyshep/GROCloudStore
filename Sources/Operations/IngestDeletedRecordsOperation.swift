@@ -1,5 +1,5 @@
 //
-//  InjestDeletedRecordsOperation.swift
+//  IngestDeletedRecordsOperation.swift
 //  GROCloudStore
 //
 //  Created by Andrew Shepard on 2/8/16.
@@ -9,7 +9,7 @@
 import CoreData
 import CloudKit
 
-final internal class InjestDeletedRecordsOperation: Operation {
+final internal class IngestDeletedRecordsOperation: Operation {
     unowned var operation: RecordChangeOperation
     weak var delegate: ManagedObjectIDProvider?
     

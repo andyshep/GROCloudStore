@@ -99,22 +99,22 @@ extension GROIncrementalStore {
         let databaseChanges = DatabaseChangesOperation(context: backingContext, dataSource: dataSource)
         let recordZoneChanges = ZoneChangesOperation(operation: databaseChanges, request: request, context: context)
         
-        let injestDeletedRecords = InjestDeletedRecordsOperation(operation: recordZoneChanges)
-        let injestModifiedRecords = InjestModifiedRecordsOperation(operation: recordZoneChanges)
+        let ingestDeletedRecords = IngestDeletedRecordsOperation(operation: recordZoneChanges)
+        let ingestModifiedRecords = IngestModifiedRecordsOperation(operation: recordZoneChanges)
         
         recordZoneChanges.delegate = self
-        injestDeletedRecords.delegate = self
-        injestModifiedRecords.delegate = self
+        ingestDeletedRecords.delegate = self
+        ingestModifiedRecords.delegate = self
         
         recordZoneChanges.addDependency(databaseChanges)
         
-        injestDeletedRecords.addDependency(recordZoneChanges)
-        injestModifiedRecords.addDependency(injestDeletedRecords)
+        ingestDeletedRecords.addDependency(recordZoneChanges)
+        ingestModifiedRecords.addDependency(ingestDeletedRecords)
         
         verifySubscriptions.addDependency(verifyRecordZone)
         recordZoneChanges.addDependency(verifySubscriptions)
         
-        [injestDeletedRecords, injestModifiedRecords].onFinish {
+        [ingestDeletedRecords, ingestModifiedRecords].onFinish {
             self.backingContext.performAndWait({
                 self.backingContext.saveOrLogError()
             })
@@ -124,8 +124,8 @@ extension GROIncrementalStore {
         operationQueue.addOperation(verifySubscriptions)
         operationQueue.addOperation(databaseChanges)
         operationQueue.addOperation(recordZoneChanges)
-        operationQueue.addOperation(injestDeletedRecords)
-        operationQueue.addOperation(injestModifiedRecords)
+        operationQueue.addOperation(ingestDeletedRecords)
+        operationQueue.addOperation(ingestModifiedRecords)
     }
     
     private func saveRemoteObjects(for request: NSPersistentStoreRequest, in context: NSManagedObjectContext) {
@@ -135,24 +135,24 @@ extension GROIncrementalStore {
         }
         
         let pushChanges = PushChangesOperation(request: saveRequest, context: context, backingContext: backingContext, dataSource: dataSource)
-        let injestDeletedRecords = InjestDeletedRecordsOperation(operation: pushChanges)
-        let injestModifiedRecords = InjestModifiedRecordsOperation(operation: pushChanges)
+        let ingestDeletedRecords = IngestDeletedRecordsOperation(operation: pushChanges)
+        let ingestModifiedRecords = IngestModifiedRecordsOperation(operation: pushChanges)
         
-        injestDeletedRecords.delegate = self
-        injestModifiedRecords.delegate = self
+        ingestDeletedRecords.delegate = self
+        ingestModifiedRecords.delegate = self
         
-        injestDeletedRecords.addDependency(pushChanges)
-        injestModifiedRecords.addDependency(injestDeletedRecords)
+        ingestDeletedRecords.addDependency(pushChanges)
+        ingestModifiedRecords.addDependency(ingestDeletedRecords)
         
-        [injestDeletedRecords, injestModifiedRecords].onFinish {
+        [ingestDeletedRecords, ingestModifiedRecords].onFinish {
             self.backingContext.performAndWait({
                 self.backingContext.saveOrLogError()
             })
         }
         
         operationQueue.addOperation(pushChanges)
-        operationQueue.addOperation(injestDeletedRecords)
-        operationQueue.addOperation(injestModifiedRecords)
+        operationQueue.addOperation(ingestDeletedRecords)
+        operationQueue.addOperation(ingestModifiedRecords)
     }
     
     private func checkCloudKitAccountStatus(completion: @escaping (_ status: CKAccountStatus) -> ()) {

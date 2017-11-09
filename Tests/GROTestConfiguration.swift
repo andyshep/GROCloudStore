@@ -11,15 +11,15 @@ import CloudKit
 @testable import GROCloudStore
 
 struct DefaultTestContainer: CloudContainerType {
-    var Identifier: String {
+    var identifier: String {
         return "iCloud.org.andyshep.GROCloudStore"
     }
     
-    var CustomZoneNames: [String] {
+    var customZoneNames: [String] {
         return ["zone1"]
     }
     
-    var ZoneToRecordMappings: [String : String] {
+    var zoneToRecordMappings: [String : String] {
         return [:]
     }
 }
@@ -27,12 +27,12 @@ struct DefaultTestContainer: CloudContainerType {
 struct TestSubscription: SubscriptionType {
     static let TestSubscriptionName = "org.andyshep.GROCloudStore.TestSubscription"
     
-    var Default: [CKSubscription] {
+    var all: [CKSubscription] {
         let subscriptionId = TestSubscription.TestSubscriptionName
-        let zoneId = CKRecordZoneID(zoneName: DefaultTestContainer().CustomZoneNames.first!, ownerName: CKOwnerDefaultName)
+        let zoneId = CKRecordZoneID(zoneName: DefaultTestContainer().customZoneNames.first!, ownerName: CKCurrentUserDefaultName)
         
-        let options = CKSubscriptionOptions.firesOnRecordCreation
-        let subscription = CKSubscription(recordType: "GROTestEntity", predicate: NSPredicate(format: "TRUEPREDICATE"), subscriptionID: subscriptionId, options: options)
+        let options = CKQuerySubscriptionOptions.firesOnRecordCreation
+        let subscription = CKQuerySubscription(recordType: "GROTestEntity", predicate: NSPredicate(format: "TRUEPREDICATE"), subscriptionID: subscriptionId, options: options)
         subscription.zoneID = zoneId
         
         let notificationInfo = CKNotificationInfo()
@@ -49,11 +49,11 @@ class GROTestConfiguration: NSObject {
 }
 
 extension GROTestConfiguration: Configuration {
-    var Subscriptions: SubscriptionType {
+    var subscriptions: SubscriptionType {
         return TestSubscription()
     }
     
-    var CloudContainer: CloudContainerType {
+    var container: CloudContainerType {
         return DefaultTestContainer()
     }
 }

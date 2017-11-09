@@ -21,6 +21,10 @@ internal struct GROAttribute {
         return "__gro__needsDeletion"
     }
     
+    static var encodedSystemFields: String {
+        return "__gro__encodedSystemFields"
+    }
+    
     static var prefix: String {
         return "__gro__"
     }

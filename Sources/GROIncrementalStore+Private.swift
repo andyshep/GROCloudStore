@@ -15,7 +15,7 @@ extension GROIncrementalStore {
         let backingContext = self.backingContext
         
         if fetchRequest.resultType == [] {
-            
+
             context.perform {
                 self.fetchRemoteObjects(fetchRequest, context: context)
             }

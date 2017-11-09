@@ -10,7 +10,8 @@ import Foundation
 import CloudKit
 @testable import GROCloudStore
 
-class GROTestDataSource: CloudDataSource {
+@objc(GROTestDataSource)
+class GROTestDataSource: NSObject, CloudDataSource {
     
     var database: CKDatabase {
         fatalError()

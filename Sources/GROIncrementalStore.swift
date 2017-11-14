@@ -49,10 +49,6 @@ public class GROIncrementalStore: NSIncrementalStore {
         return String(describing: GROIncrementalStore.self)
     }
     
-//    public override class func initialize() {
-//        NSPersistentStoreCoordinator.registerStoreClass(self, forStoreType: storeType)
-//    }
-    
     override init(persistentStoreCoordinator root: NSPersistentStoreCoordinator?, configurationName name: String?, at url: URL, options: [AnyHashable : Any]? = nil) {
         guard let configuration = options?[GROConfigurationKey] as? Configuration else {
             fatalError("missing configuration")

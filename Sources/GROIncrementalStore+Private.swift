@@ -94,8 +94,6 @@ extension GROIncrementalStore {
         let verifyRecordZone = VerifyRecordZoneOperation(context: backingContext, dataSource: dataSource)
         let verifySubscriptions = VerifySubscriptionOperation(context: backingContext, dataSource: dataSource, configuration: configuration)
         
-        // FIXME: do you need both database and zone changes operation?
-        // what is the difference?
         let databaseChanges = DatabaseChangesOperation(context: backingContext, dataSource: dataSource)
         let recordZoneChanges = ZoneChangesOperation(operation: databaseChanges, request: request, context: context)
         

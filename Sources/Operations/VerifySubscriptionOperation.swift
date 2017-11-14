@@ -11,9 +11,9 @@ import CloudKit
 
 final internal class VerifySubscriptionOperation: AsyncOperation {
     
-    fileprivate let context: NSManagedObjectContext
-    fileprivate let dataSource: CloudDataSource
-    fileprivate let configuration: Configuration
+    private let context: NSManagedObjectContext
+    private let dataSource: CloudDataSource
+    private let configuration: Configuration
     
     init(context: NSManagedObjectContext, dataSource: CloudDataSource, configuration: Configuration) {
         self.context = context
@@ -45,13 +45,13 @@ final internal class VerifySubscriptionOperation: AsyncOperation {
         }
     }
     
-    fileprivate func createSubscriptions() {
+    private func createSubscriptions() {
         let configuration = dataSource.configuration
         let subscriptions = configuration.subscriptions.all
         dataSource.createSubscriptions(subscriptions: subscriptions, completion: didCreate)
     }
     
-    fileprivate func didFetch(subscriptions: [CKSubscription]?, error: Error?) {
+    private func didFetch(subscriptions: [CKSubscription]?, error: Error?) {
         
         guard error == nil else {
             attemptCloudKitRecoveryFrom(error: error! as NSError); return
@@ -74,7 +74,7 @@ final internal class VerifySubscriptionOperation: AsyncOperation {
         }
     }
     
-    fileprivate func didCreate(subscription: CKSubscription?, error: Error?) {
+    private func didCreate(subscription: CKSubscription?, error: Error?) {
         if let error = error {
             print("error: \(error)")
         }
@@ -86,7 +86,7 @@ final internal class VerifySubscriptionOperation: AsyncOperation {
         finish()
     }
     
-    fileprivate func save(subscription: CKSubscription, in context: NSManagedObjectContext) {
+    private func save(subscription: CKSubscription, in context: NSManagedObjectContext) {
         context.perform {
             guard let savedSubscription = GROSubscription.newObject(in: context) as? GROSubscription else { return }
             

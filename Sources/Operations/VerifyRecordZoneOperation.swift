@@ -13,8 +13,8 @@ typealias Zones = [CKRecordZoneID: CKRecordZone]
 
 final internal class VerifyRecordZoneOperation: AsyncOperation {
     
-    fileprivate let context: NSManagedObjectContext
-    fileprivate let dataSource: CloudDataSource
+    private let context: NSManagedObjectContext
+    private let dataSource: CloudDataSource
     
     init(context: NSManagedObjectContext, dataSource: CloudDataSource) {
         self.context = context
@@ -45,7 +45,7 @@ final internal class VerifyRecordZoneOperation: AsyncOperation {
         }
     }
     
-    fileprivate func didFetch(recordZones zones: Zones?, error: Error?) {
+    private func didFetch(recordZones zones: Zones?, error: Error?) {
         guard error == nil else { attemptCloudKitRecoveryFrom(error: error!); return finish() }
         guard let zones = zones else { return finish() }
         
@@ -73,7 +73,7 @@ final internal class VerifyRecordZoneOperation: AsyncOperation {
         finish()
     }
     
-    fileprivate func didCreate(recordZone: CKRecordZone?, error: Error?) {
+    private func didCreate(recordZone: CKRecordZone?, error: Error?) {
         finish()
     }
     

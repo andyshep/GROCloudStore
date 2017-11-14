@@ -55,13 +55,11 @@ final internal class ZoneChangesOperation: AsyncOperation {
         }
     }
     
-    // MARK: - Private
-    
-    fileprivate func recordDidChange(_ record: CKRecord) -> Void {
+    private func recordDidChange(_ record: CKRecord) -> Void {
         self.updatedRecords.append(record)
     }
     
-    fileprivate func recordIDWasDeleted(_ recordID: CKRecordID) -> Void {
+    private func recordIDWasDeleted(_ recordID: CKRecordID) -> Void {
         self.deletedRecordIDs.append(recordID)
     }
 }

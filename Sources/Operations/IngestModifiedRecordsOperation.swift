@@ -69,18 +69,18 @@ final internal class IngestModifiedRecordsOperation: Operation {
     private func processRecords(on context: NSManagedObjectContext, using lock: DispatchSemaphore? = nil) {
         context.performAndWait {
             for record in self.primaryRecords {
-                self.update(record: record, in: context)
+                self.updateObject(matching: record, in: context)
             }
             
             for record in self.secondaryRecords {
-                self.update(record: record, in: context)
+                self.updateObject(matching: record, in: context)
             }
                         
             lock?.signal()
         }
     }
     
-    fileprivate func update(record: CKRecord, in context: NSManagedObjectContext) {
+    private func updateObject(matching record: CKRecord, in context: NSManagedObjectContext) {
         let identifier = record.recordID.recordName
         let entityName = record.entityName
         
@@ -125,7 +125,7 @@ final internal class IngestModifiedRecordsOperation: Operation {
         }
     }
     
-    fileprivate func objectID(matching identifier: String, description entity: NSEntityDescription, in context: NSManagedObjectContext) throws -> NSManagedObjectID? {
+    private func objectID(matching identifier: String, description entity: NSEntityDescription, in context: NSManagedObjectContext) throws -> NSManagedObjectID? {
         
         if context == self.backingContext {
             let objectId = try self.delegate?.backingObjectID(for: entity, with: identifier)

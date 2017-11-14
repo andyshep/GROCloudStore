@@ -14,7 +14,7 @@ extension GROIncrementalStore {
         guard let fetchRequest = request as? NSFetchRequest<NSManagedObject> else { fatalError() }
         let backingContext = self.backingContext
         
-        if fetchRequest.resultType == [] {
+        if fetchRequest.resultType == .managedObjectResultType {
 
             context.perform {
                 self.fetchRemoteObjects(fetchRequest, context: context)

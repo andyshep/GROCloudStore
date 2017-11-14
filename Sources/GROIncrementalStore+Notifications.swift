@@ -16,7 +16,7 @@ internal extension NSNotification.Name {
 internal extension GROIncrementalStore {
     @objc internal func contextDidChange(_ notification: Notification) {
         guard let context = notification.object as? NSManagedObjectContext else { return }
-        let contextSaveInfo = (notification as NSNotification).userInfo ?? [:]
+        let contextSaveInfo = notification.userInfo ?? [:]
         
         if context == self.backingContext {
             guard let mergeContext = self.mainContext else { return }
@@ -33,8 +33,8 @@ internal extension GROIncrementalStore {
     }
     
     @objc internal func didCreateRecord(_ notification: Notification) {
-        guard let objectID = (notification as NSNotification).userInfo?[GROObjectIDKey] as? NSManagedObjectID else { return }
-        guard let identifier = (notification as NSNotification).userInfo?[GRORecordNameKey] as? String else { return }
+        guard let objectID = notification.userInfo?[GROObjectIDKey] as? NSManagedObjectID else { return }
+        guard let identifier = notification.userInfo?[GRORecordNameKey] as? String else { return }
         
         guard let name = objectID.entity.name else { return }
         

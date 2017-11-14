@@ -128,10 +128,10 @@ final internal class IngestModifiedRecordsOperation: Operation {
     fileprivate func objectID(matching identifier: String, description entity: NSEntityDescription, in context: NSManagedObjectContext) throws -> NSManagedObjectID? {
         
         if context == self.backingContext {
-            let objectId = try self.delegate?.backingObjectID(for: entity, with: identifier as NSString?)
+            let objectId = try self.delegate?.backingObjectID(for: entity, with: identifier)
             return objectId
         } else {
-            let objectId = try self.delegate?.objectID(for: entity, with: identifier as NSString?)
+            let objectId = try self.delegate?.objectID(for: entity, with: identifier)
             return objectId
         }
     }

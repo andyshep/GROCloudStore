@@ -20,7 +20,7 @@ extension GROIncrementalStore: ManagedObjectIDProvider {
      - returns: NSManagedObjectID assocated with the entity and identifier
      */
     
-    internal func objectID(for entity: NSEntityDescription, with identifier: NSString?) throws -> NSManagedObjectID {
+    internal func objectID(for entity: NSEntityDescription, with identifier: String?) throws -> NSManagedObjectID {
         guard let identifier = identifier else { throw GROIncrementalStoreError.noRemoteIdentifier }
         guard let name = entity.name else { throw GROIncrementalStoreError.noEntityName }
         
@@ -60,7 +60,7 @@ extension GROIncrementalStore: ManagedObjectIDProvider {
         return managedObjectId!
     }
     
-    internal func backingObjectID(for entity: NSEntityDescription, with identifier: NSString?) throws -> NSManagedObjectID? {
+    internal func backingObjectID(for entity: NSEntityDescription, with identifier: String?) throws -> NSManagedObjectID? {
         guard let identifier = identifier else { throw GROIncrementalStoreError.noRemoteIdentifier }
         guard let name = entity.name else { throw GROIncrementalStoreError.noEntityName }
         

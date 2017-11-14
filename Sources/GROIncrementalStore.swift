@@ -175,7 +175,7 @@ public class GROIncrementalStore: NSIncrementalStore {
         let identifier = resourceIdentifier(referenceObj as AnyObject)
         
         do {
-            let backingObjID = try self.backingObjectID(for: objectID.entity, with: String(identifier) as NSString?)
+            let backingObjID = try self.backingObjectID(for: objectID.entity, with: String(identifier))
             
             if backingObjID != nil {
                 let backingObj = try self.backingContext.existingObject(with: backingObjID!)
@@ -189,7 +189,7 @@ public class GROIncrementalStore: NSIncrementalStore {
                         guard let identifiers = identifierSet.allObjects as? [String] else { fatalError() }
                         
                         for identifier in identifiers {
-                            let objectID = try self.objectID(for: entity, with: identifier as NSString)
+                            let objectID = try self.objectID(for: entity, with: identifier)
                             objectIDs.append(objectID)
                         }
                         
@@ -201,7 +201,7 @@ public class GROIncrementalStore: NSIncrementalStore {
                         
                         guard let entity = relationship.destinationEntity else { fatalError("missing entity") }
                         
-                        let objectID = try self.objectID(for: entity, with: identifier as NSString?)
+                        let objectID = try self.objectID(for: entity, with: identifier)
                         return objectID
                     }
                 }

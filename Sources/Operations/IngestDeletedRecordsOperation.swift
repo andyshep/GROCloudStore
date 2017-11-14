@@ -46,7 +46,7 @@ final internal class IngestDeletedRecordsOperation: Operation {
                 }
                 
                 do {
-                    guard let objectId = try self.delegate?.backingObjectID(for: entity, with: identifier as NSString?) else { return }
+                    guard let objectId = try self.delegate?.backingObjectID(for: entity, with: identifier) else { return }
                     let obj = self.backingContext.object(with: objectId)
                     self.backingContext.delete(obj)
                 } catch {
@@ -65,7 +65,7 @@ final internal class IngestDeletedRecordsOperation: Operation {
                 }
                 
                 do {
-                    guard let objectId = try self.delegate?.objectID(for: entity, with: identifier as NSString?) else { return }
+                    guard let objectId = try self.delegate?.objectID(for: entity, with: identifier) else { return }
                     let obj = self.context.object(with: objectId)
                     self.context.delete(obj)
                 } catch {

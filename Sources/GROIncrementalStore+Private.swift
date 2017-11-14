@@ -66,11 +66,11 @@ extension GROIncrementalStore {
         print("found \(cachedObjects.count) objects in backing store")
         
         let results = cachedObjects as NSArray
-        let resourceIds = results.value(forKeyPath: GROAttribute.resourceIdentifier) as? [NSString] ?? []
+        let resourceIds = results.value(forKeyPath: GROAttribute.resourceIdentifier) as? [String] ?? []
         
         var mainObjects: [NSManagedObject] = []
         context.performAndWait {
-            mainObjects = resourceIds.map({ (resourceId: NSString) -> NSManagedObject in
+            mainObjects = resourceIds.map({ (resourceId: String) -> NSManagedObject in
                 let objectId = try! self.objectID(for: entity, with: resourceId)
                 let managedObject = context.object(with: objectId)
                 guard let transformableObj = managedObject as? ManagedObjectTransformable else { fatalError() }

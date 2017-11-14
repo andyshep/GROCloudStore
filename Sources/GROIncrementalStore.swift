@@ -63,7 +63,7 @@ public class GROIncrementalStore: NSIncrementalStore {
         self.dataSource = options?[GRODataSourceKey] as? CloudDataSource ?? GRODefaultDataSource(configuration: configuration)
         self.useInMemoryStores = options?[GROUseInMemoryStoreKey] as? Bool ?? false
         
-        super.init(persistentStoreCoordinator: root, configurationName: name, at: url as URL, options: options)
+        super.init(persistentStoreCoordinator: root, configurationName: name, at: url, options: options)
         
         NotificationCenter.default.addObserver(self, selector: #selector(GROIncrementalStore.contextDidChange(_:)), name: NSNotification.Name.NSManagedObjectContextDidSave, object: nil)
         

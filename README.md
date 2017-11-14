@@ -2,11 +2,8 @@
 
 # GROCloudStore
 
-![Swift 3.0](https://img.shields.io/badge/swift-4.0-orange.svg)
+![Swift 4.0](https://img.shields.io/badge/swift-4.0-orange.svg)
 ![Platform](https://img.shields.io/badge/platform-ios%20%7C%20macos-lightgrey.svg)
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-![Version Status](https://img.shields.io/cocoapods/v/GROCloudStore.svg)
-[![license MIT](https://img.shields.io/cocoapods/l/GROCloudStore.svg)](http://opensource.org/licenses/MIT)
 
 GROCloudStore provides an `NSIncrementalStore` subclass that is backed by CloudKit, allowing data to be loaded from the cloud into your Core Data model. GROCloudStore works by augmenting your existing Core Data model with attributes so that records and entities can be tracked together. When saving to Core Data, `CKRecord` objects are created from managed objects and then saved to CloudKit.
 
@@ -16,26 +13,6 @@ GROCloudStore only supports the private CloudKit database. This is because GROCl
 
  * Xcode 9
  * Swift 4
-
-## Installation
-
-GROCloudStore is compatible with both Carthage and CocoaPods.
-
-### Carthage
-
-To integrate GROCloudStore into your Xcode project using Carthage, specify it in your `Cartfile`:
-
-	github "andyshep/GROCloudStore"
-
-Run `carthage update` to build the framework and drag the built `GROCloudStore.framework` into your Xcode project.
-
-### Cocoapods
-
-For Cocoapods, add an entry into your `Podfile`.
-
-	pod 'GROCloudStore'
-
-Run `pod install` and open the workspace that was created in Xcode.
 
 ## Configuration
 

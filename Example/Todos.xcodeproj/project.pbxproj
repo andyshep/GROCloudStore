@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F73B0B8E1CF77F2F00A47CF0 /* GROCloudStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F73B3E2D1CF60E8000393F1A /* GROCloudStore.framework */; };
 		F7415D9F1CF408AC002A6275 /* TodoCloudConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7415D9E1CF408AC002A6275 /* TodoCloudConfiguration.swift */; };
 		F7415DA01CF408AC002A6275 /* TodoCloudConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7415D9E1CF408AC002A6275 /* TodoCloudConfiguration.swift */; };
 		F7417C6E1CF374C000FFDA3F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7417C631CF374C000FFDA3F /* AppDelegate.swift */; };
@@ -30,8 +29,6 @@
 		F7417CB71CF39A4800FFDA3F /* NSURL+Directories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7417CB61CF39A4800FFDA3F /* NSURL+Directories.swift */; };
 		F7417CB81CF39A4800FFDA3F /* NSURL+Directories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7417CB61CF39A4800FFDA3F /* NSURL+Directories.swift */; };
 		F75E87671CF4C56100CBE3EA /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75E87661CF4C56100CBE3EA /* AddViewController.swift */; };
-		F7AFF1BC1D1B8FE900E70EAE /* GROCloudStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F73B3E2D1CF60E8000393F1A /* GROCloudStore.framework */; };
-		F7AFF1BE1D1B8FF300E70EAE /* GROCloudStore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F73B3E2D1CF60E8000393F1A /* GROCloudStore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F7B00F2C1D1B90ED00907B39 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F881A41CF62D220048484D /* CloudKit.framework */; };
 		F7E685331CF40A3E00EEFD86 /* Todos+Transformables.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E685321CF40A3E00EEFD86 /* Todos+Transformables.swift */; };
 		F7E685341CF40A3E00EEFD86 /* Todos+Transformables.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E685321CF40A3E00EEFD86 /* Todos+Transformables.swift */; };
@@ -40,26 +37,33 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		F73B3E2C1CF60E8000393F1A /* PBXContainerItemProxy */ = {
+		F7DB284D21547E0200635C09 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F73B3E271CF60E8000393F1A /* GROCloudStore.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = F78D92DD1C934AAD009EA958;
-			remoteInfo = GROCloudStore;
+			remoteGlobalIDString = F71D59771EECD75800A86C22;
+			remoteInfo = GROCloudStore_macOS;
 		};
-		F73B3E2E1CF60E8000393F1A /* PBXContainerItemProxy */ = {
+		F7DB284F21547E0200635C09 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F73B3E271CF60E8000393F1A /* GROCloudStore.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = F78D92E71C934AAD009EA958;
-			remoteInfo = GROCloudStoreTests;
+			remoteGlobalIDString = F71D597F1EECD75800A86C22;
+			remoteInfo = GROCloudStore_macOSTests;
 		};
-		F78698F41D9D91CD00BDF7AB /* PBXContainerItemProxy */ = {
+		F7DB285121547E0200635C09 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F73B3E271CF60E8000393F1A /* GROCloudStore.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F78D92DC1C934AAD009EA958;
-			remoteInfo = GROCloudStore;
+			proxyType = 2;
+			remoteGlobalIDString = F71D599C1EECD8A900A86C22;
+			remoteInfo = GROCloudStore_iOS;
+		};
+		F7DB285321547E0200635C09 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F73B3E271CF60E8000393F1A /* GROCloudStore.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F71D59A41EECD8A900A86C22;
+			remoteInfo = GROCloudStore_iOSTests;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -70,7 +74,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F7AFF1BE1D1B8FF300E70EAE /* GROCloudStore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -113,7 +116,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7B00F2C1D1B90ED00907B39 /* CloudKit.framework in Frameworks */,
-				F7AFF1BC1D1B8FE900E70EAE /* GROCloudStore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,7 +123,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F73B0B8E1CF77F2F00A47CF0 /* GROCloudStore.framework in Frameworks */,
 				F7F881A81CF62D280048484D /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -132,8 +133,10 @@
 		F73B3E281CF60E8000393F1A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F73B3E2D1CF60E8000393F1A /* GROCloudStore.framework */,
-				F73B3E2F1CF60E8000393F1A /* GROCloudStoreTests.xctest */,
+				F7DB284E21547E0200635C09 /* GROCloudStore.framework */,
+				F7DB285021547E0200635C09 /* GROCloudStore_macOSTests.xctest */,
+				F7DB285221547E0200635C09 /* GROCloudStore.framework */,
+				F7DB285421547E0200635C09 /* GROCloudStore_iOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -244,7 +247,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				F78698F51D9D91CD00BDF7AB /* PBXTargetDependency */,
 			);
 			name = "Todos-OSX";
 			productName = "Todos-OSX";
@@ -258,7 +260,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Andrew Shepard";
 				TargetAttributes = {
 					F7417C4A1CF3748800FFDA3F = {
@@ -318,18 +320,32 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		F73B3E2D1CF60E8000393F1A /* GROCloudStore.framework */ = {
+		F7DB284E21547E0200635C09 /* GROCloudStore.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = GROCloudStore.framework;
-			remoteRef = F73B3E2C1CF60E8000393F1A /* PBXContainerItemProxy */;
+			remoteRef = F7DB284D21547E0200635C09 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F73B3E2F1CF60E8000393F1A /* GROCloudStoreTests.xctest */ = {
+		F7DB285021547E0200635C09 /* GROCloudStore_macOSTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = GROCloudStoreTests.xctest;
-			remoteRef = F73B3E2E1CF60E8000393F1A /* PBXContainerItemProxy */;
+			path = GROCloudStore_macOSTests.xctest;
+			remoteRef = F7DB284F21547E0200635C09 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F7DB285221547E0200635C09 /* GROCloudStore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = GROCloudStore.framework;
+			remoteRef = F7DB285121547E0200635C09 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F7DB285421547E0200635C09 /* GROCloudStore_iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GROCloudStore_iOSTests.xctest;
+			remoteRef = F7DB285321547E0200635C09 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -393,14 +409,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		F78698F51D9D91CD00BDF7AB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = GROCloudStore;
-			targetProxy = F78698F41D9D91CD00BDF7AB /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
 		F7417C811CF3754100FFDA3F /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -438,13 +446,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -471,6 +489,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -484,13 +503,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -509,6 +538,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -527,7 +557,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.andyshep.Todos-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -544,7 +574,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.andyshep.Todos-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -563,7 +593,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -583,7 +613,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

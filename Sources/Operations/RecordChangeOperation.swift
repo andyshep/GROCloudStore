@@ -12,5 +12,5 @@ import CloudKit
 internal protocol RecordChangeOperation: ContextOperation {
     var insertedRecords: [CKRecord] { get }
     var updatedRecords: [CKRecord] { get }
-    var deletedRecordIDs: [CKRecordID] { get }
+    var deletedRecordIDs: [CKRecord.ID] { get }
 }

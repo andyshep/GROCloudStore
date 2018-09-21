@@ -26,7 +26,7 @@ final internal class IngestDeletedRecordsOperation: Operation {
         return self.operation.backingContext
     }
     
-    private var recordIDs: [CKRecordID] {
+    private var recordIDs: [CKRecord.ID] {
         return self.operation.deletedRecordIDs
     }
     

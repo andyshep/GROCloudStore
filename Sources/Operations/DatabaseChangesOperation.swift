@@ -13,8 +13,8 @@ final internal class DatabaseChangesOperation: AsyncOperation {
     let context: NSManagedObjectContext
 //    let request: NSPersistentStoreRequest
     
-    private(set) var changedRecordZoneIds: [CKRecordZoneID] = []
-    private(set) var deletedRecordZoneIds: [CKRecordZoneID] = []
+    private(set) var changedRecordZoneIds: [CKRecordZone.ID] = []
+    private(set) var deletedRecordZoneIds: [CKRecordZone.ID] = []
     
     let dataSource: CloudDataSource
     

@@ -13,7 +13,7 @@ internal extension NSSaveChangesRequest {
     
     var insertedRecords: [CKRecord] {
         let objects = self.insertedObjects ?? []
-        return objects.flatMap({ (object) -> CKRecord? in
+        return objects.compactMap({ (object) -> CKRecord? in
             guard let transformable = object as? CloudKitTransformable else { return nil }
             return transformable.transform()
         })
@@ -21,15 +21,15 @@ internal extension NSSaveChangesRequest {
     
     var updatedRecords: [CKRecord] {
         let objects = self.updatedObjects ?? []
-        return objects.flatMap({ (object) -> CKRecord? in
+        return objects.compactMap({ (object) -> CKRecord? in
             guard let transformable = object as? CloudKitTransformable else { return nil }
             return transformable.transform()
         })
     }
     
-    var deletedRecordIDs: [CKRecordID] {
+    var deletedRecordIDs: [CKRecord.ID] {
         let objects = self.deletedObjects ?? []
-        return objects.flatMap { (object) -> CKRecordID? in
+        return objects.compactMap { (object) -> CKRecord.ID? in
             guard let transformable = object as? CloudKitTransformable else { return nil }
             return transformable.transform().recordID
         }

@@ -22,8 +22,8 @@ class ViewController: NSViewController {
         didSet {
             guard let controller = representedObject as? NSArrayController else { return }
             
-            self.tableView.bind(NSContentBinding, to: controller, withKeyPath: "arrangedObjects", options: nil)
-            self.tableView.bind(NSSelectionIndexesBinding, to: controller, withKeyPath: "selectionIndexes", options: nil)
+            self.tableView.bind(NSBindingName.content, to: controller, withKeyPath: "arrangedObjects", options: nil)
+            self.tableView.bind(NSBindingName.selectionIndexes, to: controller, withKeyPath: "selectionIndexes", options: nil)
             
             controller.fetch(nil)
         }

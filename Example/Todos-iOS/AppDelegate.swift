@@ -16,12 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         let center = UNUserNotificationCenter.current()
         let options: UNAuthorizationOptions = []
         center.requestAuthorization(options: options) { (granted, error) in
             guard error == nil else {
-                print("error: \(error)")
+                print("error: \(String(describing: error))")
                 return
             }
             
@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         let cloudNotification = CKNotification(fromRemoteNotificationDictionary: userInfo as! [String : NSObject])
-        if cloudNotification.subscriptionID == Subscription.Todo {
+        if cloudNotification.subscriptionID == Subscription.Name.Todo.rawValue {
             
             guard
                 let navController = application.windows.first?.rootViewController as? UINavigationController,

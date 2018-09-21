@@ -18,7 +18,7 @@ import CoreData
     func transform(record _: CKRecord) -> Void
     func transform() -> CKRecord
     
-    func references(for record: CKRecord) -> [CKReference: String]
+    func references(for record: CKRecord) -> [CKRecord.Reference: String]
     func secondaries(for record: CKRecord) -> [String: [String: AnyObject]]
     
     var encodedSystemFields: Data? { get set }
@@ -54,10 +54,10 @@ extension CloudKitTransformable where Self: NSManagedObject {
                 guard let configuration = configurationFromPersistentStore(coordinator: psc) else { fatalError() }
                 
                 let zoneName = configuration.container.zoneName(forRecordType: recordType)
-                let zoneId = CKRecordZoneID(zoneName: zoneName, ownerName: CKCurrentUserDefaultName)
+                let zoneId = CKRecordZone.ID(zoneName: zoneName, ownerName: CKCurrentUserDefaultName)
                 let recordName = UUID().uuidString
                 
-                let recordId = CKRecordID(recordName: recordName, zoneID: zoneId)
+                let recordId = CKRecord.ID(recordName: recordName, zoneID: zoneId)
                 let rec = CKRecord(recordType: self.recordType, recordID: recordId)
                 
                 self.encodedSystemFields = encodeSystemFieldsWithRecord(record: rec) as Data

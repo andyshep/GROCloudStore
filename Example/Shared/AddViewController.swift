@@ -21,7 +21,7 @@ class AddViewController: UIViewController {
         guard let context = context else { return }
         
         let item = self.textField.text ?? ""
-        if item.characters.count > 0 {
+        if item.count > 0 {
             
             guard let todo = NSEntityDescription.insertNewObject(forEntityName: "Todo", into: context) as? Todo else { return }
             

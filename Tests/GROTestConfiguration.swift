@@ -29,13 +29,13 @@ struct TestSubscription: SubscriptionType {
     
     var all: [CKSubscription] {
         let subscriptionId = TestSubscription.TestSubscriptionName
-        let zoneId = CKRecordZoneID(zoneName: DefaultTestContainer().customZoneNames.first!, ownerName: CKCurrentUserDefaultName)
+        let zoneId = CKRecordZone.ID(zoneName: DefaultTestContainer().customZoneNames.first!, ownerName: CKCurrentUserDefaultName)
         
-        let options = CKQuerySubscriptionOptions.firesOnRecordCreation
+        let options = CKQuerySubscription.Options.firesOnRecordCreation
         let subscription = CKQuerySubscription(recordType: "GROTestEntity", predicate: NSPredicate(format: "TRUEPREDICATE"), subscriptionID: subscriptionId, options: options)
         subscription.zoneID = zoneId
         
-        let notificationInfo = CKNotificationInfo()
+        let notificationInfo = CKSubscription.NotificationInfo()
         notificationInfo.shouldSendContentAvailable = true
         notificationInfo.soundName = ""
         subscription.notificationInfo = notificationInfo

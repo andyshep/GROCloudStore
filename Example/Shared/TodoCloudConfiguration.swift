@@ -31,7 +31,7 @@ public struct Subscription: SubscriptionType {
     public var all: [CKSubscription] {
         let subscription = CKDatabaseSubscription(subscriptionID: Name.Todo.rawValue)
         
-        let notificationInfo = CKNotificationInfo()
+        let notificationInfo = CKSubscription.NotificationInfo()
         notificationInfo.shouldSendContentAvailable = true
         subscription.notificationInfo = notificationInfo
         

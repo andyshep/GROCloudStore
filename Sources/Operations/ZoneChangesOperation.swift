@@ -17,7 +17,7 @@ final internal class ZoneChangesOperation: AsyncOperation {
     
     private(set) var insertedRecords: [CKRecord] = []
     private(set) var updatedRecords: [CKRecord] = []
-    private(set) var deletedRecordIDs: [CKRecordID] = []
+    private(set) var deletedRecordIDs: [CKRecord.ID] = []
     
     weak var delegate: ManagedObjectIDProvider?
     
@@ -59,7 +59,7 @@ final internal class ZoneChangesOperation: AsyncOperation {
         self.updatedRecords.append(record)
     }
     
-    private func recordIDWasDeleted(_ recordID: CKRecordID) -> Void {
+    private func recordIDWasDeleted(_ recordID: CKRecord.ID) -> Void {
         self.deletedRecordIDs.append(recordID)
     }
 }

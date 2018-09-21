@@ -32,7 +32,7 @@ class GROTestDataSource: NSObject, CloudDataSource {
         //
     }
     
-    func record(withRecordID recordID: CKRecordID, completion: @escaping  RecordCompletion) {
+    func record(withRecordID recordID: CKRecord.ID, completion: @escaping  RecordCompletion) {
         //
     }
     
@@ -48,11 +48,11 @@ class GROTestDataSource: NSObject, CloudDataSource {
         //
     }
     
-    func changedRecords(inZoneIds zoneIds: [CKRecordZoneID], tokens: [CKRecordZoneID : CKServerChangeToken]?, completion: @escaping ChangedRecordsHandler) {
+    func changedRecords(inZoneIds zoneIds: [CKRecordZone.ID], tokens: [CKRecordZone.ID : CKServerChangeToken]?, completion: @escaping ChangedRecordsHandler) {
         //
     }
     
-    func delete(withRecordID recordID: CKRecordID, completion: @escaping DeleteRecordCompletion) {
+    func delete(withRecordID recordID: CKRecord.ID, completion: @escaping DeleteRecordCompletion) {
         //
     }
     

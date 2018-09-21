@@ -17,7 +17,7 @@ final internal class PushChangesOperation: AsyncOperation {
     
     private(set) var insertedRecords: [CKRecord]
     private(set) var updatedRecords: [CKRecord]
-    private(set) var deletedRecordIDs: [CKRecordID]
+    private(set) var deletedRecordIDs: [CKRecord.ID]
     
     private let dataSource: CloudDataSource
     

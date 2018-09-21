@@ -50,7 +50,7 @@ extension Todo: CloudKitTransformable {
         return record
     }
     
-    func references(for record: CKRecord) -> [CKReference: String] {
+    func references(for record: CKRecord) -> [CKRecord.Reference: String] {
         return [:]
     }
     

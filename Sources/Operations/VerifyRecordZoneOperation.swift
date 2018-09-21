@@ -9,7 +9,7 @@
 import CoreData
 import CloudKit
 
-typealias Zones = [CKRecordZoneID: CKRecordZone]
+typealias Zones = [CKRecordZone.ID: CKRecordZone]
 
 final internal class VerifyRecordZoneOperation: AsyncOperation {
     
@@ -53,7 +53,7 @@ final internal class VerifyRecordZoneOperation: AsyncOperation {
         let configuration = self.dataSource.configuration
         
         let zoneName = configuration.container.customZoneNames.first!
-        let defaultZoneID = CKRecordZoneID(zoneName: zoneName, ownerName: CKCurrentUserDefaultName)
+        let defaultZoneID = CKRecordZone.ID(zoneName: zoneName, ownerName: CKCurrentUserDefaultName)
         
         for (zoneId, _) in zones {
             if zoneId == defaultZoneID {
@@ -77,7 +77,7 @@ final internal class VerifyRecordZoneOperation: AsyncOperation {
         finish()
     }
     
-    private func save(recordZoneID: CKRecordZoneID, in context: NSManagedObjectContext) {
+    private func save(recordZoneID: CKRecordZone.ID, in context: NSManagedObjectContext) {
         context.perform { 
             guard let savedZone = GRORecordZone.newObject(in: context) as? GRORecordZone else { return }
             

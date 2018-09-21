@@ -15,18 +15,18 @@ internal class GROChangeToken: NSManagedObject {
     @NSManaged var zoneName: String?
 }
 
-internal func changeTokens(forZoneIds zoneIds: [CKRecordZoneID], in context: NSManagedObjectContext) -> [CKRecordZoneID: CKServerChangeToken]? {
+internal func changeTokens(forZoneIds zoneIds: [CKRecordZone.ID], in context: NSManagedObjectContext) -> [CKRecordZone.ID: CKServerChangeToken]? {
     let request = NSFetchRequest<GROChangeToken>(entityName: GROChangeToken.entityName)
     do {
         let zoneNames = zoneIds.map { return $0.zoneName }
         let results = try context.fetch(request)
         let savedChanges = results.filter { return zoneNames.contains($0.zoneName!) }
         
-        var tokens: [CKRecordZoneID: CKServerChangeToken] = [:]
+        var tokens: [CKRecordZone.ID: CKServerChangeToken] = [:]
         
         for change in savedChanges {
             let zoneName = change.zoneName
-            let zoneId = CKRecordZoneID(zoneName: zoneName!, ownerName: CKCurrentUserDefaultName)
+            let zoneId = CKRecordZone.ID(zoneName: zoneName!, ownerName: CKCurrentUserDefaultName)
             
             if let token = NSKeyedUnarchiver.unarchiveObject(with: change.content) as? CKServerChangeToken {
                 tokens[zoneId] = token
@@ -39,7 +39,7 @@ internal func changeTokens(forZoneIds zoneIds: [CKRecordZoneID], in context: NSM
     }
 }
 
-internal func changeToken(forRecordZoneId zoneId: CKRecordZoneID, in context: NSManagedObjectContext) -> GROChangeToken {
+internal func changeToken(forRecordZoneId zoneId: CKRecordZone.ID, in context: NSManagedObjectContext) -> GROChangeToken {
     if let tokens = existingChangeTokens(in: context) {
         let matches = tokens.filter { return $0.zoneName == zoneId.zoneName }
         
@@ -72,7 +72,7 @@ internal func newChangeToken(in context: NSManagedObjectContext) -> GROChangeTok
     return token
 }
 
-internal func save(token: CKServerChangeToken?, forRecordZoneId zoneId: CKRecordZoneID, in context: NSManagedObjectContext) {
+internal func save(token: CKServerChangeToken?, forRecordZoneId zoneId: CKRecordZone.ID, in context: NSManagedObjectContext) {
     if let token = token {
         context.performAndWait {
             let savedChangeToken = changeToken(forRecordZoneId: zoneId, in: context)

@@ -72,7 +72,10 @@ class CoreDataManager {
     // MARK: - Private
     
     private lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator? = {
+        let storeClass = GROIncrementalStore.self
         let storeType = GROIncrementalStore.storeType
+        
+        NSPersistentStoreCoordinator.registerStoreClass(storeClass, forStoreType: storeType)
         
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         let url = URL.applicationDocumentsDirectory().appendingPathComponent("Todos.sqlite")

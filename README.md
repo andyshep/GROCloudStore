@@ -50,7 +50,6 @@ class SampleConfiguration: Configuration {
 }
 ```
 
-
 2. Provide an instance of this configuration object when creating your Core Data stack. This should be done along with specifying `GROIncrementalStore.storeType` as the Persistent Store type.
 
 ```swift
@@ -69,7 +68,7 @@ managedObjectContext.persistentStoreCoordinator = coordinator
 // continue to use the managed object context
 ```
 		
-3. Add an `NSData` attribute called `encodedSystemFields` on your Core Data model objects. This field is used to store the result of calling [encodeSystemFieldsWithCoder](https://developer.apple.com/library/ios/documentation/CloudKit/Reference/CKRecord_class/#//apple_ref/occ/instm/CKRecord/encodeSystemFieldsWithCoder:) on your `CKRecord` objects.
+3. Add an `Data` attribute called `encodedSystemFields` on your Core Data model objects. This field is used to store the result of calling [encodeSystemFieldsWithCoder](https://developer.apple.com/library/ios/documentation/CloudKit/Reference/CKRecord_class/#//apple_ref/occ/instm/CKRecord/encodeSystemFieldsWithCoder:) on your `CKRecord` objects.
 
 ```swift
 class MyModelObject: NSManagedObject {
@@ -125,13 +124,13 @@ There is an example Todos app that shows how to integrate with GROCloudStore. Th
 
 Before the example can be used, you'll need to do the following.
 
-1.  Be logged into iCloud on your Mac or through the iOS simulator
+1.  Log into iCloud on your Mac or through the iOS simulator
 2.  Change the bundle identifier and iCloud bucket to something unique
 3.  Generate an entitlements file using your Apple developer account.
 
 # Credits
 
-GROCloudStore is inspired by the design of [AFIncrementalStore](https://github.com/AFNetworking/AFIncrementalStore/tree/development), especially the use of multiple persistent stores and augmenting the managed object model. Additionally, the [Advanced Operations](https://developer.apple.com/videos/play/wwdc2015/226/) presentation from WWDC 2015 and the sample code provided formed the basis of the CloudKit syncing layer.
+GROCloudStore is inspired by the design of [AFIncrementalStore](https://github.com/AFNetworking/AFIncrementalStore/tree/development) and the [Advanced Operations](https://developer.apple.com/videos/play/wwdc2015/226/) presentation from WWDC 2015.
 
 ## License
 

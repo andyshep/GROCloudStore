@@ -2,7 +2,7 @@
 
 # GROCloudStore
 
-![Swift 4.0](https://img.shields.io/badge/swift-4.0-orange.svg)
+![Swift 4.0](https://img.shields.io/badge/swift-5.0-orange.svg)
 ![Platform](https://img.shields.io/badge/platform-ios%20%7C%20macos-lightgrey.svg)
 
 GROCloudStore provides an `NSIncrementalStore` subclass that is backed by CloudKit, allowing data to be loaded from the cloud into your Core Data model. GROCloudStore works by augmenting your existing Core Data model with attributes so that records and entities can be tracked together. When saving to Core Data, `CKRecord` objects are created from managed objects and then saved to CloudKit.
@@ -11,8 +11,8 @@ GROCloudStore only supports the private CloudKit database. This is because GROCl
 
 ## Requirements
 
- * Xcode 10
- * Swift 4.2
+ * Xcode 11
+ * Swift 5
 
 ## Configuration
 

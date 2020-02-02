@@ -43,7 +43,7 @@ public class GROIncrementalStore: NSIncrementalStore {
     
     private var useInMemoryStores: Bool = false
     
-    internal(set) var configuration: Configuration
+    internal var configuration: Configuration
     
     public class var storeType: String {
         return String(describing: GROIncrementalStore.self)

@@ -48,9 +48,8 @@ extension CloudKitTransformable where Self: NSManagedObject {
     
     public var record: CKRecord {
         get {
-            guard let data = self.encodedSystemFields else {
-                
-                let psc = self.managedObjectContext?.persistentStoreCoordinator
+            guard let data = encodedSystemFields else {
+                let psc = managedObjectContext?.persistentStoreCoordinator
                 guard let configuration = configurationFromPersistentStore(coordinator: psc) else { fatalError() }
                 
                 let zoneName = configuration.container.zoneName(forRecordType: recordType)

@@ -14,7 +14,7 @@ internal extension NSNotification.Name {
 }
 
 internal extension GROIncrementalStore {
-    @objc internal func contextDidChange(_ notification: Notification) {
+    @objc func contextDidChange(_ notification: Notification) {
         guard let context = notification.object as? NSManagedObjectContext else { return }
         let contextSaveInfo = notification.userInfo ?? [:]
         
@@ -32,7 +32,7 @@ internal extension GROIncrementalStore {
         }
     }
     
-    @objc internal func didCreateRecord(_ notification: Notification) {
+    @objc func didCreateRecord(_ notification: Notification) {
         guard let objectID = notification.userInfo?[GROObjectIDKey] as? NSManagedObjectID else { return }
         guard let identifier = notification.userInfo?[GRORecordNameKey] as? String else { return }
         
@@ -43,7 +43,7 @@ internal extension GROIncrementalStore {
         self.registeredEntities[name] = entities
     }
     
-    @objc internal func cloudDidChange(_ notification: Notification) {
+    @objc func cloudDidChange(_ notification: Notification) {
         let token = FileManager.default.ubiquityIdentityToken
         print("change token: \(String(describing: token))")
         

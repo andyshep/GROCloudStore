@@ -56,23 +56,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        let cloudNotification = CKNotification(fromRemoteNotificationDictionary: userInfo as! [String : NSObject])
-        if cloudNotification.subscriptionID == Subscription.Name.Todo.rawValue {
-            
-            guard
-                let navController = application.windows.first?.rootViewController as? UINavigationController,
-                let viewController = navController.topViewController as? ViewController else {
-                    print("couldn't find controller to handle cloud change notification")
-                    return
-            }
-            
-            try! viewController.fetchedResultsController.performFetch()
-            completionHandler(.newData)
+        guard
+            let notificationDictionary = userInfo as? [String: NSObject],
+            let cloudNotification = CKNotification(fromRemoteNotificationDictionary: notificationDictionary),
+            let subscriptionID = cloudNotification.subscriptionID,
+            subscriptionID == Subscription.Name.Todo.rawValue
+        else {
+            return completionHandler(.noData)
         }
+        
+        guard
+            let navController = application.windows.first?.rootViewController as? UINavigationController,
+            let viewController = navController.topViewController as? ViewController
+        else {
+            print("couldn't find controller to handle cloud change notification")
+            return
+        }
+        
+        try? viewController.fetchedResultsController.performFetch()
+        completionHandler(.newData)
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("error registering for remote notification: \(error)")
     }
-
 }

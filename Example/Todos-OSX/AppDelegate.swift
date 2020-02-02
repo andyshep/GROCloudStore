@@ -33,17 +33,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func application(_ application: NSApplication, didReceiveRemoteNotification userInfo: [String : Any]) {
-        if let dictionary = userInfo as? [String: NSObject] {
-            let cloudNotification = CKNotification(fromRemoteNotificationDictionary: dictionary)
-            if cloudNotification.subscriptionID == Subscription.Name.Todo.rawValue {
-                guard let windowController = NSApp.windows.first?.windowController as? WindowController else {
-                    print("couldn't find controller to handle cloud change notification")
-                    return
-                }
-                
-                windowController.arrayController.fetch(nil)
-            }
+        guard
+            let notificationDictionary = userInfo as? [String: NSObject],
+            let cloudNotification = CKNotification(fromRemoteNotificationDictionary: notificationDictionary),
+            let subscriptionID = cloudNotification.subscriptionID,
+            subscriptionID == Subscription.Name.Todo.rawValue
+        else { return }
+        
+        guard let windowController = NSApp.windows.first?.windowController as? WindowController else {
+            print("couldn't find controller to handle cloud change notification")
+            return
         }
+        
+        windowController.arrayController.fetch(nil)
     }
 }
 

@@ -29,11 +29,15 @@
 		F7417CB71CF39A4800FFDA3F /* NSURL+Directories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7417CB61CF39A4800FFDA3F /* NSURL+Directories.swift */; };
 		F7417CB81CF39A4800FFDA3F /* NSURL+Directories.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7417CB61CF39A4800FFDA3F /* NSURL+Directories.swift */; };
 		F75E87671CF4C56100CBE3EA /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F75E87661CF4C56100CBE3EA /* AddViewController.swift */; };
+		F7A896C123E6F626001238CD /* GROCloudStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7DB285221547E0200635C09 /* GROCloudStore.framework */; };
+		F7A896C223E6F626001238CD /* GROCloudStore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F7DB285221547E0200635C09 /* GROCloudStore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F7B00F2C1D1B90ED00907B39 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F881A41CF62D220048484D /* CloudKit.framework */; };
 		F7E685331CF40A3E00EEFD86 /* Todos+Transformables.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E685321CF40A3E00EEFD86 /* Todos+Transformables.swift */; };
 		F7E685341CF40A3E00EEFD86 /* Todos+Transformables.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E685321CF40A3E00EEFD86 /* Todos+Transformables.swift */; };
 		F7F84F5F1CF7864E0096AD06 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F84F5E1CF7864E0096AD06 /* WindowController.swift */; };
 		F7F881A81CF62D280048484D /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7F881A41CF62D220048484D /* CloudKit.framework */; };
+		F7FE7D4223E64039000C9F24 /* GROCloudStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7DB284E21547E0200635C09 /* GROCloudStore.framework */; };
+		F7FE7D4323E64039000C9F24 /* GROCloudStore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F7DB284E21547E0200635C09 /* GROCloudStore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +78,18 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				F7A896C223E6F626001238CD /* GROCloudStore.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F7FE7D4423E64039000C9F24 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F7FE7D4323E64039000C9F24 /* GROCloudStore.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -116,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7B00F2C1D1B90ED00907B39 /* CloudKit.framework in Frameworks */,
+				F7A896C123E6F626001238CD /* GROCloudStore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7F881A81CF62D280048484D /* CloudKit.framework in Frameworks */,
+				F7FE7D4223E64039000C9F24 /* GROCloudStore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +261,7 @@
 				F7417C751CF3754100FFDA3F /* Sources */,
 				F7417C761CF3754100FFDA3F /* Frameworks */,
 				F7417C771CF3754100FFDA3F /* Resources */,
+				F7FE7D4423E64039000C9F24 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -260,12 +279,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Andrew Shepard";
 				TargetAttributes = {
 					F7417C4A1CF3748800FFDA3F = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 9XH5KEL8D8;
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -281,8 +299,8 @@
 					};
 					F7417C781CF3754100FFDA3F = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 9XH5KEL8D8;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -296,7 +314,7 @@
 			};
 			buildConfigurationList = F7417C461CF3748800FFDA3F /* Build configuration list for PBXProject "Todos" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -441,6 +459,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -489,7 +508,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -498,6 +517,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -538,7 +558,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -551,13 +571,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Todos-iOS/Todos-iOS.entitlements";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Todos-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.andyshep.Todos-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -568,13 +589,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Todos-iOS/Todos-iOS.entitlements";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/Todos-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.andyshep.Todos-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -583,17 +605,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Todos-OSX/Todos-OSX.entitlements";
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Todos-OSX/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.andyshep.Todos-OSX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -602,18 +628,22 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "Todos-OSX/Todos-OSX.entitlements";
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Todos-OSX/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.andyshep.Todos-OSX";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

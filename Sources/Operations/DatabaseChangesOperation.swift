@@ -11,7 +11,6 @@ import CoreData
 
 final internal class DatabaseChangesOperation: AsyncOperation {
     let context: NSManagedObjectContext
-//    let request: NSPersistentStoreRequest
     
     private(set) var changedRecordZoneIds: [CKRecordZone.ID] = []
     private(set) var deletedRecordZoneIds: [CKRecordZone.ID] = []
@@ -19,8 +18,6 @@ final internal class DatabaseChangesOperation: AsyncOperation {
     let dataSource: CloudDataSource
     
     required init(context: NSManagedObjectContext, dataSource: CloudDataSource) {
-//        self.request = request
-//        self.context = context
         self.context = context
         self.dataSource = dataSource
         

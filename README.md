@@ -2,12 +2,14 @@
 
 # GROCloudStore
 
-![Swift 4.0](https://img.shields.io/badge/swift-5.0-orange.svg)
+![Swift 5.0](https://img.shields.io/badge/swift-5.0-orange.svg)
 ![Platform](https://img.shields.io/badge/platform-ios%20%7C%20macos-lightgrey.svg)
 
 GROCloudStore provides an `NSIncrementalStore` subclass that is backed by CloudKit, allowing data to be loaded from the cloud into your Core Data model. GROCloudStore works by augmenting your existing Core Data model with attributes so that records and entities can be tracked together. When saving to Core Data, `CKRecord` objects are created from managed objects and then saved to CloudKit.
 
 GROCloudStore only supports the private CloudKit database. This is because GROCloudStore uses custom record zones which are not supported in the public database.
+
+_This library is deprecated in favor of `NSPersistentCloudKitContainer`_
 
 ## Requirements
 
@@ -68,7 +70,7 @@ managedObjectContext.persistentStoreCoordinator = coordinator
 // continue to use the managed object context
 ```
 		
-3. Add an `Data` attribute called `encodedSystemFields` on your Core Data model objects. This field is used to store the result of calling [encodeSystemFieldsWithCoder](https://developer.apple.com/library/ios/documentation/CloudKit/Reference/CKRecord_class/#//apple_ref/occ/instm/CKRecord/encodeSystemFieldsWithCoder:) on your `CKRecord` objects.
+3. Add a `Data` attribute called `encodedSystemFields` onto your Core Data model objects. This field is used to store the result of calling [encodeSystemFieldsWithCoder](https://developer.apple.com/library/ios/documentation/CloudKit/Reference/CKRecord_class/#//apple_ref/occ/instm/CKRecord/encodeSystemFieldsWithCoder:) on your `CKRecord` objects.
 
 ```swift
 class MyModelObject: NSManagedObject {
@@ -120,7 +122,7 @@ extension MyModelObject: CloudKitTransformable {
 
 ## Example
 
-There is an example Todos app that shows how to integrate with GROCloudStore. The app displays a task list of items to do, using a single Core Data entity.
+There is an example Todos app that shows how to integrate with GROCloudStore. The app displays a task list of todo items, using a single Core Data entity.
 
 Before the example can be used, you'll need to do the following.
 
